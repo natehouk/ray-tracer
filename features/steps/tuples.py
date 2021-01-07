@@ -123,42 +123,42 @@ def step_impl(context):
 
 @given(u'v1 ← vector(3, 2, 1)')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Given v1 ← vector(3, 2, 1)')
+    context.v1 = vector(3, 2, 1)
 
 
 @given(u'v2 ← vector(5, 6, 7)')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Given v2 ← vector(5, 6, 7)')
+    context.v2 = vector(5, 6, 7)
 
 
 @then(u'v1 - v2 = vector(-2, -4, -6)')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Then v1 - v2 = vector(-2, -4, -6)')
+    context.v1 - context.v2 == vector(-2, -4, -6)
 
 
 @given(u'zero ← vector(0, 0, 0)')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Given zero ← vector(0, 0, 0)')
+    context.zero = vector(0, 0, 0)
 
 
 @given(u'v ← vector(1, -2, 3)')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Given v ← vector(1, -2, 3)')
+    context.v = vector(1, -2, 3)
 
 
 @then(u'zero - v = vector(-1, 2, -3)')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Then zero - v = vector(-1, 2, -3)')
+    context.zero - context.v == vector(-1, 2, -3)
 
 
 @given(u'a ← tuple(1, -2, 3, -4)')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Given a ← tuple(1, -2, 3, -4)')
+    context.a = T(1, -2, 3, -4)
 
 
 @then(u'-a = tuple(-1, 2, -3, 4)')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Then -a = tuple(-1, 2, -3, 4)')
+    assert -context.a == T(-1, 2, -3, 4)
 
 
 @then(u'a * 3.5 = tuple(3.5, -7, 10.5, -14)')

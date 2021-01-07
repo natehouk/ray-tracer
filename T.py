@@ -35,6 +35,9 @@ class T:
     def __sub__(self, other):
         return T(self.x - other.x, self.y - other.y, self.z - other.z, self.w - other.w)
 
+    def __neg__(self):
+        return vector(0, 0, 0) - self
+
     def __str__(self):
         return "T<" + str(self.x) + ", " + str(self.y) + ", " + str(self.z) + ", " + str(self.w) + ">"
 
