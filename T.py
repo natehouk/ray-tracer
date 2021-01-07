@@ -1,3 +1,9 @@
+def point(x, y, z):
+    return T(x, y, z, 1.0)
+
+def vector(x, y, z):
+    return T(x, y, z, 0.0)
+
 class T:
     EPSILON = 0.00001
 

@@ -1,9 +1,9 @@
 from behave import *
-import T
+from T import T, point, vector
 
 @given(u'a ← tuple(4.3, -4.2, 3.1, 1.0)')
 def step_impl(context):
-    context.a = T.T(4.3, -4.2, 3.1, 1.0)
+    context.a = T(4.3, -4.2, 3.1, 1.0)
 
 
 @then(u'a.x = 4.3')
@@ -38,7 +38,7 @@ def step_impl(context):
 
 @given(u'a ← tuple(4.3, -4.2, 3.1, 0.0)')
 def step_impl(context):
-    context.a = T.T(4.3, -4.2, 3.1, 0.0)
+    context.a = T(4.3, -4.2, 3.1, 0.0)
 
 
 @then(u'a.w = 0.0')
@@ -58,52 +58,52 @@ def step_impl(context):
 
 @given(u'p ← point(4, -4, 3)')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Given p ← point(4, -4, 3)')
+    context.p = point(4, -4, 3)
 
 
 @then(u'p = tuple(4, -4, 3, 1)')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Then p = tuple(4, -4, 3, 1)')
+    assert context.p == T(4, -4, 3, 1)
 
 
 @given(u'v ← vector(4, -4, 3)')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Given v ← vector(4, -4, 3)')
+    context.v = vector(4, -4, 3)
 
 
 @then(u'v = tuple(4, -4, 3, 0)')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Then v = tuple(4, -4, 3, 0)')
+    assert context.v == T(4, -4, 3, 0)
 
 
 @given(u'a1 ← tuple(3, -2, 5, 1)')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Given a1 ← tuple(3, -2, 5, 1)')
+    context.a1 = T(3, -2, 5, 1)
 
 
 @given(u'a2 ← tuple(-2, 3, 1, 0)')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Given a2 ← tuple(-2, 3, 1, 0)')
+    context.a2 = T(-2, 3, 1, 0)
 
 
 @then(u'a1 + a2 = tuple(1, 1, 6, 1)')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Then a1 + a2 = tuple(1, 1, 6, 1)')
+    context.a1 + context.a2 == T(1, 1, 6, 1)
 
 
 @given(u'p1 ← point(3, 2, 1)')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Given p1 ← point(3, 2, 1)')
+    context.p1 = point(3, 2, 1)
 
 
 @given(u'p2 ← point(5, 6, 7)')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Given p2 ← point(5, 6, 7)')
+    context.p2 = point(5, 6, 7)
 
 
 @then(u'p1 - p2 = vector(-2, -4, -6)')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Then p1 - p2 = vector(-2, -4, -6)')
+    context.p1 - context.p2 == vector(-2, -4, -6)
 
 
 @given(u'p ← point(3, 2, 1)')
