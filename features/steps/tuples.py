@@ -108,17 +108,17 @@ def step_impl(context):
 
 @given(u'p ← point(3, 2, 1)')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Given p ← point(3, 2, 1)')
+    context.p = point(3, 2, 1)
 
 
 @given(u'v ← vector(5, 6, 7)')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Given v ← vector(5, 6, 7)')
+    context.v = vector(5, 6, 7)
 
 
 @then(u'p - v = point(-2, -4, -6)')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Then p - v = point(-2, -4, -6)')
+    context.p - context.v == point(-2, -4, -6)
 
 
 @given(u'v1 ← vector(3, 2, 1)')
