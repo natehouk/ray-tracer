@@ -1,4 +1,4 @@
-from math import sqrt
+from math import sqrt, isnan
 
 # Equality precision
 EPSILON = 0.00001
@@ -17,6 +17,9 @@ def point(x, y, z):
 
 def vector(x, y, z):
     return tuple(x, y, z, 0.0)
+
+def color(r, g, b):
+    return tuple(r, g, b, float('nan'))
 
 def magnitude(v):
     return sqrt(v.x ** 2 + v.y ** 2 + v.z ** 2 + v.w ** 2)
@@ -47,24 +50,43 @@ class tuple:
 
     def __init__(self, x, y, z, w):
         self.x = x
+        self.red = x
         self.y = y
+        self.green = y
         self.z = z
+        self.blue = z
         self.w = w
 
-    def __eq__(self, t):
-        return bool((equals(self.x, t.x) and
-                     equals(self.y, t.y) and
-                     equals(self.z, t.z) and
-                     equals(self.w, t.w)))
+    def __eq__(self, other):
+        if isnan(self.w) and isnan(other.w):
+            return bool(equals(self.x, other.x) and
+                        equals(self.y, other.y) and
+                        equals(self.z, other.z))
+        else:
+            return bool(equals(self.x, other.x) and
+                        equals(self.y, other.y) and
+                        equals(self.z, other.z) and
+                        equals(self.w, other.w))
 
-    def __add__(self, t):
-        return tuple(self.x + t.x, self.y + t.y, self.z + t.z, self.w + t.w)
+    def __add__(self, other):
+        return tuple(self.x + other.x, 
+                     self.y + other.y, 
+                     self.z + other.z, 
+                     self.w + other.w)
 
-    def __sub__(self, t):
-        return tuple(self.x - t.x, self.y - t.y, self.z - t.z, self.w - t.w)
+    def __sub__(self, other):
+        return tuple(self.x - other.x, 
+                     self.y - other.y, 
+                     self.z - other.z, 
+                     self.w - other.w)
 
-    def __mul__(self, scalar):
-        return tuple(self.x * scalar, self.y * scalar, self.z * scalar, self.w * scalar)
+    def __mul__(self, other):
+        if isinstance(other, int) or isinstance(other, float):
+            scalar = other
+            return tuple(self.x * scalar, self.y * scalar, self.z * scalar, self.w * scalar)
+        elif isinstance(other, tuple) and  isnan(other.w):
+            return color(self.red * other.red, self.green * other.green, self.blue * other.blue)
+        return NotImplementedError
 
     def __truediv__(self, scalar):
         return tuple(self.x / scalar, self.y / scalar, self.z / scalar, self.w / scalar)

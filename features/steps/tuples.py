@@ -1,5 +1,5 @@
 from behave import *
-from tuple import tuple, is_point, is_vector, point, vector, magnitude, normalize, dot, cross
+from tuple import tuple, is_point, is_vector, point, vector, color, magnitude, normalize, dot, cross
 from math import sqrt
 
 @given(u'a ← tuple(4.3, -4.2, 3.1, 1.0)')
@@ -264,77 +264,77 @@ def step_impl(context):
 
 @given(u'c ← color(-0.5, 0.4, 1.7)')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Given c ← color(-0.5, 0.4, 1.7)')
+    context.c = color(-0.5, 0.4, 1.7)
 
 
 @then(u'c.red = -0.5')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Then c.red = -0.5')
+    context.c.red == -0.5
 
 
 @then(u'c.green = 0.4')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Then c.green = 0.4')
+    context.c.green == 0.4
 
 
 @then(u'c.blue = 1.7')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Then c.blue = 1.7')
+    context.c.blue == 1.7
 
 
 @given(u'c1 ← color(0.9, 0.6, 0.75)')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Given c1 ← color(0.9, 0.6, 0.75)')
+    context.c1 = color(0.9, 0.6, 0.75)
 
 
 @given(u'c2 ← color(0.7, 0.1, 0.25)')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Given c2 ← color(0.7, 0.1, 0.25)')
+    context.c2 = color(0.7, 0.1, 0.25)
 
 
 @then(u'c1 + c2 = color(1.6, 0.7, 1.0)')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Then c1 + c2 = color(1.6, 0.7, 1.0)')
+    assert context.c1 + context.c2 == color(1.6, 0.7, 1.0)
 
 
 @then(u'c1 - c2 = color(0.2, 0.5, 0.5)')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Then c1 - c2 = color(0.2, 0.5, 0.5)')
+    assert context.c1 - context.c2 == color(0.2, 0.5, 0.5)
 
 
 @given(u'c ← color(0.2, 0.3, 0.4)')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Given c ← color(0.2, 0.3, 0.4)')
+    context.c = color(0.2, 0.3, 0.4)
 
 
 @then(u'c * 2 = color(0.4, 0.6, 0.8)')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Then c * 2 = color(0.4, 0.6, 0.8)')
+    assert context.c * 2 ==color(0.4, 0.6, 0.8)
 
 
 @given(u'c1 ← color(1, 0.2, 0.4)')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Given c1 ← color(1, 0.2, 0.4)')
+    context.c1 = color(1, 0.2, 0.4)
 
 
 @given(u'c2 ← color(0.9, 1, 0.1)')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Given c2 ← color(0.9, 1, 0.1)')
+    context.c2 = color(0.9, 1, 0.1)
 
 
 @then(u'c1 * c2 = color(0.9, 0.2, 0.04)')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Then c1 * c2 = color(0.9, 0.2, 0.04)')
+    assert context.c1 * context.c2 == color(0.9, 0.2, 0.04)
 
 
 @given(u'v ← vector(1, -1, 0)')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Given v ← vector(1, -1, 0)')
+    context.v = vector(1, -1, 0)
 
 
 @given(u'n ← vector(0, 1, 0)')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Given n ← vector(0, 1, 0)')
+    context.n = vector(0, 1, 0)
 
 
 @when(u'r ← reflect(v, n)')
@@ -349,7 +349,7 @@ def step_impl(context):
 
 @given(u'v ← vector(0, -1, 0)')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Given v ← vector(0, -1, 0)')
+    context.v = vector(0, -1, 0)
 
 
 @given(u'n ← vector(√2/2, √2/2, 0)')
