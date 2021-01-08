@@ -1,5 +1,5 @@
 from behave import *
-from T import T, point, vector
+from T import T
 
 @given(u'a ← tuple(4.3, -4.2, 3.1, 1.0)')
 def step_impl(context):
@@ -58,7 +58,7 @@ def step_impl(context):
 
 @given(u'p ← point(4, -4, 3)')
 def step_impl(context):
-    context.p = point(4, -4, 3)
+    context.p = T.point(4, -4, 3)
 
 
 @then(u'p = tuple(4, -4, 3, 1)')
@@ -68,7 +68,7 @@ def step_impl(context):
 
 @given(u'v ← vector(4, -4, 3)')
 def step_impl(context):
-    context.v = vector(4, -4, 3)
+    context.v = T.vector(4, -4, 3)
 
 
 @then(u'v = tuple(4, -4, 3, 0)')
@@ -88,67 +88,67 @@ def step_impl(context):
 
 @then(u'a1 + a2 = tuple(1, 1, 6, 1)')
 def step_impl(context):
-    context.a1 + context.a2 == T(1, 1, 6, 1)
+    assert context.a1 + context.a2 == T(1, 1, 6, 1)
 
 
 @given(u'p1 ← point(3, 2, 1)')
 def step_impl(context):
-    context.p1 = point(3, 2, 1)
+    context.p1 = T.point(3, 2, 1)
 
 
 @given(u'p2 ← point(5, 6, 7)')
 def step_impl(context):
-    context.p2 = point(5, 6, 7)
+    context.p2 = T.point(5, 6, 7)
 
 
 @then(u'p1 - p2 = vector(-2, -4, -6)')
 def step_impl(context):
-    context.p1 - context.p2 == vector(-2, -4, -6)
+    assert context.p1 - context.p2 == T.vector(-2, -4, -6)
 
 
 @given(u'p ← point(3, 2, 1)')
 def step_impl(context):
-    context.p = point(3, 2, 1)
+    context.p = T.point(3, 2, 1)
 
 
 @given(u'v ← vector(5, 6, 7)')
 def step_impl(context):
-    context.v = vector(5, 6, 7)
+    context.v = T.vector(5, 6, 7)
 
 
 @then(u'p - v = point(-2, -4, -6)')
 def step_impl(context):
-    context.p - context.v == point(-2, -4, -6)
+    assert context.p - context.v == T.point(-2, -4, -6)
 
 
 @given(u'v1 ← vector(3, 2, 1)')
 def step_impl(context):
-    context.v1 = vector(3, 2, 1)
+    context.v1 = T.vector(3, 2, 1)
 
 
 @given(u'v2 ← vector(5, 6, 7)')
 def step_impl(context):
-    context.v2 = vector(5, 6, 7)
+    context.v2 = T.vector(5, 6, 7)
 
 
 @then(u'v1 - v2 = vector(-2, -4, -6)')
 def step_impl(context):
-    context.v1 - context.v2 == vector(-2, -4, -6)
+    assert context.v1 - context.v2 == T.vector(-2, -4, -6)
 
 
 @given(u'zero ← vector(0, 0, 0)')
 def step_impl(context):
-    context.zero = vector(0, 0, 0)
+    context.zero = T.vector(0, 0, 0)
 
 
 @given(u'v ← vector(1, -2, 3)')
 def step_impl(context):
-    context.v = vector(1, -2, 3)
+    context.v = T.vector(1, -2, 3)
 
 
 @then(u'zero - v = vector(-1, 2, -3)')
 def step_impl(context):
-    context.zero - context.v == vector(-1, 2, -3)
+    assert context.zero - context.v == T.vector(-1, 2, -3)
 
 
 @given(u'a ← tuple(1, -2, 3, -4)')
@@ -163,47 +163,47 @@ def step_impl(context):
 
 @then(u'a * 3.5 = tuple(3.5, -7, 10.5, -14)')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Then a * 3.5 = tuple(3.5, -7, 10.5, -14)')
+    assert context.a * 3.5 == T(3.5, -7, 10.5, -14)
 
 
 @then(u'a * 0.5 = tuple(0.5, -1, 1.5, -2)')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Then a * 0.5 = tuple(0.5, -1, 1.5, -2)')
+    assert context.a * 0.5 == T(0.5, -1, 1.5, -2)
 
 
 @then(u'a / 2 = tuple(0.5, -1, 1.5, -2)')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Then a / 2 = tuple(0.5, -1, 1.5, -2)')
+    assert context.a / 2 == T(0.5, -1, 1.5, -2)
 
 
 @given(u'v ← vector(1, 0, 0)')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Given v ← vector(1, 0, 0)')
+    context.v = T.vector(1, 0, 0)
 
 
 @then(u'magnitude(v) = 1')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Then magnitude(v) = 1')
+    assert T.magnitude(context.v) == 1
 
 
 @given(u'v ← vector(0, 1, 0)')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Given v ← vector(0, 1, 0)')
+    context.v = T.vector(0, 1, 0)
 
 
 @given(u'v ← vector(0, 0, 1)')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Given v ← vector(0, 0, 1)')
+    context.v = T.vector(0, 0, 1)
 
 
 @given(u'v ← vector(1, 2, 3)')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Given v ← vector(1, 2, 3)')
+    context.v = T.vector(1, 2, 3)
 
 
 @then(u'magnitude(v) = √14')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Then magnitude(v) = √14')
+    assert T.magnitude(context.v) == math.sqrt(14)
 
 
 @given(u'v ← vector(-1, -2, -3)')
