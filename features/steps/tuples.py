@@ -208,12 +208,12 @@ def step_impl(context):
 
 @given(u'v ← vector(-1, -2, -3)')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Given v ← vector(-1, -2, -3)')
+    context.v = T.vector(-1, -2, -3)
 
 
 @given(u'v ← vector(4, 0, 0)')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Given v ← vector(4, 0, 0)')
+    context.v = T.vector(4, 0, 0)
 
 
 @then(u'normalize(v) = vector(1, 0, 0)')
