@@ -1,4 +1,4 @@
-import math
+from math import sqrt
 
 class T:
     EPSILON = 0.00001
@@ -29,7 +29,14 @@ class T:
 
     @staticmethod
     def magnitude(v):
-        return math.sqrt(v.x ** 2 + v.y ** 2 + v.z ** 2 + v.w ** 2)
+        return sqrt(v.x ** 2 + v.y ** 2 + v.z ** 2 + v.w ** 2)
+
+    @staticmethod
+    def normalize(v):
+        return T(v.x / T.magnitude(v),
+                 v.y / T.magnitude(v),
+                 v.z / T.magnitude(v),
+                 v.w / T.magnitude(v))
 
     def __eq__(self, other):
         return bool((self.equals(self.x, other.x) and
@@ -45,9 +52,6 @@ class T:
 
     def __mul__(self, scalar):
         return T(self.x * scalar, self.y * scalar, self.z * scalar, self.w * scalar)
-
-    def __floordiv__(self, scalar):
-        return T(self.x / scalar, self.y / scalar, self.z / scalar, self.w / scalar)
 
     def __truediv__(self, scalar):
         return T(self.x / scalar, self.y / scalar, self.z / scalar, self.w / scalar)

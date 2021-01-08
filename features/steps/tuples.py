@@ -1,5 +1,6 @@
 from behave import *
 from T import T
+from math import sqrt
 
 @given(u'a ← tuple(4.3, -4.2, 3.1, 1.0)')
 def step_impl(context):
@@ -203,7 +204,7 @@ def step_impl(context):
 
 @then(u'magnitude(v) = √14')
 def step_impl(context):
-    assert T.magnitude(context.v) == math.sqrt(14)
+    assert T.magnitude(context.v) == sqrt(14)
 
 
 @given(u'v ← vector(-1, -2, -3)')
@@ -218,32 +219,32 @@ def step_impl(context):
 
 @then(u'normalize(v) = vector(1, 0, 0)')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Then normalize(v) = vector(1, 0, 0)')
+    assert T.normalize(context.v) == T.vector(1, 0, 0)
 
 
 @then(u'normalize(v) = approximately vector(0.26726, 0.53452, 0.80178)')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Then normalize(v) = approximately vector(0.26726, 0.53452, 0.80178)')
+    assert T.normalize(context.v) == T.vector(0.26726, 0.53452, 0.80178)
 
 
 @when(u'norm ← normalize(v)')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: When norm ← normalize(v)')
+    context.norm = T.normalize(context.v)
 
 
 @then(u'magnitude(norm) = 1')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Then magnitude(norm) = 1')
+    assert T.magnitude(context.norm) == 1
 
 
 @given(u'a ← vector(1, 2, 3)')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Given a ← vector(1, 2, 3)')
+    context.a = T.vector(1, 2, 3)
 
 
 @given(u'b ← vector(2, 3, 4)')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Given b ← vector(2, 3, 4)')
+    context.b = T.vector(2, 3, 4)
 
 
 @then(u'dot(a, b) = 20')
