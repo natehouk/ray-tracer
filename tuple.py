@@ -38,6 +38,11 @@ def cross(a, b):
                   a.z * b.x - a.x * b.z,
                   a.x * b.y - a.y * b.x)
 
+def tick(env, proj):
+    position = proj.position + proj.velocity
+    velocity = proj.velocity + env.gravity + env.wind
+    return projectile(position, velocity)
+
 class tuple:
 
     def __init__(self, x, y, z, w):
@@ -68,8 +73,36 @@ class tuple:
         return vector(0, 0, 0) - self
 
     def __str__(self):
-        return "T<" + str(self.x) + ", " + str(self.y) + ", " + str(self.z) + ", " + str(self.w) + ">"
+        return "tuple(" + str(self.x) + ", " + str(self.y) + ", " + str(self.z) + ", " + str(self.w) + ")"
+
+class projectile:
+
+    def __init__(self, p, v):
+        self.position = p
+        self.velocity = v
+
+    def __str__(self):
+        return "projectile(" + str(self.position) + ", " + str(self.velocity) + ")"
+
+class environment:
+
+    def __init__(self, g, w):
+        self.gravity = g
+        self.wind = w
+
+    def __str__(self):
+        return "environment(" + str(self.gravity) + ", " + str(self.wind) + ")"
 
 if __name__ == "__main__":
-    t = tuple(1, 1, 1, 1)
-    print(t.x)
+    # projectile starts one unit above the origin
+    # velocity is normalzied to 1 unit/tick
+    p = projectile(point(0, 1, 0), normalize(vector(1, 1, 0)))
+
+    # gravity -0.1 unit/tick, and wind is -0.01 unit/tick
+    e = environment(vector(0, -0.1, 0), vector(-0.01, 0, 0))
+
+    while(True):
+        print(p)
+        print(e)
+        input()
+        p = tick(e, p)
