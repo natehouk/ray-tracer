@@ -339,12 +339,12 @@ def step_impl(context):
 
 @when(u'r ← reflect(v, n)')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: When r ← reflect(v, n)')
+    context.r = reflect(v, n)
 
 
 @then(u'r = vector(1, 1, 0)')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Then r = vector(1, 1, 0)')
+    assert context.r == vector(1, 1, 0)
 
 
 @given(u'v ← vector(0, -1, 0)')
@@ -354,9 +354,9 @@ def step_impl(context):
 
 @given(u'n ← vector(√2/2, √2/2, 0)')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Given n ← vector(√2/2, √2/2, 0)')
+    context.n = vector(sqrt(2) / 2, sqrt(2) / 2, 0)
 
 
 @then(u'r = vector(1, 0, 0)')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Then r = vector(1, 0, 0)')
+    assert context.r == vector(1, 0, 0)
