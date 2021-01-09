@@ -121,6 +121,7 @@ class environment:
     def __str__(self):
         return "environment(" + str(self.gravity) + ", " + str(self.wind) + ")"
 
+
 if __name__ == "__main__":
     # projectile starts one unit above the origin
     # velocity is normalzied to 1 unit/tick

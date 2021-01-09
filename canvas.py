@@ -1,10 +1,18 @@
-from tuple import color
+import time
+from tuple import color, point, vector, normalize, projectile, environment, tick
 
 def write_pixel(c, width, height, color):
-    c.canvas[width][height] = color
-
+    if width >= 0 and width < c.width and height >= 0 and height < c.height:
+        c.canvas[width][height] = color
+        return
+    else:
+        return Exception
+    
 def pixel_at(c, width, height):
-    return c.canvas[width][height]
+    if width >= 0 and width < c.width and height >= 0 and height < c.height:
+        return c.canvas[width][height]
+    else:
+        return Exception
 
 def canvas_to_ppm(c):
     return ppm(c)
@@ -12,7 +20,7 @@ def canvas_to_ppm(c):
 def clamp(c):
     return color(int(max(min(c.red * 255, 255), 0) + .5),
                  int(max(min(c.green * 255, 255), 0) + .5),
-                 int(max(min(c.blue * 255, 255), 0) + .5 ))
+                 int(max(min(c.blue * 255, 255), 0) + .5))
 
 class canvas:
 
@@ -24,22 +32,32 @@ class canvas:
     def __str__(self):
         body = ""
         for i in range(0, self.height):
+            cur = ""
             for j in range (0, self.width):
-                body += str(clamp(self.canvas[j][i]).red)
-                if len(body.split("\n")[-1]) >= 67 and j != self.width - 1:
-                    body += "\n"
+                clamped = clamp(self.canvas[j][i])
+                print(str(i) + " " + str(j))
+                cur += str(clamped.red)
+                if len(cur) >= 67 and j != self.width - 1:
+                    cur += "\n"
+                    body += cur
+                    cur = ""
                 else:
-                    body += " "
-                body += str(clamp(self.canvas[j][i]).green)
-                if len(body.split("\n")[-1]) >= 67 and j != self.width - 1:
-                    body += "\n"
+                    cur += " "
+                cur += str(clamped.green)
+                if len(cur) >= 67 and j != self.width - 1:
+                    cur += "\n"
+                    body += cur
+                    cur = ""
                 else:
-                    body += " "
-                body += str(clamp(self.canvas[j][i]).blue)
-                if len(body.split("\n")[-1]) >= 67 and j != self.width - 1:
-                    body += "\n"
+                    cur += " "
+                cur += str(clamped.blue)
+                if len(cur) >= 67 and j != self.width - 1:
+                    cur += "\n"
+                    body += cur
+                    cur = ""
                 elif j != self.width - 1:
-                    body += " "
+                    cur += " "
+            body += cur
             if i != self.height - 1:
                 body += "\n"
         return body
@@ -48,10 +66,46 @@ class ppm:
 
     def __init__(self, c):
         self.header = "P3\n" + str(c.width) + " " + str(c.height) + "\n255"
+        self.canvas = c
         self.body = str(c)
 
     def __str__(self):
         return self.header + self.body
 
     def file(self):
-        return self.header + self.body + "\n"
+        return self.header + "\n" + self.body + "\n"
+
+    def write_file(self):
+        f = open("canvas.txt", "w")
+        f.write(self.file())
+        f.close()
+    
+
+if __name__ == "__main__":
+    start = point(0, 1, 0)
+    velocity = normalize(vector(1, 1.8, 0)) * 11.25
+    p = projectile(start, velocity)
+
+    gravity = vector(0, -0.1, 0)
+    wind = vector(-0.01, 0, 0)
+    e = environment(gravity, wind)
+
+    red = color(1, 0, 0)
+
+    c = canvas(900, 550)
+
+    x = 0
+    while(x < 300):
+        print(p)
+        print(e)
+        write_pixel(c, int(p.position.x), c.height - int(p.position.y), red)
+        #input()
+        p = tick(e, p)
+        x += 1
+    
+    start = time.time()
+    print("Start writing file...")
+    canvas_to_ppm(c).write_file()
+    end = time.time()
+    print("Finished writing file.")
+    print(end - start)
