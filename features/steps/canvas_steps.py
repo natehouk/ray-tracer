@@ -87,24 +87,28 @@ def step_impl(context):
 
 @then(u'lines 4-6 of ppm are')
 def step_impl(context):
+    print(context.ppm.body)
     assert context.ppm.body ==  "255 0 0 0 0 0 0 0 0 0 0 0 0 0 0\n0 0 0 0 0 0 0 128 0 0 0 0 0 0 0\n0 0 0 0 0 0 0 0 0 0 0 0 0 0 255"
 
 
 @given(u'c ← canvas(10, 2)')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Given c ← canvas(10, 2)')
+    context.c = canvas(10, 2)
 
 
 @when(u'every pixel of c is set to color(1, 0.8, 0.6)')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: When every pixel of c is set to color(1, 0.8, 0.6)')
+    for i in range(0, context.c.width):
+        for j in range(0, context.c.height):
+            context.c.canvas[i][j] = color(1, 0.8, 0.6)
 
 
 @then(u'lines 4-7 of ppm are')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Then lines 4-7 of ppm are')
+    print(context.ppm.body)
+    assert context.ppm.body == "255 204 153 255 204 153 255 204 153 255 204 153 255 204 153 255 204\n153 255 204 153 255 204 153 255 204 153 255 204 153\n255 204 153 255 204 153 255 204 153 255 204 153 255 204 153 255 204\n153 255 204 153 255 204 153 255 204 153 255 204 153"
 
 
 @then(u'ppm ends with a newline character')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Then ppm ends with a newline character')
+    assert context.ppm.file().endswith("\n")

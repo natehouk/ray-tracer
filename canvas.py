@@ -25,8 +25,20 @@ class canvas:
         body = ""
         for i in range(0, self.height):
             for j in range (0, self.width):
-                body += str(clamp(self.canvas[j][i]))
-                if j != self.width - 1:
+                body += str(clamp(self.canvas[j][i]).red)
+                if len(body.split("\n")[-1]) >= 67 and j != self.width - 1:
+                    body += "\n"
+                else:
+                    body += " "
+                body += str(clamp(self.canvas[j][i]).green)
+                if len(body.split("\n")[-1]) >= 67 and j != self.width - 1:
+                    body += "\n"
+                else:
+                    body += " "
+                body += str(clamp(self.canvas[j][i]).blue)
+                if len(body.split("\n")[-1]) >= 67 and j != self.width - 1:
+                    body += "\n"
+                elif j != self.width - 1:
                     body += " "
             if i != self.height - 1:
                 body += "\n"
@@ -39,4 +51,7 @@ class ppm:
         self.body = str(c)
 
     def __str__(self):
-        print(self.header + self.body)
+        return self.header + self.body
+
+    def file(self):
+        return self.header + self.body + "\n"
