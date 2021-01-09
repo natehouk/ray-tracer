@@ -98,7 +98,10 @@ class tuple:
         return vector(0, 0, 0) - self
 
     def __str__(self):
-        return "tuple(" + str(self.x) + ", " + str(self.y) + ", " + str(self.z) + ", " + str(self.w) + ")"
+        if (isnan(self.w)):
+            return  str(self.x) + " " + str(self.y) + " " + str(self.z)
+        else:
+            return "tuple(" + str(self.x) + ", " + str(self.y) + ", " + str(self.z) + ", " + str(self.w) + ")"
 
 class projectile:
 

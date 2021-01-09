@@ -1,6 +1,6 @@
 from __future__ import absolute_import
 from behave import *
-from canvas import canvas, write_pixel, pixel_at
+from canvas import canvas, write_pixel, pixel_at, canvas_to_ppm
 from tuple import color
 
 @given(u'c ← canvas(10, 20)')
@@ -42,52 +42,52 @@ def step_impl(context):
 
 @given(u'c ← canvas(5, 3)')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Given c ← canvas(5, 3)')
+    context.c = canvas(5, 3)
 
 
 @when(u'ppm ← canvas_to_ppm(c)')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: When ppm ← canvas_to_ppm(c)')
-
+    context.ppm = canvas_to_ppm(context.c)
+    
 
 @then(u'lines 1-3 of ppm are')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Then lines 1-3 of ppm are')
+    assert context.ppm.header == "P3\n5 3\n255"
 
 
 @given(u'c1 ← color(1.5, 0, 0)')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Given c1 ← color(1.5, 0, 0)')
+    context.c1 = color(1.5, 0, 0)
 
 
 @given(u'c2 ← color(0, 0.5, 0)')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Given c2 ← color(0, 0.5, 0)')
+    context.c2 = color(0, 0.5, 0)
 
 
 @given(u'c3 ← color(-0.5, 0, 1)')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Given c3 ← color(-0.5, 0, 1)')
+    context.c3 = color(-0.5, 0, 1)
 
 
 @when(u'write_pixel(c, 0, 0, c1)')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: When write_pixel(c, 0, 0, c1)')
+    write_pixel(context.c, 0, 0, context.c1)
 
 
 @when(u'write_pixel(c, 2, 1, c2)')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: When write_pixel(c, 2, 1, c2)')
+    write_pixel(context.c, 2, 1, context.c2)
 
 
 @when(u'write_pixel(c, 4, 2, c3)')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: When write_pixel(c, 4, 2, c3)')
+    write_pixel(context.c, 4, 2, context.c3)
 
 
 @then(u'lines 4-6 of ppm are')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Then lines 4-6 of ppm are')
+    assert context.ppm.body ==  "255 0 0 0 0 0 0 0 0 0 0 0 0 0 0\n0 0 0 0 0 0 0 128 0 0 0 0 0 0 0\n0 0 0 0 0 0 0 0 0 0 0 0 0 0 255"
 
 
 @given(u'c ← canvas(10, 2)')
