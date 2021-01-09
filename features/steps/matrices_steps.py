@@ -91,9 +91,14 @@ def step_impl(context):
     assert context.A == context.B
 
 
-@then(u'A != B')
+@given(u'the following matrix C')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Then A != B')
+    context.C = matrix(2, 3, 4, 5, 6, 7, 8, 9, 8, 7, 6, 5, 4, 3, 2, 1)
+
+
+@then(u'A != C')
+def step_impl(context):
+    assert context.A != context.C
 
 
 @then(u'A * B is the following 4x4 matrix')

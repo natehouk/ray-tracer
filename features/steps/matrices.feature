@@ -51,12 +51,12 @@ Scenario: Matrix equality with different matrices
       | 5 | 6 | 7 | 8 |
       | 9 | 8 | 7 | 6 |
       | 5 | 4 | 3 | 2 |
-    And the following matrix B:
+    And the following matrix C:
       | 2 | 3 | 4 | 5 |
       | 6 | 7 | 8 | 9 |
       | 8 | 7 | 6 | 5 |
       | 4 | 3 | 2 | 1 |
-  Then A != B
+  Then A != C
 
 Scenario: Multiplying two matrices
   Given the following matrix A:
