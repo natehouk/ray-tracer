@@ -15,6 +15,36 @@ def determinate(m):
     else:
         return NotImplemented
 
+def submatrix(m, row, column):
+    if isnan(m.matrix[0][3]):
+        s = matrix(0, 0, 0, 0)
+        l = []
+        for i in range(3):
+            if i == row:
+                continue
+            for j in range(3):
+                if j == column:
+                    continue
+                l.append(m.matrix[i][j])
+        for i in range(2):
+            for j in range(2):
+                s.matrix[i][j] = l.pop(0)
+        return s
+    else:
+        s = matrix(0, 0, 0, 0, 0, 0, 0, 0, 0)
+        l = []
+        for i in range(4):
+            if i == row:
+                continue
+            for j in range(4):
+                if j == column:
+                    continue
+                l.append(m.matrix[i][j])
+        for i in range(3):
+            for j in range(3):
+                s.matrix[i][j] = l.pop(0)
+        return s
+
 class matrix:
 
     def __init__(self, a, b, c, d, 

@@ -4,7 +4,7 @@ from math import sqrt, isnan
 EPSILON = 0.00001
 
 def equals(a, b):
-    return abs(a - b) < EPSILON
+    return abs(a - b) < EPSILON or (isnan(a) and isnan(b))
 
 def is_point(p):
     return p.w == 1.0

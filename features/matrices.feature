@@ -139,23 +139,23 @@ Scenario: A submatrix of a 4x4 matrix is a 3x3 matrix
     | -7 | -1 | 1 |
 
 Scenario: Calculating a minor of a 3x3 matrix
-  Given the following 3x3 matrix A:
+  Given the following 3x3 matrix B:
       |  3 |  5 |  0 |
       |  2 | -1 | -7 |
       |  6 | -1 |  5 |
-    And B ← submatrix(A, 1, 0)
-  Then determinant(B) = 25
-    And minor(A, 1, 0) = 25
+    And C ← submatrix(B, 1, 0)
+  Then determinant(C) = 25
+    And minor(B, 1, 0) = 25
 
 Scenario: Calculating a cofactor of a 3x3 matrix
-  Given the following 3x3 matrix A:
+  Given the following 3x3 matrix B:
       |  3 |  5 |  0 |
       |  2 | -1 | -7 |
       |  6 | -1 |  5 |
-  Then minor(A, 0, 0) = -12
-    And cofactor(A, 0, 0) = -12
-    And minor(A, 1, 0) = 25
-    And cofactor(A, 1, 0) = -25
+  Then minor(B, 0, 0) = -12
+    And cofactor(B, 0, 0) = -12
+    And minor(B, 1, 0) = 25
+    And cofactor(B, 1, 0) = -25
 
 Scenario: Calculating the determinant of a 3x3 matrix
   Given the following 3x3 matrix A:

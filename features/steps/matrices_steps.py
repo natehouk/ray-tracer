@@ -1,5 +1,5 @@
 from behave import *
-from matrix import matrix, transpose, determinate
+from matrix import matrix, transpose, determinate, submatrix
 from tuple import tuple
 
 @given(u'the following 4x4 matrix M')
@@ -183,50 +183,55 @@ def step_impl(context):
 
 @given(u'the following 3x3 matrix A')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Given the following 3x3 matrix A')
+    context.A = matrix(1, 5, 0, -3, 2, 7, 0, 6, -3)
 
 
 @then(u'submatrix(A, 0, 2) is the following 2x2 matrix')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Then submatrix(A, 0, 2) is the following 2x2 matrix')
+    assert submatrix(context.A, 0, 2) == matrix(-3, 2, 0, 6)
 
 
 @given(u'the following 4x4 matrix A')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Given the following 4x4 matrix A')
+    context.A = matrix(-6, 1, 1, 6, -8, 5, 8, 6, -1, 0, 8, 2, -7, 1, -1, 1)
 
 
 @then(u'submatrix(A, 2, 1) is the following 3x3 matrix')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Then submatrix(A, 2, 1) is the following 3x3 matrix')
+    assert submatrix(context.A, 2, 1) == matrix(-6, 1, 6, -8, 8, 6, -7, -1, 1)
 
 
-@given(u'B ← submatrix(A, 1, 0)')
+@given(u'the following 3x3 matrix B')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Given B ← submatrix(A, 1, 0)')
+    context.B = matrix(3, 5, 0, 2, -1, -7, 6, -1, 5)
 
 
-@then(u'determinant(B) = 25')
+@given(u'C ← submatrix(B, 1, 0)')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Then determinant(B) = 25')
+    context.C = submatrix(context.B, 1, 0)
 
 
-@then(u'minor(A, 1, 0) = 25')
+@then(u'determinant(C) = 25')
+def step_impl(context):
+    assert determinate(context.C) == 25
+
+
+@then(u'minor(B, 1, 0) = 25')
 def step_impl(context):
     raise NotImplementedError(u'STEP: Then minor(A, 1, 0) = 25')
 
 
-@then(u'minor(A, 0, 0) = -12')
+@then(u'minor(B, 0, 0) = -12')
 def step_impl(context):
     raise NotImplementedError(u'STEP: Then minor(A, 0, 0) = -12')
 
 
-@then(u'cofactor(A, 0, 0) = -12')
+@then(u'cofactor(B, 0, 0) = -12')
 def step_impl(context):
     raise NotImplementedError(u'STEP: Then cofactor(A, 0, 0) = -12')
 
 
-@then(u'cofactor(A, 1, 0) = -25')
+@then(u'cofactor(B, 1, 0) = -25')
 def step_impl(context):
     raise NotImplementedError(u'STEP: Then cofactor(A, 1, 0) = -25')
 
