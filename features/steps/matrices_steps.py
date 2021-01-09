@@ -1,5 +1,5 @@
 from behave import *
-from matrix import matrix
+from matrix import matrix, transpose
 from tuple import tuple
 
 @given(u'the following 4x4 matrix M')
@@ -149,19 +149,26 @@ def step_impl(context):
     assert identity_matrix * context.a == context.a
 
 
-@then(u'transpose(A) is the following matrix')
+@given(u'the following matrix G')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Then transpose(A) is the following matrix')
+    context.G = matrix(0, 9, 3, 0, 9, 8, 0, 8, 1, 8, 5, 3, 0, 0, 5, 8)
+
+
+@then(u'transpose(G) is the following matrix')
+def step_impl(context):
+    assert transpose(context.G) == matrix(0, 9, 1, 0, 9, 8, 8, 0, 3, 0, 5, 5, 0, 8, 3, 8)
 
 
 @given(u'A ← transpose(identity_matrix)')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Given A ← transpose(identity_matrix)')
+    identity_matrix = matrix(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)
+    context.A = transpose(identity_matrix)
 
 
 @then(u'A = identity_matrix')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Then A = identity_matrix')
+    identity_matrix = matrix(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)
+    assert context.A == identity_matrix
 
 
 @given(u'the following 2x2 matrix A')

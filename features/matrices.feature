@@ -97,12 +97,12 @@ Scenario: Multiplying the identity matrix by a tuple
   Then identity_matrix * a = a
 
 Scenario: Transposing a matrix
-  Given the following matrix A:
+  Given the following matrix G:
     | 0 | 9 | 3 | 0 |
     | 9 | 8 | 0 | 8 |
     | 1 | 8 | 5 | 3 |
     | 0 | 0 | 5 | 8 |
-  Then transpose(A) is the following matrix:
+  Then transpose(G) is the following matrix:
     | 0 | 9 | 1 | 0 |
     | 9 | 8 | 8 | 0 |
     | 3 | 0 | 5 | 5 |

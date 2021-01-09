@@ -1,6 +1,13 @@
 from math import isnan
 from tuple import tuple, equals
 
+def transpose(m):
+    t = matrix(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+    for i in range(4):
+        for j in range(4):
+            t.matrix[j][i] = m.matrix[i][j]
+    return t
+
 class matrix:
 
     def __init__(self, a, b, c, d, 
