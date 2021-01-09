@@ -41,6 +41,9 @@ def cross(a, b):
                   a.z * b.x - a.x * b.z,
                   a.x * b.y - a.y * b.x)
 
+def hadamard_product(c1, c2):
+    return color(c1.red * c2.red, c1.green * c2.green, c1.blue * c2.blue)
+
 def tick(env, proj):
     position = proj.position + proj.velocity
     velocity = proj.velocity + env.gravity + env.wind
@@ -85,7 +88,7 @@ class tuple:
             scalar = other
             return tuple(self.x * scalar, self.y * scalar, self.z * scalar, self.w * scalar)
         elif isinstance(other, tuple) and  isnan(other.w):
-            return color(self.red * other.red, self.green * other.green, self.blue * other.blue)
+            return hadamard_product(self, other)
         return NotImplementedError
 
     def __truediv__(self, scalar):
