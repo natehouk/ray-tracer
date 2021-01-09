@@ -87,7 +87,6 @@ def step_impl(context):
 
 @then(u'lines 4-6 of ppm are')
 def step_impl(context):
-    print(context.ppm.body)
     assert context.ppm.body ==  "255 0 0 0 0 0 0 0 0 0 0 0 0 0 0\n0 0 0 0 0 0 0 128 0 0 0 0 0 0 0\n0 0 0 0 0 0 0 0 0 0 0 0 0 0 255"
 
 
@@ -105,10 +104,9 @@ def step_impl(context):
 
 @then(u'lines 4-7 of ppm are')
 def step_impl(context):
-    print(context.ppm.body)
     assert context.ppm.body == "255 204 153 255 204 153 255 204 153 255 204 153 255 204 153 255 204\n153 255 204 153 255 204 153 255 204 153 255 204 153\n255 204 153 255 204 153 255 204 153 255 204 153 255 204 153 255 204\n153 255 204 153 255 204 153 255 204 153 255 204 153"
 
 
 @then(u'ppm ends with a newline character')
 def step_impl(context):
-    assert context.ppm.file().endswith("\n")
+    assert str(context.ppm).endswith("\n")

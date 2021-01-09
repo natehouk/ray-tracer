@@ -70,14 +70,11 @@ class ppm:
         self.body = str(c)
 
     def __str__(self):
-        return self.header + self.body
-
-    def file(self):
         return self.header + "\n" + self.body + "\n"
 
     def write_file(self):
         f = open("canvas.txt", "w")
-        f.write(self.file())
+        f.write(self)
         f.close()
     
 
