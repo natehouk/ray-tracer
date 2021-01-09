@@ -1,4 +1,3 @@
-from __future__ import absolute_import
 from behave import *
 from canvas import canvas, write_pixel, pixel_at, canvas_to_ppm
 from tuple import color
