@@ -8,6 +8,13 @@ def transpose(m):
             t.matrix[j][i] = m.matrix[i][j]
     return t
 
+def determinate(m):
+    if isnan(m.matrix[0][2]):
+        return (m.matrix[0][0] * m.matrix[1][1] -
+                m.matrix[0][1] * m.matrix[1][0])
+    else:
+        return NotImplemented
+
 class matrix:
 
     def __init__(self, a, b, c, d, 

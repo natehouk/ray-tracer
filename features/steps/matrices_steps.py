@@ -1,5 +1,5 @@
 from behave import *
-from matrix import matrix, transpose
+from matrix import matrix, transpose, determinate
 from tuple import tuple
 
 @given(u'the following 4x4 matrix M')
@@ -173,12 +173,12 @@ def step_impl(context):
 
 @given(u'the following 2x2 matrix A')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Given the following 2x2 matrix A')
+    context.A = matrix(1, 5, -3, 2)
 
 
 @then(u'determinant(A) = 17')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Then determinant(A) = 17')
+    assert determinate(context.A) == 17
 
 
 @given(u'the following 3x3 matrix A')
