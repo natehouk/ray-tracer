@@ -158,97 +158,97 @@ Scenario: Calculating a cofactor of a 3x3 matrix
     And cofactor(B, 1, 0) = -25
 
 Scenario: Calculating the determinant of a 3x3 matrix
-  Given the following 3x3 matrix A:
+  Given the following 3x3 matrix C:
     |  1 |  2 |  6 |
     | -5 |  8 | -4 |
     |  2 |  6 |  4 |
-  Then cofactor(A, 0, 0) = 56
-    And cofactor(A, 0, 1) = 12
-    And cofactor(A, 0, 2) = -46
-    And determinant(A) = -196
+  Then cofactor(C, 0, 0) = 56
+    And cofactor(C, 0, 1) = 12
+    And cofactor(C, 0, 2) = -46
+    And determinant(C) = -196
 
 Scenario: Calculating the determinant of a 4x4 matrix
-  Given the following 4x4 matrix A:
+  Given the following 4x4 matrix B:
     | -2 | -8 |  3 |  5 |
     | -3 |  1 |  7 |  3 |
     |  1 |  2 | -9 |  6 |
     | -6 |  7 |  7 | -9 |
-  Then cofactor(A, 0, 0) = 690
-    And cofactor(A, 0, 1) = 447
-    And cofactor(A, 0, 2) = 210
-    And cofactor(A, 0, 3) = 51
-    And determinant(A) = -4071
+  Then cofactor(B, 0, 0) = 690
+    And cofactor(B, 0, 1) = 447
+    And cofactor(B, 0, 2) = 210
+    And cofactor(B, 0, 3) = 51
+    And determinant(B) = -4071
 
 Scenario: Testing an invertible matrix for invertibility
-  Given the following 4x4 matrix A:
+  Given the following 4x4 matrix C:
     |  6 |  4 |  4 |  4 |
     |  5 |  5 |  7 |  6 |
     |  4 | -9 |  3 | -7 |
     |  9 |  1 |  7 | -6 |
-  Then determinant(A) = -2120
-    And A is invertible
+  Then determinant(C) = -2120
+    And C is invertible
 
 Scenario: Testing a noninvertible matrix for invertibility
-  Given the following 4x4 matrix A:
+  Given the following 4x4 matrix D:
     | -4 |  2 | -2 | -3 |
     |  9 |  6 |  2 |  6 |
     |  0 | -5 |  1 | -5 |
     |  0 |  0 |  0 |  0 |
-  Then determinant(A) = 0
-    And A is not invertible
+  Then determinant(D) = 0
+    And D is not invertible
 
 Scenario: Calculating the inverse of a matrix
-  Given the following 4x4 matrix A:
+  Given the following 4x4 matrix E:
       | -5 |  2 |  6 | -8 |
       |  1 | -5 |  1 |  8 |
       |  7 |  7 | -6 | -7 |
       |  1 | -3 |  7 |  4 |
-    And B ← inverse(A)
-  Then determinant(A) = 532
-    And cofactor(A, 2, 3) = -160
-    And B[3,2] = -160/532
-    And cofactor(A, 3, 2) = 105
-    And B[2,3] = 105/532
-    And B is the following 4x4 matrix:
+    And F ← inverse(E)
+  Then determinant(E) = 532
+    And cofactor(E, 2, 3) = -160
+    And F[3,2] = -160/532
+    And cofactor(E, 3, 2) = 105
+    And F[2,3] = 105/532
+    And F is the following 4x4 matrix:
       |  0.21805 |  0.45113 |  0.24060 | -0.04511 |
       | -0.80827 | -1.45677 | -0.44361 |  0.52068 |
       | -0.07895 | -0.22368 | -0.05263 |  0.19737 |
       | -0.52256 | -0.81391 | -0.30075 |  0.30639 |
 
 Scenario: Calculating the inverse of another matrix
-  Given the following 4x4 matrix A:
+  Given the following 4x4 matrix F:
     |  8 | -5 |  9 |  2 |
     |  7 |  5 |  6 |  1 |
     | -6 |  0 |  9 |  6 |
     | -3 |  0 | -9 | -4 |
-  Then inverse(A) is the following 4x4 matrix:
+  Then inverse(F) is the following 4x4 matrix:
     | -0.15385 | -0.15385 | -0.28205 | -0.53846 |
     | -0.07692 |  0.12308 |  0.02564 |  0.03077 |
     |  0.35897 |  0.35897 |  0.43590 |  0.92308 |
     | -0.69231 | -0.69231 | -0.76923 | -1.92308 |
 
 Scenario: Calculating the inverse of a third matrix
-  Given the following 4x4 matrix A:
+  Given the following 4x4 matrix G:
     |  9 |  3 |  0 |  9 |
     | -5 | -2 | -6 | -3 |
     | -4 |  9 |  6 |  4 |
     | -7 |  6 |  6 |  2 |
-  Then inverse(A) is the following 4x4 matrix:
+  Then inverse(G) is the following 4x4 matrix:
     | -0.04074 | -0.07778 |  0.14444 | -0.22222 |
     | -0.07778 |  0.03333 |  0.36667 | -0.33333 |
     | -0.02901 | -0.14630 | -0.10926 |  0.12963 |
     |  0.17778 |  0.06667 | -0.26667 |  0.33333 |
 
 Scenario: Multiplying a product by its inverse
-  Given the following 4x4 matrix A:
+  Given the following 4x4 matrix H:
       |  3 | -9 |  7 |  3 |
       |  3 | -8 |  2 | -9 |
       | -4 |  4 |  4 |  1 |
       | -6 |  5 | -1 |  1 |
-    And the following 4x4 matrix B:
+    And the following 4x4 matrix I:
       |  8 |  2 |  2 |  2 |
       |  3 | -1 |  7 |  0 |
       |  7 |  0 |  5 |  4 |
       |  6 | -2 |  0 |  5 |
-    And C ← A * B
-  Then C * inverse(B) = A
+    And J ← H * I
+  Then J * inverse(I) = H

@@ -8,14 +8,30 @@ def transpose(m):
             t.matrix[j][i] = m.matrix[i][j]
     return t
 
-def determinate(m):
+def determinant(m):
+
+    # calculate determinant of 2x2 matrix
     if isnan(m.matrix[0][2]):
         return (m.matrix[0][0] * m.matrix[1][1] -
                 m.matrix[0][1] * m.matrix[1][0])
+
+    # calculate determinant of 3x3 matrix
+    elif isnan(m.matrix[0][3]):    
+        det = 0
+        for i in range(3):
+            det = det + m.matrix[0][i] * cofactor(m, 0, i)
+        return det
+
+    # calculate determinant of 4x4 matrix
     else:
-        return NotImplemented
+        det = 0
+        for i in range(4):
+            det = det + m.matrix[0][i] * cofactor(m, 0, i)
+        return det
 
 def submatrix(m, row, column):
+
+    # calculate submatrix of 3x3 matrix
     if isnan(m.matrix[0][3]):
         s = matrix(0, 0, 0, 0)
         l = []
@@ -30,6 +46,8 @@ def submatrix(m, row, column):
             for j in range(2):
                 s.matrix[i][j] = l.pop(0)
         return s
+
+    # calculate submatrix of 4x4 matrix
     else:
         s = matrix(0, 0, 0, 0, 0, 0, 0, 0, 0)
         l = []
@@ -44,6 +62,20 @@ def submatrix(m, row, column):
             for j in range(3):
                 s.matrix[i][j] = l.pop(0)
         return s
+
+def minor(m, row, column):
+
+    # calculate minor of 3x3 matrix
+    if isnan(m.matrix[0][3]):
+        return determinant(submatrix(m, row, column))
+    else:
+        return NotImplemented
+
+def cofactor(m, row, column):
+    return determinant(submatrix(m, row, column)) * (-1 if row + column % 2 != 0 else 1)
+
+def is_invertable(m):
+    return True if determinant(m) != 0 else False
 
 class matrix:
 
