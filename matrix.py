@@ -1,5 +1,5 @@
 from math import isnan
-from tuple import equals
+from tuple import tuple, equals
 
 class matrix:
 
@@ -42,6 +42,8 @@ class matrix:
             self.matrix[3][3] = p
 
     def __eq__(self, other):
+        print(self)
+        print(other)
         if (equals(self.matrix[0][0], other.matrix[0][0]) and
             equals(self.matrix[0][1], other.matrix[0][1]) and
             equals(self.matrix[0][2], other.matrix[0][2]) and
@@ -61,3 +63,36 @@ class matrix:
             return True
         else:
             return False
+    
+    def __mul__(self, other):
+        if (isinstance(other, matrix)):
+            M = matrix(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
+            for i in range(4):
+                for j in range(4):
+                    M.matrix[i][j] = (self.matrix[i][0] * other.matrix[0][j] + 
+                                      self.matrix[i][1] * other.matrix[1][j] + 
+                                      self.matrix[i][2] * other.matrix[2][j] + 
+                                      self.matrix[i][3] * other.matrix[3][j])
+            return M
+        elif (isinstance(other, tuple)):
+            T = tuple(0, 0, 0, 0)
+            T.x  = (self.matrix[0][0] * other.x + 
+                    self.matrix[0][1] * other.y + 
+                    self.matrix[0][2] * other.z + 
+                    self.matrix[0][3] * other.w)
+            T.y  = (self.matrix[1][0] * other.x + 
+                    self.matrix[1][1] * other.y + 
+                    self.matrix[1][2] * other.z + 
+                    self.matrix[1][3] * other.w)
+            T.z  = (self.matrix[2][0] * other.x + 
+                    self.matrix[2][1] * other.y + 
+                    self.matrix[2][2] * other.z + 
+                    self.matrix[2][3] * other.w)
+            T.w  = (self.matrix[3][0] * other.x + 
+                    self.matrix[3][1] * other.y + 
+                    self.matrix[3][2] * other.z + 
+                    self.matrix[3][3] * other.w)
+            print(T)
+            return T
+        else:
+            return NotImplemented

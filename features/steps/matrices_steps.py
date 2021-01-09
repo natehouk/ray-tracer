@@ -1,5 +1,6 @@
 from behave import *
 from matrix import matrix
+from tuple import tuple
 
 @given(u'the following 4x4 matrix M')
 def step_impl(context):
@@ -101,19 +102,29 @@ def step_impl(context):
     assert context.A != context.C
 
 
-@then(u'A * B is the following 4x4 matrix')
+@given(u'the following matrix D')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Then A * B is the following 4x4 matrix')
+    context.D = matrix(-2, 1, 2, 3, 3, 2, 1, -1, 4, 3, 6, 5, 1, 2, 7, 8)
+
+
+@then(u'A * D is the following 4x4 matrix')
+def step_impl(context):
+    assert context.A * context.D == matrix(20, 22, 50, 48, 44, 54, 114, 108, 40, 58, 110, 102, 16, 26, 46, 42)
+
+
+@given(u'the following matrix E')
+def step_impl(context):
+    context.E = matrix(1, 2, 3, 4, 2, 4, 4, 2, 8, 6, 4, 1, 0, 0, 0, 1)
 
 
 @given(u'b ← tuple(1, 2, 3, 1)')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Given b ← tuple(1, 2, 3, 1)')
+    context.b = tuple(1, 2, 3, 1)
 
 
-@then(u'A * b = tuple(18, 24, 33, 1)')
+@then(u'E * b = tuple(18, 24, 33, 1)')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Then A * b = tuple(18, 24, 33, 1)')
+    assert context.E * context.b == tuple(18, 24, 33, 1)
 
 
 @then(u'A * identity_matrix = A')
