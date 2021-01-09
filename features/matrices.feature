@@ -85,12 +85,12 @@ Scenario: A matrix multiplied by a tuple
   Then E * b = tuple(18, 24, 33, 1)
 
 Scenario: Multiplying a matrix by the identity matrix
-  Given the following matrix A:
+  Given the following matrix F:
     | 0 | 1 |  2 |  4 |
     | 1 | 2 |  4 |  8 |
     | 2 | 4 |  8 | 16 |
     | 4 | 8 | 16 | 32 |
-  Then A * identity_matrix = A
+  Then F * identity_matrix = F
 
 Scenario: Multiplying the identity matrix by a tuple
   Given a ← tuple(1, 2, 3, 4)

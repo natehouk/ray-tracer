@@ -127,19 +127,26 @@ def step_impl(context):
     assert context.E * context.b == tuple(18, 24, 33, 1)
 
 
-@then(u'A * identity_matrix = A')
+@given(u'the following matrix F')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Then A * identity_matrix = A')
+    context.F = matrix(0, 1, 2, 4, 1, 2, 4, 8, 2, 4, 8, 16, 4, 8, 16, 32)
+
+
+@then(u'F * identity_matrix = F')
+def step_impl(context):
+    identity_matrix = matrix(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)
+    assert context.F * identity_matrix == context.F
 
 
 @given(u'a ← tuple(1, 2, 3, 4)')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Given a ← tuple(1, 2, 3, 4)')
+    context.a = tuple(1, 2, 3, 4)
 
 
 @then(u'identity_matrix * a = a')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Then identity_matrix * a = a')
+    identity_matrix = matrix(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)
+    assert identity_matrix * context.a == context.a
 
 
 @then(u'transpose(A) is the following matrix')
