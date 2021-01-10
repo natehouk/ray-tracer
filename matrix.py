@@ -1,4 +1,4 @@
-from math import isnan
+from math import isnan, cos, sin
 from copy import deepcopy
 from tuple import tuple, equals
 
@@ -12,7 +12,7 @@ def transpose(m):
 def determinant(m):
 
     # calculate determinant of 2x2 matrix
-    if m.size == 2:
+    if m.size == 2: 
         return (m.matrix[0][0] * m.matrix[1][1] -
                 m.matrix[0][1] * m.matrix[1][0])
 
@@ -75,6 +75,24 @@ def inverse(m):
                 c = cofactor(m, i, j)
                 m2.matrix[j][i] = c / determinant(m)
         return m2
+
+def identity_matrix():
+    return matrix(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)
+
+def translation(x, y, z):
+    return matrix(1, 0, 0, x, 0, 1, 0, y, 0, 0, 1, z, 0, 0, 0, 1)
+
+def scaling(x, y, z):
+    return matrix(x, 0, 0, 0, 0, y, 0, 0, 0, 0, z, 0, 0, 0, 0, 1)
+
+def rotation_x(r):
+    return matrix(1, 0, 0, 0, 0, cos(r), -sin(r), 0, 0, sin(r), cos(r), 0, 0, 0, 0, 1)
+
+def rotation_y(r):
+    return matrix(cos(r), 0, sin(r), 0, 0, 1, 0, 0, -sin(r), 0, cos(r), 0, 0, 0, 0, 1)
+
+def rotation_z(r):
+    return matrix(cos(r), -sin(r), 0, 0, sin(r), cos(r), 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)
 
 class matrix:
 
@@ -181,4 +199,3 @@ class matrix:
                     string += " | "
             string += "\n"
         return string
-        

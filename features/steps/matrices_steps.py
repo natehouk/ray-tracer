@@ -1,5 +1,5 @@
 from behave import *
-from matrix import matrix, transpose, determinant, submatrix, minor, cofactor, is_invertable, inverse
+from matrix import matrix, transpose, determinant, submatrix, minor, cofactor, is_invertable, inverse, identity_matrix, translation
 from tuple import tuple
 
 @given(u'the following 4x4 matrix M')
@@ -134,8 +134,7 @@ def step_impl(context):
 
 @then(u'A3 * identity_matrix = A3')
 def step_impl(context):
-    identity_matrix = matrix(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)
-    assert context.A3 * identity_matrix == context.A3
+    assert context.A3 * identity_matrix() == context.A3
 
 
 @given(u'a ← tuple(1, 2, 3, 4)')
@@ -145,8 +144,7 @@ def step_impl(context):
 
 @then(u'identity_matrix * a = a')
 def step_impl(context):
-    identity_matrix = matrix(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)
-    assert identity_matrix * context.a == context.a
+    assert identity_matrix() * context.a == context.a
 
 
 @given(u'the following matrix A4')
@@ -161,14 +159,12 @@ def step_impl(context):
 
 @given(u'A5 ← transpose(identity_matrix)')
 def step_impl(context):
-    identity_matrix = matrix(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)
-    context.A5 = transpose(identity_matrix)
+    context.A5 = transpose(identity_matrix())
 
 
 @then(u'A5 = identity_matrix')
 def step_impl(context):
-    identity_matrix = matrix(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)
-    assert context.A5 == identity_matrix
+    assert context.A5 == identity_matrix()
 
 
 @given(u'the following 2x2 matrix A6')
