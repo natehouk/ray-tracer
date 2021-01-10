@@ -170,7 +170,6 @@ class matrix:
                     self.matrix[3][1] * other.y + 
                     self.matrix[3][2] * other.z + 
                     self.matrix[3][3] * other.w)
-            print(T)
             return T
         else:
             return NotImplemented
