@@ -1,5 +1,5 @@
 from behave import *
-from matrix import matrix, transpose, determinant, submatrix, minor, cofactor, is_invertable
+from matrix import matrix, transpose, determinant, submatrix, minor, cofactor, is_invertable, inverse
 from tuple import tuple
 
 @given(u'the following 4x4 matrix M')
@@ -92,29 +92,29 @@ def step_impl(context):
     assert context.A == context.B
 
 
-@given(u'the following matrix C')
+@given(u'the following matrix B2')
 def step_impl(context):
-    context.C = matrix(2, 3, 4, 5, 6, 7, 8, 9, 8, 7, 6, 5, 4, 3, 2, 1)
+    context.B2 = matrix(2, 3, 4, 5, 6, 7, 8, 9, 8, 7, 6, 5, 4, 3, 2, 1)
 
 
-@then(u'A != C')
+@then(u'A != B2')
 def step_impl(context):
-    assert context.A != context.C
+    assert context.A != context.B2
 
 
-@given(u'the following matrix D')
+@given(u'the following matrix B3')
 def step_impl(context):
-    context.D = matrix(-2, 1, 2, 3, 3, 2, 1, -1, 4, 3, 6, 5, 1, 2, 7, 8)
+    context.B3 = matrix(-2, 1, 2, 3, 3, 2, 1, -1, 4, 3, 6, 5, 1, 2, 7, 8)
 
 
-@then(u'A * D is the following 4x4 matrix')
+@then(u'A * B3 is the following 4x4 matrix')
 def step_impl(context):
-    assert context.A * context.D == matrix(20, 22, 50, 48, 44, 54, 114, 108, 40, 58, 110, 102, 16, 26, 46, 42)
+    assert context.A * context.B3 == matrix(20, 22, 50, 48, 44, 54, 114, 108, 40, 58, 110, 102, 16, 26, 46, 42)
 
 
-@given(u'the following matrix E')
+@given(u'the following matrix A2')
 def step_impl(context):
-    context.E = matrix(1, 2, 3, 4, 2, 4, 4, 2, 8, 6, 4, 1, 0, 0, 0, 1)
+    context.A2 = matrix(1, 2, 3, 4, 2, 4, 4, 2, 8, 6, 4, 1, 0, 0, 0, 1)
 
 
 @given(u'b ← tuple(1, 2, 3, 1)')
@@ -122,20 +122,20 @@ def step_impl(context):
     context.b = tuple(1, 2, 3, 1)
 
 
-@then(u'E * b = tuple(18, 24, 33, 1)')
+@then(u'A2 * b = tuple(18, 24, 33, 1)')
 def step_impl(context):
-    assert context.E * context.b == tuple(18, 24, 33, 1)
+    assert context.A2 * context.b == tuple(18, 24, 33, 1)
 
 
-@given(u'the following matrix F')
+@given(u'the following matrix A3')
 def step_impl(context):
-    context.F = matrix(0, 1, 2, 4, 1, 2, 4, 8, 2, 4, 8, 16, 4, 8, 16, 32)
+    context.A3 = matrix(0, 1, 2, 4, 1, 2, 4, 8, 2, 4, 8, 16, 4, 8, 16, 32)
 
 
-@then(u'F * identity_matrix = F')
+@then(u'A3 * identity_matrix = A3')
 def step_impl(context):
     identity_matrix = matrix(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)
-    assert context.F * identity_matrix == context.F
+    assert context.A3 * identity_matrix == context.A3
 
 
 @given(u'a ← tuple(1, 2, 3, 4)')
@@ -149,254 +149,254 @@ def step_impl(context):
     assert identity_matrix * context.a == context.a
 
 
-@given(u'the following matrix G')
+@given(u'the following matrix A4')
 def step_impl(context):
-    context.G = matrix(0, 9, 3, 0, 9, 8, 0, 8, 1, 8, 5, 3, 0, 0, 5, 8)
+    context.A4 = matrix(0, 9, 3, 0, 9, 8, 0, 8, 1, 8, 5, 3, 0, 0, 5, 8)
 
 
-@then(u'transpose(G) is the following matrix')
+@then(u'transpose(A4) is the following matrix')
 def step_impl(context):
-    assert transpose(context.G) == matrix(0, 9, 1, 0, 9, 8, 8, 0, 3, 0, 5, 5, 0, 8, 3, 8)
+    assert transpose(context.A4) == matrix(0, 9, 1, 0, 9, 8, 8, 0, 3, 0, 5, 5, 0, 8, 3, 8)
 
 
-@given(u'A ← transpose(identity_matrix)')
-def step_impl(context):
-    identity_matrix = matrix(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)
-    context.A = transpose(identity_matrix)
-
-
-@then(u'A = identity_matrix')
+@given(u'A5 ← transpose(identity_matrix)')
 def step_impl(context):
     identity_matrix = matrix(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)
-    assert context.A == identity_matrix
+    context.A5 = transpose(identity_matrix)
 
 
-@given(u'the following 2x2 matrix A')
+@then(u'A5 = identity_matrix')
 def step_impl(context):
-    context.A = matrix(1, 5, -3, 2)
+    identity_matrix = matrix(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)
+    assert context.A5 == identity_matrix
 
 
-@then(u'determinant(A) = 17')
+@given(u'the following 2x2 matrix A6')
 def step_impl(context):
-    assert determinant(context.A) == 17
+    context.A6 = matrix(1, 5, -3, 2)
 
 
-@given(u'the following 3x3 matrix A')
+@then(u'determinant(A6) = 17')
 def step_impl(context):
-    context.A = matrix(1, 5, 0, -3, 2, 7, 0, 6, -3)
+    assert determinant(context.A6) == 17
 
 
-@then(u'submatrix(A, 0, 2) is the following 2x2 matrix')
+@given(u'the following 3x3 matrix A7')
 def step_impl(context):
-    assert submatrix(context.A, 0, 2) == matrix(-3, 2, 0, 6)
+    context.A7 = matrix(1, 5, 0, -3, 2, 7, 0, 6, -3)
 
 
-@given(u'the following 4x4 matrix A')
+@then(u'submatrix(A7, 0, 2) is the following 2x2 matrix')
+def step_impl(context):
+    assert submatrix(context.A7, 0, 2) == matrix(-3, 2, 0, 6)
+
+
+@given(u'the following 4x4 matrix A8')
 def step_impl(context):
     context.A = matrix(-6, 1, 1, 6, -8, 5, 8, 6, -1, 0, 8, 2, -7, 1, -1, 1)
 
 
-@then(u'submatrix(A, 2, 1) is the following 3x3 matrix')
+@then(u'submatrix(A8, 2, 1) is the following 3x3 matrix')
 def step_impl(context):
     assert submatrix(context.A, 2, 1) == matrix(-6, 1, 6, -8, 8, 6, -7, -1, 1)
 
 
-@given(u'the following 3x3 matrix B')
+@given(u'the following 3x3 matrix A9')
 def step_impl(context):
-    context.B = matrix(3, 5, 0, 2, -1, -7, 6, -1, 5)
+    context.A9 = matrix(3, 5, 0, 2, -1, -7, 6, -1, 5)
 
 
-@given(u'C ← submatrix(B, 1, 0)')
+@given(u'B ← submatrix(A9, 1, 0)')
 def step_impl(context):
-    context.C = submatrix(context.B, 1, 0)
+    context.B = submatrix(context.A9, 1, 0)
 
 
-@then(u'determinant(C) = 25')
+@then(u'determinant(B) = 25')
 def step_impl(context):
-    assert determinant(context.C) == 25
+    assert determinant(context.B) == 25
 
 
-@then(u'minor(B, 1, 0) = 25')
+@then(u'minor(A9, 1, 0) = 25')
 def step_impl(context):
-    assert minor(context.B, 1, 0) == 25
+    assert minor(context.A9, 1, 0) == 25
 
 
-@then(u'minor(B, 0, 0) = -12')
+@then(u'minor(A9, 0, 0) = -12')
 def step_impl(context):
-    assert minor(context.B, 0, 0) == -12
+    assert minor(context.A9, 0, 0) == -12
 
 
-@then(u'cofactor(B, 0, 0) = -12')
+@then(u'cofactor(A9, 0, 0) = -12')
 def step_impl(context):
-    assert cofactor(context.B, 0, 0) == -12
+    assert cofactor(context.A9, 0, 0) == -12
 
 
-@then(u'cofactor(B, 1, 0) = -25')
+@then(u'cofactor(A9, 1, 0) = -25')
 def step_impl(context):
-    assert cofactor(context.B, 1, 0) == -25
+    assert cofactor(context.A9, 1, 0) == -25
 
 
-@given(u'the following 3x3 matrix C')
+@given(u'the following 3x3 matrix A10')
 def step_impl(context):
-    context.C = matrix(1, 2, 6, -5, 8, -4, 2, 6, 4)
+    context.A10 = matrix(1, 2, 6, -5, 8, -4, 2, 6, 4)
 
 
-@then(u'cofactor(C, 0, 0) = 56')
+@then(u'cofactor(A10, 0, 0) = 56')
 def step_impl(context):
-    assert cofactor(context.C, 0, 0) == 56
+    assert cofactor(context.A10, 0, 0) == 56
 
 
-@then(u'cofactor(C, 0, 1) = 12')
+@then(u'cofactor(A10, 0, 1) = 12')
 def step_impl(context):
-    assert cofactor(context.C, 0, 1) == 12
+    assert cofactor(context.A10, 0, 1) == 12
 
 
-@then(u'cofactor(C, 0, 2) = -46')
+@then(u'cofactor(A10, 0, 2) = -46')
 def step_impl(context):
-    assert cofactor(context.C, 0, 2) == -46
+    assert cofactor(context.A10, 0, 2) == -46
 
 
-@then(u'determinant(C) = -196')
+@then(u'determinant(A10) = -196')
 def step_impl(context):
-    assert determinant(context.C) == -196
+    assert determinant(context.A10) == -196
+
+
+@given(u'the following 4x4 matrix A11')
+def step_impl(context):
+    context.A11 = matrix(-2, -8, 3, 5, -3, 1, 7, 3, 1, 2, -9, 6, -6, 7, 7, -9)
+
+
+@then(u'cofactor(A11, 0, 0) = 690')
+def step_impl(context):
+    print(cofactor(context.A11, 0, 0))
+    assert cofactor(context.A11, 0, 0) == 690
+
+
+@then(u'cofactor(A11, 0, 1) = 447')
+def step_impl(context):
+    assert cofactor(context.A11, 0, 1) == 447
+
+
+@then(u'cofactor(A11, 0, 2) = 210')
+def step_impl(context):
+    assert cofactor(context.A11, 0, 2) == 210
+
+
+@then(u'cofactor(A11, 0, 3) = 51')
+def step_impl(context):
+    assert cofactor(context.A11, 0, 3) == 51
+
+
+@then(u'determinant(A11) = -4071')
+def step_impl(context):
+    assert determinant(context.A11) == -4071
+
+
+@given(u'the following 4x4 matrix A12')
+def step_impl(context):
+    context.A12 = matrix(6, 4, 4, 4, 5, 5, 7, 6, 4, -9, 3, -7, 9, 1, 7, -6)
+
+
+@then(u'determinant(A12) = -2120')
+def step_impl(context):
+    assert determinant(context.A12) == -2120
+
+
+@then(u'A12 is invertible')
+def step_impl(context):
+    assert is_invertable(context.A12) is True
+
+
+@given(u'the following 4x4 matrix A13')
+def step_impl(context):
+    context.A13 = matrix(-4, 2, -2, -3, 9, 6, 2, 6, 0, -5, 1, -5, 0, 0, 0, 0)
+
+
+@then(u'determinant(A13) = 0')
+def step_impl(context):
+    assert determinant(context.A13) == 0
+
+
+@then(u'A13 is not invertible')
+def step_impl(context):
+    assert is_invertable(context.A13) is False
+
+
+@given(u'the following 4x4 matrix A14')
+def step_impl(context):
+    context.A14 = matrix(-5, 2, 6, -8, 1, -5, 1, 8, 7, 7, -6, -7, 1, -3, 7, 4)
+
+
+@given(u'B ← inverse(A14)')
+def step_impl(context):
+    context.B = inverse(context.A14)
+
+
+@then(u'determinant(A14) = 532')
+def step_impl(context):
+    assert determinant(context.A14) == 532
+
+
+@then(u'cofactor(A14, 2, 3) = -160')
+def step_impl(context):
+    assert cofactor(context.A14, 2, 3) == -160
+
+
+@then(u'B[3,2] = -160/532')
+def step_impl(context):
+    assert context.B.matrix[3][2] == -160/532
+
+
+@then(u'cofactor(A14, 3, 2) = 105')
+def step_impl(context):
+    assert cofactor(context.A14, 3, 2) == 105
+
+
+@then(u'B[2,3] = 105/532')
+def step_impl(context):
+    context.B.matrix[2][3] == 105/532
+
+
+@then(u'B is the following 4x4 matrix')
+def step_impl(context):
+    context.B = matrix(0.21805, 0.45113, 0.24060, -0.04511, -0.80827, -1.45677, -0.44361, 0.52068, -0.07895, -0.22368, -0.05263, 0.19737, -0.52256, -0.81391, -0.30075, 0.30639)
+
+
+@given(u'the following 4x4 matrix A15')
+def step_impl(context):
+    raise NotImplementedError(u'STEP: Given the following 4x4 matrix A15')
+
+
+@then(u'inverse(A15) is the following 4x4 matrix')
+def step_impl(context):
+    raise NotImplementedError(u'STEP: Then inverse(A15) is the following 4x4 matrix')
+
+
+@given(u'the following 4x4 matrix A16')
+def step_impl(context):
+    raise NotImplementedError(u'STEP: Given the following 4x4 matrix A16')
+
+
+@then(u'inverse(A16) is the following 4x4 matrix')
+def step_impl(context):
+    raise NotImplementedError(u'STEP: Then inverse(A16) is the following 4x4 matrix')
+
+
+@given(u'the following 4x4 matrix A17')
+def step_impl(context):
+    raise NotImplementedError(u'STEP: Given the following 4x4 matrix A17')
 
 
 @given(u'the following 4x4 matrix B')
 def step_impl(context):
-    context.B = matrix(-2, -8, 3, 5, -3, 1, 7, 3, 1, 2, -9, 6, -6, 7, 7, -9)
+    raise NotImplementedError(u'STEP: Given the following 4x4 matrix B')
 
 
-@then(u'cofactor(B, 0, 0) = 690')
+@given(u'C ← A17 * B')
 def step_impl(context):
-    print(cofactor(context.B, 0, 0))
-    assert cofactor(context.B, 0, 0) == 690
+    raise NotImplementedError(u'STEP: Given C ← A17 * B')
 
 
-@then(u'cofactor(B, 0, 1) = 447')
+@then(u'C * inverse(B) = A17')
 def step_impl(context):
-    assert cofactor(context.B, 0, 1) == 447
-
-
-@then(u'cofactor(B, 0, 2) = 210')
-def step_impl(context):
-    assert cofactor(context.B, 0, 2) == 210
-
-
-@then(u'cofactor(B, 0, 3) = 51')
-def step_impl(context):
-    assert cofactor(context.B, 0, 3) == 51
-
-
-@then(u'determinant(B) = -4071')
-def step_impl(context):
-    assert determinant(context.B) == -4071
-
-
-@given(u'the following 4x4 matrix C')
-def step_impl(context):
-    context.C = matrix(6, 4, 4, 4, 5, 5, 7, 6, 4, -9, 3, -7, 9, 1, 7, -6)
-
-
-@then(u'determinant(C) = -2120')
-def step_impl(context):
-    assert determinant(context.C) == -2120
-
-
-@then(u'C is invertible')
-def step_impl(context):
-    assert is_invertable(context.C) is True
-
-
-@given(u'the following 4x4 matrix D')
-def step_impl(context):
-    context.D = matrix(-4, 2, -2, -3, 9, 6, 2, 6, 0, -5, 1, -5, 0, 0, 0, 0)
-
-
-@then(u'determinant(D) = 0')
-def step_impl(context):
-    assert determinant(context.D) == 0
-
-
-@then(u'D is not invertible')
-def step_impl(context):
-    assert is_invertable(context.D) is False
-
-
-@given(u'the following 4x4 matrix E')
-def step_impl(context):
-    raise NotImplementedError(u'STEP: Given the following 4x4 matrix E')
-
-
-@given(u'F ← inverse(E)')
-def step_impl(context):
-    raise NotImplementedError(u'STEP: Given F ← inverse(E)')
-
-
-@then(u'determinant(E) = 532')
-def step_impl(context):
-    raise NotImplementedError(u'STEP: Then determinant(E) = 532')
-
-
-@then(u'cofactor(E, 2, 3) = -160')
-def step_impl(context):
-    raise NotImplementedError(u'STEP: Then cofactor(E, 2, 3) = -160')
-
-
-@then(u'F[3,2] = -160/532')
-def step_impl(context):
-    raise NotImplementedError(u'STEP: Then F[3,2] = -160/532')
-
-
-@then(u'cofactor(E, 3, 2) = 105')
-def step_impl(context):
-    raise NotImplementedError(u'STEP: Then cofactor(E, 3, 2) = 105')
-
-
-@then(u'F[2,3] = 105/532')
-def step_impl(context):
-    raise NotImplementedError(u'STEP: Then F[2,3] = 105/532')
-
-
-@then(u'F is the following 4x4 matrix')
-def step_impl(context):
-    raise NotImplementedError(u'STEP: Then F is the following 4x4 matrix')
-
-
-@given(u'the following 4x4 matrix F')
-def step_impl(context):
-    raise NotImplementedError(u'STEP: Given the following 4x4 matrix F')
-
-
-@then(u'inverse(F) is the following 4x4 matrix')
-def step_impl(context):
-    raise NotImplementedError(u'STEP: Then inverse(F) is the following 4x4 matrix')
-
-
-@given(u'the following 4x4 matrix G')
-def step_impl(context):
-    raise NotImplementedError(u'STEP: Given the following 4x4 matrix G')
-
-
-@then(u'inverse(G) is the following 4x4 matrix')
-def step_impl(context):
-    raise NotImplementedError(u'STEP: Then inverse(G) is the following 4x4 matrix')
-
-
-@given(u'the following 4x4 matrix H')
-def step_impl(context):
-    raise NotImplementedError(u'STEP: Given the following 4x4 matrix H')
-
-
-@given(u'the following 4x4 matrix I')
-def step_impl(context):
-    raise NotImplementedError(u'STEP: Given the following 4x4 matrix I')
-
-
-@given(u'J ← H * I')
-def step_impl(context):
-    raise NotImplementedError(u'STEP: Given J ← H * I')
-
-
-@then(u'J * inverse(I) = H')
-def step_impl(context):
-    raise NotImplementedError(u'STEP: Then J * inverse(I) = H')
+    raise NotImplementedError(u'STEP: Then C * inverse(B) = A17')
