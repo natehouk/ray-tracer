@@ -120,8 +120,6 @@ class matrix:
             self.matrix[3][3] = p
 
     def __eq__(self, other):
-        print(self)
-        print(other)
         if (equals(self.matrix[0][0], other.matrix[0][0]) and
             equals(self.matrix[0][1], other.matrix[0][1]) and
             equals(self.matrix[0][2], other.matrix[0][2]) and
