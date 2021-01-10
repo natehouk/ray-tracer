@@ -1,6 +1,8 @@
-from math import isnan, cos, sin
+from math import isnan, pi, cos, sin
 from copy import deepcopy
-from tuple import tuple, equals
+from tuple import tuple, point, color, equals
+from canvas import canvas, write_pixel, canvas_to_ppm
+import time
 
 def transpose(m):
     t = matrix(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
@@ -96,6 +98,7 @@ def rotation_z(r):
 
 def shearing(x_y, x_z, y_x, y_z, z_x, z_y):
     return matrix(1, x_y, x_z, 0, y_x, 1, y_z, 0, z_x, z_y, 1, 0, 0, 0, 0, 1)
+
 
 class matrix:
 
@@ -202,3 +205,21 @@ class matrix:
                     string += " | "
             string += "\n"
         return string
+
+
+if __name__ == "__main__":
+    origin = point(0, 0, 0)
+    twelve = point(0, 0, 1)
+    c = canvas(600, 600)
+    red = color(1, 0, 0)
+    for i in range(12):
+        r = rotation_y(i * pi/6)
+        pixel = r * twelve
+        write_pixel(c, 225 * pixel.x + 300 , c.height - 225 * pixel.z - 300, red)
+
+    start = time.time()
+    print("Start writing file...")
+    canvas_to_ppm(c).write_file("clock.ppm")
+    end = time.time()
+    print("Finished writing file.")
+    print(end - start)

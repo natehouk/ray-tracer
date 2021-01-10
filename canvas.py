@@ -3,7 +3,7 @@ from tuple import color, point, vector, normalize, projectile, environment, tick
 
 def write_pixel(c, width, height, color):
     if width >= 0 and width < c.width and height >= 0 and height < c.height:
-        c.canvas[width][height] = color
+        c.canvas[int(width)][int(height)] = color
         return
     else:
         return Exception
@@ -71,9 +71,9 @@ class ppm:
     def __str__(self):
         return self.header + "\n" + self.body + "\n"
 
-    def write_file(self):
-        f = open("canvas.txt", "w")
-        f.write(self)
+    def write_file(self, filename):
+        f = open(filename, "w")
+        f.write(str(self))
         f.close()
     
 
@@ -92,16 +92,13 @@ if __name__ == "__main__":
 
     x = 0
     while(x < 300):
-        print(p)
-        print(e)
-        write_pixel(c, int(p.position.x), c.height - int(p.position.y), red)
-        #input()
+        write_pixel(c, p.position.x, c.height - p.position.y, red)
         p = tick(e, p)
         x += 1
     
     start = time.time()
     print("Start writing file...")
-    canvas_to_ppm(c).write_file()
+    canvas_to_ppm(c).write_file("projectile.ppm")
     end = time.time()
     print("Finished writing file.")
     print(end - start)
