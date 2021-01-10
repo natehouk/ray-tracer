@@ -94,6 +94,9 @@ def rotation_y(r):
 def rotation_z(r):
     return matrix(cos(r), -sin(r), 0, 0, sin(r), cos(r), 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)
 
+def shearing(x_y, x_z, y_x, y_z, z_x, z_y):
+    return matrix(1, x_y, x_z, 0, y_x, 1, y_z, 0, z_x, z_y, 1, 0, 0, 0, 0, 1)
+
 class matrix:
 
     def __init__(self, a, b, c, d, 

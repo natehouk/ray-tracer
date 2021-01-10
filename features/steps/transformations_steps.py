@@ -1,5 +1,5 @@
 from behave import *
-from matrix import translation, inverse, scaling, rotation_x, rotation_y, rotation_z
+from matrix import matrix, translation, inverse, scaling, rotation_x, rotation_y, rotation_z, shearing, identity_matrix
 from tuple import point, vector
 from math import pi, sqrt
 
@@ -165,189 +165,189 @@ def step_impl(context):
 
 @given(u'transform ← shearing(1, 0, 0, 0, 0, 0)')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Given transform ← shearing(1, 0, 0, 0, 0, 0)')
+    context.transform = shearing(1, 0, 0, 0, 0, 0)
 
 
 @then(u'transform * p = point(5, 3, 4)')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Then transform * p = point(5, 3, 4)')
+    assert context.transform * context.p == point(5, 3, 4)
 
 
 @given(u'transform ← shearing(0, 1, 0, 0, 0, 0)')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Given transform ← shearing(0, 1, 0, 0, 0, 0)')
+    context.transform = shearing(0, 1, 0, 0, 0, 0)
 
 
 @then(u'transform * p = point(6, 3, 4)')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Then transform * p = point(6, 3, 4)')
+    assert context.transform * context.p == point(6, 3, 4)
 
 
 @given(u'transform ← shearing(0, 0, 1, 0, 0, 0)')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Given transform ← shearing(0, 0, 1, 0, 0, 0)')
+    context.transform = shearing(0, 0, 1, 0, 0, 0)
 
 
 @then(u'transform * p = point(2, 5, 4)')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Then transform * p = point(2, 5, 4)')
+    assert context.transform * context.p == point(2, 5, 4)
 
 
 @given(u'transform ← shearing(0, 0, 0, 1, 0, 0)')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Given transform ← shearing(0, 0, 0, 1, 0, 0)')
+    context.transform = shearing(0, 0, 0, 1, 0, 0)
 
 
 @then(u'transform * p = point(2, 7, 4)')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Then transform * p = point(2, 7, 4)')
+    assert context.transform * context.p == point(2, 7, 4)
 
 
 @given(u'transform ← shearing(0, 0, 0, 0, 1, 0)')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Given transform ← shearing(0, 0, 0, 0, 1, 0)')
+    context.transform = shearing(0, 0, 0, 0, 1, 0)
 
 
 @then(u'transform * p = point(2, 3, 6)')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Then transform * p = point(2, 3, 6)')
+    assert context.transform * context.p == point(2, 3, 6)
 
 
 @given(u'transform ← shearing(0, 0, 0, 0, 0, 1)')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Given transform ← shearing(0, 0, 0, 0, 0, 1)')
+    context.transform = shearing(0, 0, 0, 0, 0, 1)
 
 
 @then(u'transform * p = point(2, 3, 7)')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Then transform * p = point(2, 3, 7)')
+    assert context.transform * context.p == point(2, 3, 7)
 
 
 @given(u'p ← point(1, 0, 1)')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Given p ← point(1, 0, 1)')
+    context.p = point(1, 0, 1)
 
 
 @given(u'A ← rotation_x(π / 2)')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Given A ← rotation_x(π / 2)')
+    context.A = rotation_x(pi / 2)
 
 
 @given(u'B ← scaling(5, 5, 5)')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Given B ← scaling(5, 5, 5)')
+    context.B = scaling(5, 5, 5)
 
 
 @given(u'C ← translation(10, 5, 7)')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Given C ← translation(10, 5, 7)')
+    context.C = translation(10, 5, 7)
 
 
 @when(u'p2 ← A * p')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: When p2 ← A * p')
+    context.p2 = context.A * context.p
 
 
 @then(u'p2 = point(1, -1, 0)')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Then p2 = point(1, -1, 0)')
+    assert context.p2 == point(1, -1, 0)
 
 
 @when(u'p3 ← B * p2')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: When p3 ← B * p2')
+    context.p3 = context.B * context.p2
 
 
 @then(u'p3 = point(5, -5, 0)')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Then p3 = point(5, -5, 0)')
+    assert context.p3 == point(5, -5, 0)
 
 
 @when(u'p4 ← C * p3')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: When p4 ← C * p3')
+    context.p4 = context.C * context.p3
 
 
 @then(u'p4 = point(15, 0, 7)')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Then p4 = point(15, 0, 7)')
+    assert context.p4 == point(15, 0, 7)
 
 
 @when(u'T ← C * B * A')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: When T ← C * B * A')
+    context.T = context.C * context.B * context.A
 
 
 @then(u'T * p = point(15, 0, 7)')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Then T * p = point(15, 0, 7)')
+    assert context.T * context.p == point(15, 0, 7)
 
 
-@given(u'from ← point(0, 0, 0)')
+@given(u'frm ← point(0, 0, 0)')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Given from ← point(0, 0, 0)')
+    context.frm = point(0, 0, 0)
 
 
 @given(u'to ← point(0, 0, -1)')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Given to ← point(0, 0, -1)')
+    context.to = point(0, 0, -1)
 
 
 @given(u'up ← vector(0, 1, 0)')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Given up ← vector(0, 1, 0)')
+    context.up = vector(0, 1, 0)
 
 
-@when(u't ← view_transform(from, to, up)')
-def step_impl(context):
-    raise NotImplementedError(u'STEP: When t ← view_transform(from, to, up)')
+# @when(u't ← view_transform(frm, to, up)')
+# def step_impl(context):
+#     context.t = view_transform(frm, to, up)
 
 
-@then(u't = identity_matrix')
-def step_impl(context):
-    raise NotImplementedError(u'STEP: Then t = identity_matrix')
+# @then(u't = identity_matrix')
+# def step_impl(context):
+#     assert context.t == identity_matrix()
 
 
-@given(u'to ← point(0, 0, 1)')
-def step_impl(context):
-    raise NotImplementedError(u'STEP: Given to ← point(0, 0, 1)')
+# @given(u'to ← point(0, 0, 1)')
+# def step_impl(context):
+#     context.to = point(0, 0, 1)
 
 
-@then(u't = scaling(-1, 1, -1)')
-def step_impl(context):
-    raise NotImplementedError(u'STEP: Then t = scaling(-1, 1, -1)')
+# @then(u't = scaling(-1, 1, -1)')
+# def step_impl(context):
+#     assert context.t == scaling(-1, 1, -1)
 
 
-@given(u'from ← point(0, 0, 8)')
-def step_impl(context):
-    raise NotImplementedError(u'STEP: Given from ← point(0, 0, 8)')
+# @given(u'frm ← point(0, 0, 8)')
+# def step_impl(context):
+#     context.frm = point(0, 0, 8)
 
 
-@given(u'to ← point(0, 0, 0)')
-def step_impl(context):
-    raise NotImplementedError(u'STEP: Given to ← point(0, 0, 0)')
+# @given(u'to ← point(0, 0, 0)')
+# def step_impl(context):
+#     context.to = point(0, 0, 0)
 
 
-@then(u't = translation(0, 0, -8)')
-def step_impl(context):
-    raise NotImplementedError(u'STEP: Then t = translation(0, 0, -8)')
+# @then(u't = translation(0, 0, -8)')
+# def step_impl(context):
+#     assert context.t == translation(0, 0, -8)
 
 
-@given(u'from ← point(1, 3, 2)')
-def step_impl(context):
-    raise NotImplementedError(u'STEP: Given from ← point(1, 3, 2)')
+# @given(u'frm ← point(1, 3, 2)')
+# def step_impl(context):
+#     context.frm = point(1, 3, 2)
 
 
-@given(u'to ← point(4, -2, 8)')
-def step_impl(context):
-    raise NotImplementedError(u'STEP: Given to ← point(4, -2, 8)')
+# @given(u'to ← point(4, -2, 8)')
+# def step_impl(context):
+#     context.to = point(4, -2, 8)
 
 
-@given(u'up ← vector(1, 1, 0)')
-def step_impl(context):
-    raise NotImplementedError(u'STEP: Given up ← vector(1, 1, 0)')
+# @given(u'up ← vector(1, 1, 0)')
+# def step_impl(context):
+#     context.up = vector(1, 1, 0)
 
 
-@then(u't is the following 4x4 matrix')
-def step_impl(context):
-    raise NotImplementedError(u'STEP: Then t is the following 4x4 matrix')
+# @then(u't is the following 4x4 matrix')
+# def step_impl(context):
+#     assert context.t == matrix(-0.50709, 0.50709, 0.67612, -2.36643, 0.76772, 0.60609, 0.12122, -2.82843, -0.35857, 0.59761, -0.71714, 0.00000, 0.00000, 0.00000, 0.00000, 1.00000)
