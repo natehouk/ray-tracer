@@ -327,36 +327,36 @@ def step_impl(context):
     assert context.c1 * context.c2 == color(0.9, 0.2, 0.04)
 
 
-@given(u'v ← vector(1, -1, 0)')
-def step_impl(context):
-    context.v = vector(1, -1, 0)
+# @given(u'v ← vector(1, -1, 0)')
+# def step_impl(context):
+#     context.v = vector(1, -1, 0)
 
 
-@given(u'n ← vector(0, 1, 0)')
-def step_impl(context):
-    context.n = vector(0, 1, 0)
+# @given(u'n ← vector(0, 1, 0)')
+# def step_impl(context):
+#     context.n = vector(0, 1, 0)
 
 
-@when(u'r ← reflect(v, n)')
-def step_impl(context):
-    context.r = reflect(v, n)
+# @when(u'r ← reflect(v, n)')
+# def step_impl(context):
+#     context.r = reflect(v, n)
 
 
-@then(u'r = vector(1, 1, 0)')
-def step_impl(context):
-    assert context.r == vector(1, 1, 0)
+# @then(u'r = vector(1, 1, 0)')
+# def step_impl(context):
+#     assert context.r == vector(1, 1, 0)
 
 
-@given(u'v ← vector(0, -1, 0)')
-def step_impl(context):
-    context.v = vector(0, -1, 0)
+# @given(u'v ← vector(0, -1, 0)')
+# def step_impl(context):
+#     context.v = vector(0, -1, 0)
 
 
-@given(u'n ← vector(√2/2, √2/2, 0)')
-def step_impl(context):
-    context.n = vector(sqrt(2) / 2, sqrt(2) / 2, 0)
+# @given(u'n ← vector(√2/2, √2/2, 0)')
+# def step_impl(context):
+#     context.n = vector(sqrt(2) / 2, sqrt(2) / 2, 0)
 
 
-@then(u'r = vector(1, 0, 0)')
-def step_impl(context):
-    assert context.r == vector(1, 0, 0)
+# @then(u'r = vector(1, 0, 0)')
+# def step_impl(context):
+#     assert context.r == vector(1, 0, 0)
