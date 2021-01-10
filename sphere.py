@@ -2,6 +2,9 @@ import random
 from math import sqrt
 from tuple import point, dot
 
+def intersections():
+    pass
+
 def intersect(sphere, ray):
     sphere_to_ray = ray.origin - point(0, 0, 0)
     

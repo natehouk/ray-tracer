@@ -1,5 +1,5 @@
 from behave import *
-from sphere import sphere, intersection
+from sphere import sphere, intersection, intersections
 
 @when(u'i ← intersection(3.5, s)')
 def step_impl(context):
@@ -143,17 +143,17 @@ def step_impl(context):
 
 @given(u'i1 ← intersection(1, s)')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Given i1 ← intersection(1, s)')
+    context.i1 = intersection(1, context.s)
 
 
 @given(u'i2 ← intersection(2, s)')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Given i2 ← intersection(2, s)')
+    context.i2 = intersection(2, context.s)
 
 
 @when(u'xs ← intersections(i1, i2)')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: When xs ← intersections(i1, i2)')
+    context.xs = intersections(i1, i2)
 
 
 @then(u'xs[0].t = 1')
