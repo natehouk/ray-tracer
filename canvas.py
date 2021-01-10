@@ -35,7 +35,6 @@ class canvas:
             cur = ""
             for j in range (0, self.width):
                 clamped = clamp(self.canvas[j][i])
-                print(str(i) + " " + str(j))
                 cur += str(clamped.red)
                 if len(cur) >= 67 and j != self.width - 1:
                     cur += "\n"

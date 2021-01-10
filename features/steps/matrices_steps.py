@@ -268,7 +268,6 @@ def step_impl(context):
 
 @then(u'cofactor(A11, 0, 0) = 690')
 def step_impl(context):
-    print(cofactor(context.A11, 0, 0))
     assert cofactor(context.A11, 0, 0) == 690
 
 
