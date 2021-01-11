@@ -11,8 +11,12 @@ def hit(intersections):
             h = i
     return h
 
-def intersections(i1, i2):
-    return [i1, i2]
+def intersections(*argv):
+    i = []
+    for arg in argv:
+        i.append(arg)
+    i = sorted(i, key=lambda x: x.t)
+    return i
 
 def intersect(sphere, ray):
     sphere_to_ray = ray.origin - point(0, 0, 0)

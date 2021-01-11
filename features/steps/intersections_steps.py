@@ -183,62 +183,62 @@ def step_impl(context):
 
 @given(u'i1 ← intersection(-1, s)')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Given i1 ← intersection(-1, s)')
+    context.i1 = intersection(-1, context.s)
 
 
 @given(u'i2 ← intersection(1, s)')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Given i2 ← intersection(1, s)')
+    context.i2 = intersection(1, context.s)
 
 
 @then(u'i = i2')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Then i = i2')
+    assert context.i == context.i2
 
 
 @given(u'i1 ← intersection(-2, s)')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Given i1 ← intersection(-2, s)')
+    context.i1 = intersection(-2, context.s)
 
 
 @given(u'i2 ← intersection(-1, s)')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Given i2 ← intersection(-1, s)')
+    context.i2 = intersection(-1, context.s)
 
 
 @then(u'i is nothing')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Then i is nothing')
+    context.i is None
 
 
 @given(u'i1 ← intersection(5, s)')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Given i1 ← intersection(5, s)')
+    context.i1 = intersection(5, context.s)
 
 
 @given(u'i2 ← intersection(7, s)')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Given i2 ← intersection(7, s)')
+    context.i2 = intersection(7, context.s)
 
 
 @given(u'i3 ← intersection(-3, s)')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Given i3 ← intersection(-3, s)')
+    context.i3 = intersection(-3, context.s)
 
 
 @given(u'i4 ← intersection(2, s)')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Given i4 ← intersection(2, s)')
+    context.i4 = intersection(2, context.s)
 
 
 @given(u'xs ← intersections(i1, i2, i3, i4)')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Given xs ← intersections(i1, i2, i3, i4)')
+    context.xs = intersections(context.i1, context.i2, context.i3, context.i4)
 
 
 @then(u'i = i4')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Then i = i4')
+    assert context.i == context.i4
 
 
 @given(u'A ← glass_sphere() with')
