@@ -23,14 +23,14 @@ def step_impl(context):
     assert len(context.xs) == 2
 
 
-@then(u'xs[0] = 4.0')
+@then(u'xs[0].t = 4.0')
 def step_impl(context):
-    assert context.xs[0] == 4.0
+    assert context.xs[0].t == 4.0
 
 
-@then(u'xs[1] = 6.0')
+@then(u'xs[1].t = 6.0')
 def step_impl(context):
-    assert context.xs[1] == 6.0
+    assert context.xs[1].t == 6.0
 
 
 @given(u'r ← ray(point(0, 1, -5), vector(0, 0, 1))')
@@ -38,14 +38,14 @@ def step_impl(context):
     context.r = ray(point(0, 1, -5), vector(0, 0, 1))
 
 
-@then(u'xs[0] = 5.0')
+@then(u'xs[0].t = 5.0')
 def step_impl(context):
-    assert context.xs[0] == 5.0
+    assert context.xs[0].t == 5.0
 
 
-@then(u'xs[1] = 5.0')
+@then(u'xs[1].t = 5.0')
 def step_impl(context):
-    assert context.xs[1] == 5.0
+    assert context.xs[1].t == 5.0
 
 
 @given(u'r ← ray(point(0, 2, -5), vector(0, 0, 1))')
@@ -63,14 +63,14 @@ def step_impl(context):
     context.r = ray(point(0, 0, 0), vector(0, 0, 1))
 
 
-@then(u'xs[0] = -1.0')
+@then(u'xs[0].t = -1.0')
 def step_impl(context):
-    assert context.xs[0] == -1.0
+    assert context.xs[0].t == -1.0
 
 
-@then(u'xs[1] = 1.0')
+@then(u'xs[1].t = 1.0')
 def step_impl(context):
-    assert context.xs[1] == 1.0
+    assert context.xs[1].t == 1.0
 
 
 @given(u'r ← ray(point(0, 0, 5), vector(0, 0, 1))')
@@ -78,24 +78,24 @@ def step_impl(context):
     context.r = ray(point(0, 0, 5), vector(0, 0, 1))
 
 
-@then(u'xs[0] = -6.0')
+@then(u'xs[0].t = -6.0')
 def step_impl(context):
-    assert context.xs[0] == -6.0
+    assert context.xs[0].t == -6.0
 
 
-@then(u'xs[1] = -4.0')
+@then(u'xs[1].t = -4.0')
 def step_impl(context):
-    assert context.xs[1] == -4.0
+    assert context.xs[1].t == -4.0
 
 
 @then(u'xs[0].object = s')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Then xs[0].object = s')
+    assert context.xs[0].object == context.s
 
 
 @then(u'xs[1].object = s')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Then xs[1].object = s')
+    assert context.xs[1].object == context.s
 
 
 @then(u's.transform = identity_matrix')

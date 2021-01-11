@@ -153,17 +153,17 @@ def step_impl(context):
 
 @when(u'xs ← intersections(i1, i2)')
 def step_impl(context):
-    context.xs = intersections(i1, i2)
+    context.xs = intersections(context.i1, context.i2)
 
 
 @then(u'xs[0].t = 1')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Then xs[0].t = 1')
+    assert context.xs[0].t == 1
 
 
 @then(u'xs[1].t = 2')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Then xs[1].t = 2')
+    assert context.xs[1].t == 2
 
 
 @given(u'xs ← intersections(i2, i1)')

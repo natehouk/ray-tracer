@@ -2,8 +2,8 @@ import random
 from math import sqrt
 from tuple import point, dot
 
-def intersections():
-    pass
+def intersections(i1, i2):
+    return [i1, i2]
 
 def intersect(sphere, ray):
     sphere_to_ray = ray.origin - point(0, 0, 0)
@@ -23,7 +23,7 @@ def intersect(sphere, ray):
     t = [t1, t2]
     t = sorted(t)
 
-    return t
+    return [intersection(t[0], sphere), intersection(t[1], sphere)]
 
 class sphere:
 
