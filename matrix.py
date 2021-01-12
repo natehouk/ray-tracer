@@ -219,7 +219,7 @@ if __name__ == "__main__":
 
     start = time.time()
     print("Start writing file...")
-    canvas_to_ppm(c).write_file("clock.ppm")
+    canvas_to_ppm(c).write_file("images/clock.ppm")
     end = time.time()
     print("Finished writing file.")
     print(str(round(end - start, 2)) + "s")
