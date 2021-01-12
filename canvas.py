@@ -90,15 +90,22 @@ if __name__ == "__main__":
 
     c = canvas(900, 550)
 
+    start = time.time()
+    print("Starting render...")
+
     x = 0
     while(x < 300):
         write_pixel(c, p.position.x, c.height - p.position.y, red)
         p = tick(e, p)
         x += 1
     
+    end = time.time()
+    print("Finished render.")
+    print(str(round(end - start, 2)) + "s")
+
     start = time.time()
     print("Start writing file...")
     canvas_to_ppm(c).write_file("projectile.ppm")
     end = time.time()
     print("Finished writing file.")
-    print(end - start)
+    print(str(round(end - start, 2)) + "s")
