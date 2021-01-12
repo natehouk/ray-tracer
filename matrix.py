@@ -2,6 +2,7 @@ from math import isnan, pi, cos, sin
 from copy import deepcopy
 from tuple import tuple, point, color, equals
 from canvas import canvas, write_pixel, canvas_to_ppm
+from ray import ray
 import time
 
 def transpose(m):
@@ -18,18 +19,10 @@ def determinant(m):
         return (m.matrix[0][0] * m.matrix[1][1] -
                 m.matrix[0][1] * m.matrix[1][0])
 
-    # calculate determinant of 3x3 matrix
-    elif m.size == 3:    
-        det = 0
-        for i in range(3):
-            det = det + m.matrix[0][i] * cofactor(m, 0, i)
-
-        return det
-
-    # calculate determinant of 4x4 matrix
+    # calculate determinant of 3x3 or 4x4 matrix
     else:
         det = 0
-        for i in range(4):
+        for i in range(m.size):
             det = det + m.matrix[0][i] * cofactor(m, 0, i)
         return det
 
@@ -98,7 +91,6 @@ def rotation_z(r):
 
 def shearing(x_y, x_z, y_x, y_z, z_x, z_y):
     return matrix(1, x_y, x_z, 0, y_x, 1, y_z, 0, z_x, z_y, 1, 0, 0, 0, 0, 1)
-
 
 class matrix:
 

@@ -1,6 +1,6 @@
 from behave import *
 from tuple import point, vector
-from ray import ray, position
+from ray import ray, position, transform
 from matrix import translation
 
 @given(u'origin ← point(1, 2, 3)')
@@ -63,19 +63,19 @@ def step_impl(context):
     context.m = translation(3, 4, 5)
 
 
-# @when(u'r2 ← transform(r, m)')
-# def step_impl(context):
-#     raise NotImplementedError(u'STEP: When r2 ← transform(r, m)')
+@when(u'r2 ← transform(r, m)')
+def step_impl(context):
+    context.r2 = transform(context.r, context.m)
 
 
-# @then(u'r2.origin = point(4, 6, 8)')
-# def step_impl(context):
-#     raise NotImplementedError(u'STEP: Then r2.origin = point(4, 6, 8)')
+@then(u'r2.origin = point(4, 6, 8)')
+def step_impl(context):
+    assert context.r2.origin == point(4, 6, 8)
 
 
-# @then(u'r2.direction = vector(0, 1, 0)')
-# def step_impl(context):
-#     raise NotImplementedError(u'STEP: Then r2.direction = vector(0, 1, 0)')
+@then(u'r2.direction = vector(0, 1, 0)')
+def step_impl(context):
+    assert context.r2.direction == vector(0, 1, 0)
 
 
 # @given(u'm ← scaling(2, 3, 4)')
