@@ -3,6 +3,7 @@ def position(ray, t):
 
 def transform(ray, matrix):
     ray.origin = matrix * ray.origin 
+    ray.direction = matrix * ray.direction
     return ray
 
 class ray:
