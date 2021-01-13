@@ -2,7 +2,7 @@ import random
 import time
 from math import sqrt, pi
 from tuple import point, dot, normalize, color
-from matrix import identity_matrix, inverse, scaling, rotation_z, shearing
+from matrix import identity_matrix, transpose, inverse, scaling, rotation_z, shearing
 from ray import ray, transform
 from canvas import canvas, write_pixel, canvas_to_ppm
 
@@ -49,8 +49,12 @@ def set_transform(sphere, transform):
     sphere.transform = transform
     return
 
-def normal_at(sphere, p):
-    return normalize(p - point(0, 0, 0))
+def normal_at(sphere, world_point):
+    object_point = inverse(sphere.transform) * world_point
+    object_normal = object_point - point(0, 0, 0)
+    world_normal = transpose(inverse(sphere.transform)) * object_normal
+    world_normal.w = 0
+    return normalize(world_normal)
 
 class sphere:
 

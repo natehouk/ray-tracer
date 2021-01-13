@@ -1,9 +1,9 @@
 from behave import *
-from math import sqrt
+from math import sqrt, pi
 from ray import ray
 from tuple import point, vector
 from sphere import sphere, intersect, set_transform, normal_at, normalize
-from matrix import identity_matrix, translation, scaling
+from matrix import identity_matrix, translation, scaling, rotation_z
 
 @given(u'r ← ray(point(0, 0, -5), vector(0, 0, 1))')
 def step_impl(context):
@@ -187,39 +187,39 @@ def step_impl(context):
     assert context.n == normalize(context.n)
 
 
-# @given(u'set_transform(s, translation(0, 1, 0))')
-# def step_impl(context):
-#     raise NotImplementedError(u'STEP: Given set_transform(s, translation(0, 1, 0))')
+@given(u'set_transform(s, translation(0, 1, 0))')
+def step_impl(context):
+    set_transform(context.s, translation(0, 1, 0))
 
 
-# @when(u'n ← normal_at(s, point(0, 1.70711, -0.70711))')
-# def step_impl(context):
-#     raise NotImplementedError(u'STEP: When n ← normal_at(s, point(0, 1.70711, -0.70711))')
+@when(u'n ← normal_at(s, point(0, 1.70711, -0.70711))')
+def step_impl(context):
+    context.n = normal_at(context.s, point(0, 1.70711, -0.70711))
 
 
-# @then(u'n = vector(0, 0.70711, -0.70711)')
-# def step_impl(context):
-#     raise NotImplementedError(u'STEP: Then n = vector(0, 0.70711, -0.70711)')
+@then(u'n = vector(0, 0.70711, -0.70711)')
+def step_impl(context):
+    assert context.n == vector(0, 0.70711, -0.70711)
 
 
-# @given(u'm ← scaling(1, 0.5, 1) * rotation_z(π/5)')
-# def step_impl(context):
-#     raise NotImplementedError(u'STEP: Given m ← scaling(1, 0.5, 1) * rotation_z(π/5)')
+@given(u'm ← scaling(1, 0.5, 1) * rotation_z(π/5)')
+def step_impl(context):
+    context.m = scaling(1, 0.5, 1) * rotation_z(pi/5)
 
 
-# @given(u'set_transform(s, m)')
-# def step_impl(context):
-#     raise NotImplementedError(u'STEP: Given set_transform(s, m)')
+@given(u'set_transform(s, m)')
+def step_impl(context):
+    set_transform(context.s, context.m)
 
 
-# @when(u'n ← normal_at(s, point(0, √2/2, -√2/2))')
-# def step_impl(context):
-#     raise NotImplementedError(u'STEP: When n ← normal_at(s, point(0, √2/2, -√2/2))')
+@when(u'n ← normal_at(s, point(0, √2/2, -√2/2))')
+def step_impl(context):
+    context.n = normal_at(context.s, point(0, sqrt(2)/2, -sqrt(2)/2))
 
 
-# @then(u'n = vector(0, 0.97014, -0.24254)')
-# def step_impl(context):
-#     raise NotImplementedError(u'STEP: Then n = vector(0, 0.97014, -0.24254)')
+@then(u'n = vector(0, 0.97014, -0.24254)')
+def step_impl(context):
+    assert context.n == vector(0, 0.97014, -0.24254)
 
 
 # @when(u'm ← s.material')
