@@ -49,6 +49,9 @@ def set_transform(sphere, transform):
     sphere.transform = transform
     return
 
+def normal_at(sphere, p):
+    return normalize(p - point(0, 0, 0))
+
 class sphere:
 
     def __init__(self):
