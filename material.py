@@ -1,4 +1,24 @@
-from tuple import color
+from tuple import color, normalize, dot, reflect
+
+def lighting(material, light, point, eyev, normalv):
+    effective_color = material.color * light.intensity
+    lightv = normalize(light.position - point)
+    ambient = effective_color * material.ambient
+    light_dot_normal = dot(lightv, normalv)
+    black = color(0, 0, 0)
+    if light_dot_normal < 0:
+        diffuse = black
+        specular = black
+    else:
+        diffuse = effective_color * material.diffuse * light_dot_normal
+        reflectv = reflect(-lightv, normalv)
+        reflect_dot_eye = dot(reflectv, eyev)
+        if reflect_dot_eye <= 0:
+            specular = black
+        else:
+            factor = pow(reflect_dot_eye, material.shininess)
+            specular = light.intensity * material.specular * factor
+    return ambient + diffuse + specular
 
 class material:
 
