@@ -1,6 +1,7 @@
 import time
 from tuple import point, color, point_light, normalize
 from sphere import sphere, intersect, normal_at, hit
+from matrix import scaling, shearing
 from material import material, lighting
 from ray import ray, position
 from canvas import canvas, write_pixel, canvas_to_ppm
@@ -16,7 +17,7 @@ if __name__ == "__main__":
     canvas = canvas(canvas_pixels, canvas_pixels)
     shape = sphere()
     shape.material = material()
-    shape.material.color = color(1, 0.2, 1)
+    shape.material.color = color(0.2, 1, 1)
 
     light_position = point(-10, 10, -10)
     light_color = color(1, 1, 1)
