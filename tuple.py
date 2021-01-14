@@ -128,6 +128,13 @@ class environment:
         return "environment(" + str(self.gravity) + ", " + str(self.wind) + ")"
 
 
+class point_light:
+
+    def __init__(self, position, intensity):
+        self.position = position
+        self.intensity = intensity
+
+
 if __name__ == "__main__":
     # projectile starts one unit above the origin
     # velocity is normalzied to 1 unit/tick

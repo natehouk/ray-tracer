@@ -5,6 +5,7 @@ from tuple import point, dot, normalize, color
 from matrix import identity_matrix, transpose, inverse, scaling, rotation_z, shearing
 from ray import ray, transform
 from canvas import canvas, write_pixel, canvas_to_ppm
+from material import material
 
 def hit(intersections):
     min = float('inf')
@@ -61,6 +62,7 @@ class sphere:
     def __init__(self):
         self.id = str.format("%032x" % random.getrandbits(128))
         self.transform = identity_matrix()
+        self.material = material()
 
 
 class intersection:

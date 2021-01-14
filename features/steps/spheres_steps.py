@@ -4,6 +4,7 @@ from ray import ray
 from tuple import point, vector
 from sphere import sphere, intersect, set_transform, normal_at, normalize
 from matrix import identity_matrix, translation, scaling, rotation_z
+from material import material
 
 @given(u'r ← ray(point(0, 0, -5), vector(0, 0, 1))')
 def step_impl(context):
@@ -222,34 +223,34 @@ def step_impl(context):
     assert context.n == vector(0, 0.97014, -0.24254)
 
 
-# @when(u'm ← s.material')
-# def step_impl(context):
-#     raise NotImplementedError(u'STEP: When m ← s.material')
+@when(u'm ← s.material')
+def step_impl(context):
+    context.m = context.s.material
 
 
-# @then(u'm = material()')
-# def step_impl(context):
-#     raise NotImplementedError(u'STEP: Then m = material()')
+@then(u'm = material()')
+def step_impl(context):
+    assert context.m == material()
 
 
 # @given(u'm ← material()')
 # def step_impl(context):
-#     raise NotImplementedError(u'STEP: Given m ← material()')
+#     context.m = material()
 
 
-# @given(u'm.ambient ← 1')
-# def step_impl(context):
-#     raise NotImplementedError(u'STEP: Given m.ambient ← 1')
+@given(u'm.ambient ← 1')
+def step_impl(context):
+    context.m.ambient = 1
 
 
-# @when(u's.material ← m')
-# def step_impl(context):
-#     raise NotImplementedError(u'STEP: When s.material ← m')
+@when(u's.material ← m')
+def step_impl(context):
+    context.s.material = context.m
 
 
-# @then(u's.material = m')
-# def step_impl(context):
-#     raise NotImplementedError(u'STEP: Then s.material = m')
+@then(u's.material = m')
+def step_impl(context):
+    assert context.s.material == context.m
 
 
 # @given(u's ← glass_sphere()')
