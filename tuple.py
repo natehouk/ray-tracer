@@ -49,6 +49,9 @@ def tick(env, proj):
     velocity = proj.velocity + env.gravity + env.wind
     return projectile(position, velocity)
 
+def reflect(i, normal):
+    return i - normal * 2 * dot(i, normal)
+
 
 class tuple:
 
