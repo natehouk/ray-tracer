@@ -134,6 +134,9 @@ class point_light:
         self.position = position
         self.intensity = intensity
 
+    def __eq__(self, other):
+        return (self.position == other.position and
+                self.intensity == other.intensity)
 
 if __name__ == "__main__":
     # projectile starts one unit above the origin

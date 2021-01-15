@@ -64,6 +64,10 @@ class sphere:
         self.transform = identity_matrix()
         self.material = material()
 
+    def __eq__(self, other):
+        return (self.transform == other.transform and
+                self.material == other.material)
+
 
 class intersection:
 
