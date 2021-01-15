@@ -3,7 +3,7 @@ import time
 from math import sqrt, pi
 from tuple import point, dot, normalize, color
 from matrix import identity_matrix, transpose, inverse, scaling, rotation_z, shearing
-from ray import ray, transform
+from ray import ray, transform, position
 from canvas import canvas, write_pixel, canvas_to_ppm
 from material import material
 
@@ -56,6 +56,20 @@ def normal_at(sphere, world_point):
     world_normal = transpose(inverse(sphere.transform)) * object_normal
     world_normal.w = 0
     return normalize(world_normal)
+
+def prepare_computations(intersection, ray):
+    c = comps()
+    c.t = intersection.t
+    c.object = intersection.object
+    c.point = position(ray, c.t)
+    c.eyev = -ray.direction
+    c.normalv = normal_at(c.object, c.point)
+    if dot(c.normalv, c.eyev) < 0:
+        c.inside = True
+        c.normalv = -c.normalv
+    else:
+        c.inside = False
+    return c
 
 class sphere:
 
@@ -122,3 +136,13 @@ if __name__ == "__main__":
     end = time.time()
     print("Finished writing file.")
     print(str(round(end - start, 2)) + "s")
+
+
+class comps:
+
+    def __init__(self):
+        self.t = None
+        self.object = None
+        self.point = None
+        self.eyev = None
+        self.normalv = None

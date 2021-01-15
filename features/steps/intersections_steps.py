@@ -1,5 +1,6 @@
 from behave import *
-from sphere import sphere, intersection, intersections, hit
+from sphere import sphere, intersection, intersections, hit, prepare_computations
+from tuple import point, vector
 
 @when(u'i ← intersection(3.5, s)')
 def step_impl(context):
@@ -28,32 +29,32 @@ def step_impl(context):
 
 @when(u'comps ← prepare_computations(i, r)')
 def step_impl(context):
-    context.comps = prepare_computations(i, r)
+    context.comps = prepare_computations(context.i, context.r)
 
 
 @then(u'comps.t = i.t')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Then comps.t = i.t')
+    assert context.comps.t == context.i.t
 
 
 @then(u'comps.object = i.object')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Then comps.object = i.object')
+    assert context.comps.object == context.i.object
 
 
 @then(u'comps.point = point(0, 0, -1)')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Then comps.point = point(0, 0, -1)')
+    assert context.comps.point == point(0, 0, -1)
 
 
 @then(u'comps.eyev = vector(0, 0, -1)')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Then comps.eyev = vector(0, 0, -1)')
+    assert context.comps.eyev == vector(0, 0, -1)
 
 
 @then(u'comps.normalv = vector(0, 0, -1)')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Then comps.normalv = vector(0, 0, -1)')
+    assert context.comps.normalv == vector(0, 0, -1)
 
 
 @given(u'shape ← plane()')
@@ -78,22 +79,22 @@ def step_impl(context):
 
 @then(u'comps.inside = false')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Then comps.inside = false')
+    assert context.comps.inside == False
 
 
 @given(u'i ← intersection(1, shape)')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Given i ← intersection(1, shape)')
+    context.i = intersection(1, context.shape)
 
 
 @then(u'comps.point = point(0, 0, 1)')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Then comps.point = point(0, 0, 1)')
+    assert context.comps.point == point(0, 0, 1)
 
 
 @then(u'comps.inside = true')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Then comps.inside = true')
+    assert context.comps.inside == True
 
 
 @given(u'shape ← sphere() with')
