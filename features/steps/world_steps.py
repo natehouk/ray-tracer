@@ -1,5 +1,5 @@
 from behave import *
-from world import world, default_world, intersect_world, shade_hit, color_at
+from world import world, default_world, intersect_world, shade_hit, color_at, is_shadowed
 from tuple import point, vector, color, point_light
 from sphere import sphere, intersection
 from matrix import scaling
@@ -176,3 +176,32 @@ def step_impl(context):
     print(context.inner.material.color)
     assert context.c == context.inner.material.color
 
+
+@given(u'p ← point(0, 10, 0)')
+def step_impl(context):
+    context.p = point(0, 10, 0)
+
+
+@then(u'is_shadowed(w, p) is false')
+def step_impl(context):
+    assert is_shadowed(context.w, context.p) is False
+
+
+@given(u'p ← point(10, -10, 10)')
+def step_impl(context):
+    context.p = point(10, -10, 10)
+
+
+@then(u'is_shadowed(w, p) is true')
+def step_impl(context):
+    assert is_shadowed(context.w, context.p) is True
+
+
+@given(u'p ← point(-20, 20, -20)')
+def step_impl(context):
+    context.p = point(-20, 20, -20)
+
+
+@given(u'p ← point(-2, 2, -2)')
+def step_impl(context):
+    context.p = point(-2, 2, -2)

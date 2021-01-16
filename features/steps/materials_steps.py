@@ -97,3 +97,13 @@ def step_impl(context):
 @then(u'result = color(0.1, 0.1, 0.1)')
 def step_impl(context):
     assert context.result == color(0.1, 0.1, 0.1)
+
+
+@given(u'in_shadow ← true')
+def step_impl(context):
+    context.in_shadow = True
+
+
+@when(u'result ← lighting(m, light, position, eyev, normalv, in_shadow)')
+def step_impl(context):
+    context.result = lighting(context.m, context.light, context.position, context.eyev, context.normalv, context.in_shadow)

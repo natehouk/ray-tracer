@@ -1,7 +1,8 @@
-from tuple import point, color, point_light
-from sphere import sphere, intersect, intersections, prepare_computations
+from tuple import point, color, point_light, magnitude, normalize
+from sphere import sphere, intersect, intersections, prepare_computations, hit
 from matrix import scaling
 from material import lighting
+from ray import ray
 
 def default_world():
     w = world()
@@ -43,6 +44,21 @@ def color_at(world, ray):
                 comps = prepare_computations(i, ray)
                 return shade_hit(world, comps)
     return color(0, 0, 0)
+
+
+def is_shadowed(world, point):
+    v = world.light.position - point
+    distance = magnitude(v)
+    direction = normalize(v)
+
+    r = ray(point, direction)
+    intersections = intersect_world(world, r)
+
+    h = hit(intersections)
+    if h is not None and h.t < distance:
+        return True
+    else:
+        return False
 
 class world:
 

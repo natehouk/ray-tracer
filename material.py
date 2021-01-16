@@ -1,6 +1,6 @@
 from tuple import color, normalize, dot, reflect
 
-def lighting(material, light, point, eyev, normalv):
+def lighting(material, light, point, eyev, normalv, in_shawdow = False):
     effective_color = material.color * light.intensity
     lightv = normalize(light.position - point)
     ambient = effective_color * material.ambient
@@ -18,7 +18,10 @@ def lighting(material, light, point, eyev, normalv):
         else:
             factor = reflect_dot_eye ** material.shininess
             specular = light.intensity * material.specular * factor
-    return ambient + diffuse + specular
+    if in_shawdow:
+        return ambient
+    else:
+        return ambient + diffuse + specular
 
 class material:
 
