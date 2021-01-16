@@ -1,6 +1,6 @@
 from math import isnan, pi, cos, sin
 from copy import deepcopy
-from tuple import tuple, point, color, equals
+from tuple import tuple, point, color, equals, normalize, cross
 from canvas import canvas, write_pixel, canvas_to_ppm
 from ray import ray
 import time
@@ -91,6 +91,14 @@ def rotation_z(r):
 
 def shearing(x_y, x_z, y_x, y_z, z_x, z_y):
     return matrix(1, x_y, x_z, 0, y_x, 1, y_z, 0, z_x, z_y, 1, 0, 0, 0, 0, 1)
+
+def view_transform(frm, to, up):
+    forward = normalize(to - frm)
+    upn = normalize(up)
+    left = cross(forward, upn)
+    true_up = cross(left, forward)
+    orientation = matrix(left.x, left.y, left.z, 0, true_up.x, true_up.y, true_up.z, 0, -forward.x, -forward.y, -forward.z, 0, 0, 0, 0, 1)
+    return orientation * translation(-frm.x, -frm.y, -frm.z)
 
 class matrix:
 

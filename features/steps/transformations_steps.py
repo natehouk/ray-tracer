@@ -1,5 +1,5 @@
 from behave import *
-from matrix import matrix, translation, inverse, scaling, rotation_x, rotation_y, rotation_z, shearing, identity_matrix
+from matrix import matrix, translation, inverse, scaling, rotation_x, rotation_y, rotation_z, shearing, identity_matrix, view_transform
 from tuple import point, vector
 from math import pi, sqrt
 
@@ -298,56 +298,56 @@ def step_impl(context):
     context.up = vector(0, 1, 0)
 
 
-# @when(u't ← view_transform(frm, to, up)')
-# def step_impl(context):
-#     context.t = view_transform(frm, to, up)
+@when(u't ← view_transform(frm, to, up)')
+def step_impl(context):
+    context.t = view_transform(context.frm, context.to, context.up)
 
 
-# @then(u't = identity_matrix')
-# def step_impl(context):
-#     assert context.t == identity_matrix()
+@then(u't = identity_matrix')
+def step_impl(context):
+    assert context.t == identity_matrix()
 
 
-# @given(u'to ← point(0, 0, 1)')
-# def step_impl(context):
-#     context.to = point(0, 0, 1)
+@given(u'to ← point(0, 0, 1)')
+def step_impl(context):
+    context.to = point(0, 0, 1)
 
 
-# @then(u't = scaling(-1, 1, -1)')
-# def step_impl(context):
-#     assert context.t == scaling(-1, 1, -1)
+@then(u't = scaling(-1, 1, -1)')
+def step_impl(context):
+    assert context.t == scaling(-1, 1, -1)
 
 
-# @given(u'frm ← point(0, 0, 8)')
-# def step_impl(context):
-#     context.frm = point(0, 0, 8)
+@given(u'frm ← point(0, 0, 8)')
+def step_impl(context):
+    context.frm = point(0, 0, 8)
 
 
-# @given(u'to ← point(0, 0, 0)')
-# def step_impl(context):
-#     context.to = point(0, 0, 0)
+@given(u'to ← point(0, 0, 0)')
+def step_impl(context):
+    context.to = point(0, 0, 0)
 
 
-# @then(u't = translation(0, 0, -8)')
-# def step_impl(context):
-#     assert context.t == translation(0, 0, -8)
+@then(u't = translation(0, 0, -8)')
+def step_impl(context):
+    assert context.t == translation(0, 0, -8)
 
 
-# @given(u'frm ← point(1, 3, 2)')
-# def step_impl(context):
-#     context.frm = point(1, 3, 2)
+@given(u'frm ← point(1, 3, 2)')
+def step_impl(context):
+    context.frm = point(1, 3, 2)
 
 
-# @given(u'to ← point(4, -2, 8)')
-# def step_impl(context):
-#     context.to = point(4, -2, 8)
+@given(u'to ← point(4, -2, 8)')
+def step_impl(context):
+    context.to = point(4, -2, 8)
 
 
-# @given(u'up ← vector(1, 1, 0)')
-# def step_impl(context):
-#     context.up = vector(1, 1, 0)
+@given(u'up ← vector(1, 1, 0)')
+def step_impl(context):
+    context.up = vector(1, 1, 0)
 
 
-# @then(u't is the following 4x4 matrix')
-# def step_impl(context):
-#     assert context.t == matrix(-0.50709, 0.50709, 0.67612, -2.36643, 0.76772, 0.60609, 0.12122, -2.82843, -0.35857, 0.59761, -0.71714, 0.00000, 0.00000, 0.00000, 0.00000, 1.00000)
+@then(u't is the following 4x4 matrix')
+def step_impl(context):
+    assert context.t == matrix(-0.50709, 0.50709, 0.67612, -2.36643, 0.76772, 0.60609, 0.12122, -2.82843, -0.35857, 0.59761, -0.71714, 0.00000, 0.00000, 0.00000, 0.00000, 1.00000)

@@ -22,8 +22,8 @@ def intersect_world(world, ray):
     for o in world.objects:
         i = intersect(o, ray)
         if len(i) != 0:
-            s.append(i[0])
-            s.append(i[1])
+            for j in i:
+                s.append(j)
     s = sorted(s, key=lambda x: x.t)
     return s
 
@@ -33,16 +33,17 @@ def shade_hit(world, comps):
 
 
 def color_at(world, ray):
-    s = intersect_world(world, ray)
-    if len(s) == 0:
+    xs = intersect_world(world, ray)
+    if len(xs) == 0:
         return color(0, 0, 0)
     else:
-        for i in s:
+        for i in xs:
             print(i.t)
             if i.t > 0:
                 comps = prepare_computations(i, ray)
+                print(comps)
                 return shade_hit(world, comps)
-    return Exception
+    return color(0, 0, 0)
 
 class world:
 

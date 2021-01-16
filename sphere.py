@@ -147,3 +147,6 @@ class comps:
         self.eyev = None
         self.normalv = None
         self.inside = None
+
+    def __str__(self):
+        return "<" + str(self.t) + ", " + str(self.object) + ", " + str(self.point) + ", " + str(self.eyev) + ", " + str(self.normalv) + ", " + str(self.inside) + ">"
