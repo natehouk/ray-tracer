@@ -13,9 +13,9 @@ class camera:
         half_view = tan(field_of_view / 2)
         aspect = hsize / vsize
         if aspect >= 1:
-            camera.half_width = half_view
-            camera.half_height = half_view / aspect
+            self.half_width = half_view
+            self.half_height = half_view / aspect
         else:
-            camera.half_width = half_view * aspect
-            camera.half_height = half_view
-        self.pixel_size = (camera.half_width * 2) / hsize
+            self.half_width = half_view * aspect
+            self.half_height = half_view
+        self.pixel_size = (self.half_width * 2) / hsize

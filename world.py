@@ -25,6 +25,7 @@ def intersect_world(world, ray):
             for j in i:
                 s.append(j)
     s = sorted(s, key=lambda x: x.t)
+
     return s
 
 

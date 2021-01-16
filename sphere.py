@@ -90,6 +90,20 @@ class intersection:
         self.object = o
 
 
+class comps:
+
+    def __init__(self):
+        self.t = None
+        self.object = None
+        self.point = None
+        self.eyev = None
+        self.normalv = None
+        self.inside = None
+
+    def __str__(self):
+        return "<" + str(self.t) + ", " + str(self.object) + ", " + str(self.point) + ", " + str(self.eyev) + ", " + str(self.normalv) + ", " + str(self.inside) + ">"
+
+
 if __name__ == "__main__":
     ray_origin = point(0, 0, -5)
     wall_z = 10
@@ -136,17 +150,3 @@ if __name__ == "__main__":
     end = time.time()
     print("Finished writing file.")
     print(str(round(end - start, 2)) + "s")
-
-
-class comps:
-
-    def __init__(self):
-        self.t = None
-        self.object = None
-        self.point = None
-        self.eyev = None
-        self.normalv = None
-        self.inside = None
-
-    def __str__(self):
-        return "<" + str(self.t) + ", " + str(self.object) + ", " + str(self.point) + ", " + str(self.eyev) + ", " + str(self.normalv) + ", " + str(self.inside) + ">"

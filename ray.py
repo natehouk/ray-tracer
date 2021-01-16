@@ -1,10 +1,17 @@
+from copy import deepcopy
+
 def position(ray, t):
     return ray.origin + ray.direction * t
 
 def transform(ray, matrix):
-    ray.origin = matrix * ray.origin 
-    ray.direction = matrix * ray.direction
-    return ray
+
+    # make sure you return a new array!
+    r = deepcopy(ray)
+    
+    r.origin = matrix * ray.origin 
+    r.direction = matrix * ray.direction
+    
+    return r
 
 class ray:
 

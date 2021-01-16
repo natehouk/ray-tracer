@@ -1,7 +1,7 @@
 from math import sqrt, isnan
 
 # Equality precision
-EPSILON = 0.1
+EPSILON = 0.00001
 
 def equals(a, b):
     return abs(a - b) < EPSILON or (isnan(a) and isnan(b))

@@ -21,12 +21,12 @@ def main():
     floor.transform = scaling(10, 0.01, 10)
     floor.material.color = color(1, 0.9, 0.9)
     floor.material.specular = 0
-    #w.objects.insert(0, floor)
+    w.objects.insert(0, floor)
 
     left_wall = sphere()
     left_wall.transform = translation(0, 0, 5) * rotation_y(-pi/4) * rotation_x(pi/2) * scaling(10, 0.01, 10)
     left_wall.material = floor.material
-    #w.objects.insert(0, left_wall)
+    w.objects.insert(0, left_wall)
 
     right_wall = sphere()
     right_wall.transform = translation(0, 0, 5) * rotation_y(pi/4) * rotation_x(pi/2) * scaling(10, 0.01, 10)
@@ -39,7 +39,7 @@ def main():
     middle.material.color = color(0.1, 1, 0.5)
     middle.material.diffuse = 0.7
     middle.material.specular = 0.3
-    w.objects.insert(0, middle)
+    #w.objects.insert(0, middle)
 
     right = sphere()
     right.transform = translation(1.5, 0.5, -0.5) * scaling(0.5, 0.5, 0.5)
@@ -47,7 +47,7 @@ def main():
     right.material.color = color(0.5, 1, 0.1)
     right.material.diffuse = 0.7
     right.material.specular = 0.3
-    w.objects.insert(0, right)
+    #w.objects.insert(0, right)
 
     left = sphere()
     left.transform = translation(-1.5, 0.33, -0.75) * scaling(0.33, 0.33, 0.33)

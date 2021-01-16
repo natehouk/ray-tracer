@@ -53,7 +53,6 @@ def step_impl(context):
 
 @then(u'c.pixel_size = 0.01')
 def step_impl(context):
-    print(context.c.pixel_size)
     assert equals(context.c.pixel_size, 0.01)
 
 
