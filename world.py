@@ -38,10 +38,8 @@ def color_at(world, ray):
         return color(0, 0, 0)
     else:
         for i in xs:
-            print(i.t)
             if i.t > 0:
                 comps = prepare_computations(i, ray)
-                print(comps)
                 return shade_hit(world, comps)
     return color(0, 0, 0)
 
