@@ -205,3 +205,33 @@ def step_impl(context):
 @given(u'p ← point(-2, 2, -2)')
 def step_impl(context):
     context.p = point(-2, 2, -2)
+
+
+@given(u'w.light ← point_light(point(0, 0, -10), color(1, 1, 1))')
+def step_impl(context):
+    context.w.light = point_light(point(0, 0, -10), color(1, 1, 1))
+
+
+@given(u's1 ← sphere()')
+def step_impl(context):
+    context.s1 = sphere()
+
+
+@given(u's1 is added to w')
+def step_impl(context):
+    context.w.objects.append(context.s1)
+
+
+@given(u's2 is added to w')
+def step_impl(context):
+    context.w.objects.append(context.s2)
+
+
+@given(u'i ← intersection(4, s2)')
+def step_impl(context):
+    context.i = intersection(4, context.s2)
+
+
+@then(u'c = color(0.1, 0.1, 0.1)')
+def step_impl(context):
+    assert context.c == color(0.1, 0.1, 0.1)

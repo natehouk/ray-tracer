@@ -1,6 +1,7 @@
 from behave import *
 from sphere import sphere, intersection, intersections, hit, prepare_computations
-from tuple import point, vector
+from tuple import point, vector, EPSILON
+from matrix import translation
 
 @when(u'i ← intersection(3.5, s)')
 def step_impl(context):
@@ -99,22 +100,24 @@ def step_impl(context):
 
 @given(u'shape ← sphere() with')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Given shape ← sphere() with')
+    context.shape = sphere()
+    context.shape.transform = translation(0, 0, 1)
 
 
 @given(u'i ← intersection(5, shape)')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Given i ← intersection(5, shape)')
+    context.i = intersection(5, context.shape)
 
 
 @then(u'comps.over_point.z < -EPSILON/2')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Then comps.over_point.z < -EPSILON/2')
+    print(context.comps.over_point.z)
+    assert context.comps.over_point.z < -EPSILON/2
 
 
 @then(u'comps.point.z > comps.over_point.z')
 def step_impl(context):
-    raise NotImplementedError(u'STEP: Then comps.point.z > comps.over_point.z')
+    assert context.comps.point.z > context.comps.over_point.z
 
 
 @given(u'shape ← glass_sphere() with')

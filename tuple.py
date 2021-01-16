@@ -25,6 +25,12 @@ def magnitude(v):
     return sqrt(v.x ** 2 + v.y ** 2 + v.z ** 2 + v.w ** 2)
 
 def normalize(v):
+    #if magnitude(v) == 0:
+    #    return tuple(float('inf'),
+    #                 float('inf'),
+    #                 float('inf'),
+    #                 float('inf'))
+    #else:
     return tuple(v.x / magnitude(v),
                  v.y / magnitude(v),
                  v.z / magnitude(v),

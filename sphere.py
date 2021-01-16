@@ -1,7 +1,7 @@
 import random
 import time
 from math import sqrt, pi
-from tuple import point, dot, normalize, color
+from tuple import point, dot, normalize, color, EPSILON
 from matrix import identity_matrix, transpose, inverse, scaling, rotation_z, shearing
 from ray import ray, transform, position
 from canvas import canvas, write_pixel, canvas_to_ppm
@@ -69,6 +69,7 @@ def prepare_computations(intersection, ray):
         c.normalv = -c.normalv
     else:
         c.inside = False
+    c.over_point = c.point + c.normalv * EPSILON
     return c
 
 class sphere:
