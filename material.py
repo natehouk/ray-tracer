@@ -16,7 +16,7 @@ def lighting(material, light, point, eyev, normalv):
         if reflect_dot_eye <= 0:
             specular = black
         else:
-            factor = pow(reflect_dot_eye, material.shininess)
+            factor = reflect_dot_eye ** material.shininess
             specular = light.intensity * material.specular * factor
     return ambient + diffuse + specular
 

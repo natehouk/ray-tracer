@@ -146,3 +146,4 @@ class comps:
         self.point = None
         self.eyev = None
         self.normalv = None
+        self.inside = None

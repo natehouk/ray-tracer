@@ -1,8 +1,9 @@
 from behave import *
-from world import world, default_world, intersect_world
-from tuple import point, color, point_light
-from sphere import sphere
+from world import world, default_world, intersect_world, shade_hit, color_at
+from tuple import point, vector, color, point_light
+from sphere import sphere, intersection
 from matrix import scaling
+from ray import ray
 
 @given(u'w ← world()')
 def step_impl(context):
@@ -91,3 +92,87 @@ def step_impl(context):
 @then(u'xs[3].t = 6')
 def step_impl(context):
     assert context.xs[3].t == 6
+
+
+@given(u'shape ← the first object in w')
+def step_impl(context):
+    context.shape = context.w.objects[0]
+
+
+@when(u'c ← shade_hit(w, comps)')
+def step_impl(context):
+    context.c = shade_hit(context.w, context.comps)
+
+
+@then(u'c = color(0.38066, 0.47583, 0.2855)')
+def step_impl(context):
+    print(context.c)
+    assert context.c == color(0.38066, 0.47583, 0.2855)
+
+
+@given(u'w.light ← point_light(point(0, 0.25, 0), color(1, 1, 1))')
+def step_impl(context):
+    context.w.light = point_light(point(0, 0.25, 0), color(1, 1, 1))
+
+
+@given(u'shape ← the second object in w')
+def step_impl(context):
+    context.shape = context.w.objects[1]
+
+
+@given(u'i ← intersection(0.5, shape)')
+def step_impl(context):
+    context.i = intersection(0.5, context.shape)
+
+
+@then(u'c = color(0.90498, 0.90498, 0.90498)')
+def step_impl(context):
+    assert context.c == color(0.90498, 0.90498, 0.90498)
+
+
+@given(u'r ← ray(point(0, 0, -5), vector(0, 1, 0))')
+def step_impl(context):
+    context.r = ray(point(0, 0, -5), vector(0, 1, 0))
+
+
+@when(u'c ← color_at(w, r)')
+def step_impl(context):
+    context.c = color_at(context.w, context.r)
+
+
+@then(u'c = color(0, 0, 0)')
+def step_impl(context):
+    assert context.c == color(0, 0, 0)
+
+
+@given(u'outer ← the first object in w')
+def step_impl(context):
+    context.outer = context.w.objects[0]
+
+
+@given(u'outer.material.ambient ← 1')
+def step_impl(context):
+    context.outer.material.ambient = 1
+
+
+@given(u'inner ← the second object in w')
+def step_impl(context):
+    context.inner = context.w.objects[1]
+
+
+@given(u'inner.material.ambient ← 1')
+def step_impl(context):
+    context.inner.material.ambient = 1
+
+
+@given(u'r ← ray(point(0, 0, 0.75), vector(0, 0, -1))')
+def step_impl(context):
+    context.r = ray(point(0, 0, 0.75), vector(0, 0, -1))
+
+
+@then(u'c = inner.material.color')
+def step_impl(context):
+    print(context.c)
+    print(context.inner.material.color)
+    assert context.c == context.inner.material.color
+

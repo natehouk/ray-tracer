@@ -1,6 +1,7 @@
 from tuple import point, color, point_light
-from sphere import sphere, intersect, intersections
+from sphere import sphere, intersect, intersections, prepare_computations
 from matrix import scaling
+from material import lighting
 
 def default_world():
     w = world()
@@ -25,6 +26,23 @@ def intersect_world(world, ray):
             s.append(i[1])
     s = sorted(s, key=lambda x: x.t)
     return s
+
+
+def shade_hit(world, comps):
+    return lighting(comps.object.material, world.light, comps.point, comps.eyev, comps.normalv)
+
+
+def color_at(world, ray):
+    s = intersect_world(world, ray)
+    if len(s) == 0:
+        return color(0, 0, 0)
+    else:
+        for i in s:
+            print(i.t)
+            if i.t > 0:
+                comps = prepare_computations(i, ray)
+                return shade_hit(world, comps)
+    return Exception
 
 class world:
 

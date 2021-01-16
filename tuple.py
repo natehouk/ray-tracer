@@ -76,16 +76,28 @@ class tuple:
                         equals(self.w, other.w))
 
     def __add__(self, other):
-        return tuple(self.x + other.x, 
-                     self.y + other.y, 
-                     self.z + other.z, 
-                     self.w + other.w)
+        if isnan(self.w) and isnan(other.w):
+            return tuple(self.x + other.x,
+                         self.y + other.y,
+                         self.z + other.z,
+                         float('nan'))
+        else:
+            return tuple(self.x + other.x,
+                         self.y + other.y,
+                         self.z + other.z,
+                         self.w + other.w)
 
     def __sub__(self, other):
-        return tuple(self.x - other.x, 
-                     self.y - other.y, 
-                     self.z - other.z, 
-                     self.w - other.w)
+        if isnan(self.w) and isnan(other.w):
+            return tuple(self.x - other.x,
+                         self.y - other.y,
+                         self.z - other.z,
+                         float('nan'))
+        else:
+            return tuple(self.x - other.x,
+                         self.y - other.y,
+                         self.z - other.z,
+                         self.w - other.w)
 
     def __mul__(self, other):
         if isinstance(other, int) or isinstance(other, float):
@@ -137,6 +149,7 @@ class point_light:
     def __eq__(self, other):
         return (self.position == other.position and
                 self.intensity == other.intensity)
+
 
 if __name__ == "__main__":
     # projectile starts one unit above the origin
