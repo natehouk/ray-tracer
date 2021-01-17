@@ -62,6 +62,19 @@ class ring_pattern(pattern):
         else:
             return self.b
 
+class checkers_pattern(pattern):
+    
+    def __init__(self, a, b):
+        self.a = a
+        self.b = b
+        super().__init__()
+
+    def pattern_at(self, pattern, point):
+        if (floor(point.x) + floor(point.y) + floor(point.z)) % 2 == 0:
+            return self.a
+        else:
+            return self.b
+
 class test_pattern(pattern):
 
     def __init__(self):

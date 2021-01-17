@@ -2,7 +2,7 @@ from behave import *
 from tuple import color, point
 from matrix import scaling, translation, identity_matrix
 from shape import set_transform
-from pattern import stripe_pattern, pattern_at_shape, set_pattern_transform, test_pattern, pattern_at_shape, gradient_pattern, ring_pattern
+from pattern import stripe_pattern, pattern_at_shape, set_pattern_transform, test_pattern, pattern_at_shape, gradient_pattern, ring_pattern, checkers_pattern
 from sphere import sphere
 
 @given(u'black ← color(0, 0, 0)')
@@ -210,3 +210,38 @@ def step_impl(context):
 @then(u'pattern_at(pattern, point(0.708, 0, 0.708)) = black')
 def step_impl(context):
     assert context.pattern.pattern_at(context.pattern, point(0.708, 0, 0.708)) == context.black
+
+
+@given(u'pattern ← checkers_pattern(white, black)')
+def step_impl(context):
+    context.pattern = checkers_pattern(context.white, context.black)
+
+
+@then(u'pattern_at(pattern, point(0.99, 0, 0)) = white')
+def step_impl(context):
+    assert context.pattern.pattern_at(context.pattern, point(0.99, 0, 0)) == context.white
+
+
+@then(u'pattern_at(pattern, point(1.01, 0, 0)) = black')
+def step_impl(context):
+    assert context.pattern.pattern_at(context.pattern, point(1.01, 0, 0)) == context.black
+
+
+@then(u'pattern_at(pattern, point(0, 0.99, 0)) = white')
+def step_impl(context):
+    assert context.pattern.pattern_at(context.pattern, point(0, 0.99, 0)) == context.white
+
+
+@then(u'pattern_at(pattern, point(0, 1.01, 0)) = black')
+def step_impl(context):
+    assert context.pattern.pattern_at(context.pattern, point(0, 1.01, 0)) == context.black
+
+
+@then(u'pattern_at(pattern, point(0, 0, 0.99)) = white')
+def step_impl(context):
+    assert context.pattern.pattern_at(context.pattern, point(0, 0, 0.99)) == context.white
+
+
+@then(u'pattern_at(pattern, point(0, 0, 1.01)) = black')
+def step_impl(context):
+    assert context.pattern.pattern_at(context.pattern, point(0, 0, 1.01)) == context.black
