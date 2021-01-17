@@ -58,24 +58,24 @@ def step_impl(context):
     assert context.comps.normalv == vector(0, 0, -1)
 
 
-@given(u'shape ← plane()')
-def step_impl(context):
-    raise NotImplementedError(u'STEP: Given shape ← plane()')
+# @given(u'shape ← plane()')
+# def step_impl(context):
+#     raise NotImplementedError(u'STEP: Given shape ← plane()')
 
 
-@given(u'r ← ray(point(0, 1, -1), vector(0, -√2/2, √2/2))')
-def step_impl(context):
-    raise NotImplementedError(u'STEP: Given r ← ray(point(0, 1, -1), vector(0, -√2/2, √2/2))')
+# @given(u'r ← ray(point(0, 1, -1), vector(0, -√2/2, √2/2))')
+# def step_impl(context):
+#     raise NotImplementedError(u'STEP: Given r ← ray(point(0, 1, -1), vector(0, -√2/2, √2/2))')
 
 
-@given(u'i ← intersection(√2, shape)')
-def step_impl(context):
-    raise NotImplementedError(u'STEP: Given i ← intersection(√2, shape)')
+# @given(u'i ← intersection(√2, shape)')
+# def step_impl(context):
+#     raise NotImplementedError(u'STEP: Given i ← intersection(√2, shape)')
 
 
-@then(u'comps.reflectv = vector(0, √2/2, √2/2)')
-def step_impl(context):
-    raise NotImplementedError(u'STEP: Then comps.reflectv = vector(0, √2/2, √2/2)')
+# @then(u'comps.reflectv = vector(0, √2/2, √2/2)')
+# def step_impl(context):
+#     raise NotImplementedError(u'STEP: Then comps.reflectv = vector(0, √2/2, √2/2)')
 
 
 @then(u'comps.inside = false')
@@ -120,29 +120,29 @@ def step_impl(context):
     assert context.comps.point.z > context.comps.over_point.z
 
 
-@given(u'shape ← glass_sphere() with')
-def step_impl(context):
-    raise NotImplementedError(u'STEP: Given shape ← glass_sphere() with')
+# @given(u'shape ← glass_sphere() with')
+# def step_impl(context):
+#     raise NotImplementedError(u'STEP: Given shape ← glass_sphere() with')
 
 
-@given(u'xs ← intersections(i)')
-def step_impl(context):
-    raise NotImplementedError(u'STEP: Given xs ← intersections(i)')
+# @given(u'xs ← intersections(i)')
+# def step_impl(context):
+#     raise NotImplementedError(u'STEP: Given xs ← intersections(i)')
 
 
-@when(u'comps ← prepare_computations(i, r, xs)')
-def step_impl(context):
-    raise NotImplementedError(u'STEP: When comps ← prepare_computations(i, r, xs)')
+# @when(u'comps ← prepare_computations(i, r, xs)')
+# def step_impl(context):
+#     raise NotImplementedError(u'STEP: When comps ← prepare_computations(i, r, xs)')
 
 
-@then(u'comps.under_point.z > EPSILON/2')
-def step_impl(context):
-    raise NotImplementedError(u'STEP: Then comps.under_point.z > EPSILON/2')
+# @then(u'comps.under_point.z > EPSILON/2')
+# def step_impl(context):
+#     raise NotImplementedError(u'STEP: Then comps.under_point.z > EPSILON/2')
 
 
-@then(u'comps.point.z < comps.under_point.z')
-def step_impl(context):
-    raise NotImplementedError(u'STEP: Then comps.point.z < comps.under_point.z')
+# @then(u'comps.point.z < comps.under_point.z')
+# def step_impl(context):
+#     raise NotImplementedError(u'STEP: Then comps.point.z < comps.under_point.z')
 
 
 @given(u'i1 ← intersection(1, s)')
@@ -245,171 +245,171 @@ def step_impl(context):
     assert context.i == context.i4
 
 
-@given(u'A ← glass_sphere() with')
-def step_impl(context):
-    raise NotImplementedError(u'STEP: Given A ← glass_sphere() with')
+# @given(u'A ← glass_sphere() with')
+# def step_impl(context):
+#     raise NotImplementedError(u'STEP: Given A ← glass_sphere() with')
 
 
-@given(u'B ← glass_sphere() with')
-def step_impl(context):
-    raise NotImplementedError(u'STEP: Given B ← glass_sphere() with')
+# @given(u'B ← glass_sphere() with')
+# def step_impl(context):
+#     raise NotImplementedError(u'STEP: Given B ← glass_sphere() with')
 
 
-@given(u'C ← glass_sphere() with')
-def step_impl(context):
-    raise NotImplementedError(u'STEP: Given C ← glass_sphere() with')
+# @given(u'C ← glass_sphere() with')
+# def step_impl(context):
+#     raise NotImplementedError(u'STEP: Given C ← glass_sphere() with')
 
 
-@given(u'r ← ray(point(0, 0, -4), vector(0, 0, 1))')
-def step_impl(context):
-    raise NotImplementedError(u'STEP: Given r ← ray(point(0, 0, -4), vector(0, 0, 1))')
+# @given(u'r ← ray(point(0, 0, -4), vector(0, 0, 1))')
+# def step_impl(context):
+#     raise NotImplementedError(u'STEP: Given r ← ray(point(0, 0, -4), vector(0, 0, 1))')
 
 
-@given(u'xs ← intersections(2:A, 2.75:B, 3.25:C, 4.75:B, 5.25:C, 6:A)')
-def step_impl(context):
-    raise NotImplementedError(u'STEP: Given xs ← intersections(2:A, 2.75:B, 3.25:C, 4.75:B, 5.25:C, 6:A)')
+# @given(u'xs ← intersections(2:A, 2.75:B, 3.25:C, 4.75:B, 5.25:C, 6:A)')
+# def step_impl(context):
+#     raise NotImplementedError(u'STEP: Given xs ← intersections(2:A, 2.75:B, 3.25:C, 4.75:B, 5.25:C, 6:A)')
 
 
-@when(u'comps ← prepare_computations(xs[0], r, xs)')
-def step_impl(context):
-    raise NotImplementedError(u'STEP: When comps ← prepare_computations(xs[0], r, xs)')
+# @when(u'comps ← prepare_computations(xs[0], r, xs)')
+# def step_impl(context):
+#     raise NotImplementedError(u'STEP: When comps ← prepare_computations(xs[0], r, xs)')
 
 
-@then(u'comps.n1 = 1.0')
-def step_impl(context):
-    raise NotImplementedError(u'STEP: Then comps.n1 = 1.0')
+# @then(u'comps.n1 = 1.0')
+# def step_impl(context):
+#     raise NotImplementedError(u'STEP: Then comps.n1 = 1.0')
 
 
-@then(u'comps.n2 = 1.5')
-def step_impl(context):
-    raise NotImplementedError(u'STEP: Then comps.n2 = 1.5')
+# @then(u'comps.n2 = 1.5')
+# def step_impl(context):
+#     raise NotImplementedError(u'STEP: Then comps.n2 = 1.5')
 
 
-@when(u'comps ← prepare_computations(xs[1], r, xs)')
-def step_impl(context):
-    raise NotImplementedError(u'STEP: When comps ← prepare_computations(xs[1], r, xs)')
+# @when(u'comps ← prepare_computations(xs[1], r, xs)')
+# def step_impl(context):
+#     raise NotImplementedError(u'STEP: When comps ← prepare_computations(xs[1], r, xs)')
 
 
-@then(u'comps.n1 = 1.5')
-def step_impl(context):
-    raise NotImplementedError(u'STEP: Then comps.n1 = 1.5')
+# @then(u'comps.n1 = 1.5')
+# def step_impl(context):
+#     raise NotImplementedError(u'STEP: Then comps.n1 = 1.5')
 
 
-@then(u'comps.n2 = 2.0')
-def step_impl(context):
-    raise NotImplementedError(u'STEP: Then comps.n2 = 2.0')
+# @then(u'comps.n2 = 2.0')
+# def step_impl(context):
+#     raise NotImplementedError(u'STEP: Then comps.n2 = 2.0')
 
 
-@when(u'comps ← prepare_computations(xs[2], r, xs)')
-def step_impl(context):
-    raise NotImplementedError(u'STEP: When comps ← prepare_computations(xs[2], r, xs)')
+# @when(u'comps ← prepare_computations(xs[2], r, xs)')
+# def step_impl(context):
+#     raise NotImplementedError(u'STEP: When comps ← prepare_computations(xs[2], r, xs)')
 
 
-@then(u'comps.n1 = 2.0')
-def step_impl(context):
-    raise NotImplementedError(u'STEP: Then comps.n1 = 2.0')
+# @then(u'comps.n1 = 2.0')
+# def step_impl(context):
+#     raise NotImplementedError(u'STEP: Then comps.n1 = 2.0')
 
 
-@then(u'comps.n2 = 2.5')
-def step_impl(context):
-    raise NotImplementedError(u'STEP: Then comps.n2 = 2.5')
+# @then(u'comps.n2 = 2.5')
+# def step_impl(context):
+#     raise NotImplementedError(u'STEP: Then comps.n2 = 2.5')
 
 
-@when(u'comps ← prepare_computations(xs[3], r, xs)')
-def step_impl(context):
-    raise NotImplementedError(u'STEP: When comps ← prepare_computations(xs[3], r, xs)')
+# @when(u'comps ← prepare_computations(xs[3], r, xs)')
+# def step_impl(context):
+#     raise NotImplementedError(u'STEP: When comps ← prepare_computations(xs[3], r, xs)')
 
 
-@then(u'comps.n1 = 2.5')
-def step_impl(context):
-    raise NotImplementedError(u'STEP: Then comps.n1 = 2.5')
+# @then(u'comps.n1 = 2.5')
+# def step_impl(context):
+#     raise NotImplementedError(u'STEP: Then comps.n1 = 2.5')
 
 
-@when(u'comps ← prepare_computations(xs[4], r, xs)')
-def step_impl(context):
-    raise NotImplementedError(u'STEP: When comps ← prepare_computations(xs[4], r, xs)')
+# @when(u'comps ← prepare_computations(xs[4], r, xs)')
+# def step_impl(context):
+#     raise NotImplementedError(u'STEP: When comps ← prepare_computations(xs[4], r, xs)')
 
 
-@when(u'comps ← prepare_computations(xs[5], r, xs)')
-def step_impl(context):
-    raise NotImplementedError(u'STEP: When comps ← prepare_computations(xs[5], r, xs)')
+# @when(u'comps ← prepare_computations(xs[5], r, xs)')
+# def step_impl(context):
+#     raise NotImplementedError(u'STEP: When comps ← prepare_computations(xs[5], r, xs)')
 
 
-@then(u'comps.n2 = 1.0')
-def step_impl(context):
-    raise NotImplementedError(u'STEP: Then comps.n2 = 1.0')
+# @then(u'comps.n2 = 1.0')
+# def step_impl(context):
+#     raise NotImplementedError(u'STEP: Then comps.n2 = 1.0')
 
 
-@given(u'shape ← glass_sphere()')
-def step_impl(context):
-    raise NotImplementedError(u'STEP: Given shape ← glass_sphere()')
+# @given(u'shape ← glass_sphere()')
+# def step_impl(context):
+#     raise NotImplementedError(u'STEP: Given shape ← glass_sphere()')
 
 
-@given(u'r ← ray(point(0, 0, √2/2), vector(0, 1, 0))')
-def step_impl(context):
-    raise NotImplementedError(u'STEP: Given r ← ray(point(0, 0, √2/2), vector(0, 1, 0))')
+# @given(u'r ← ray(point(0, 0, √2/2), vector(0, 1, 0))')
+# def step_impl(context):
+#     raise NotImplementedError(u'STEP: Given r ← ray(point(0, 0, √2/2), vector(0, 1, 0))')
 
 
-@given(u'xs ← intersections(-√2/2:shape, √2/2:shape)')
-def step_impl(context):
-    raise NotImplementedError(u'STEP: Given xs ← intersections(-√2/2:shape, √2/2:shape)')
+# @given(u'xs ← intersections(-√2/2:shape, √2/2:shape)')
+# def step_impl(context):
+#     raise NotImplementedError(u'STEP: Given xs ← intersections(-√2/2:shape, √2/2:shape)')
 
 
-@when(u'reflectance ← schlick(comps)')
-def step_impl(context):
-    raise NotImplementedError(u'STEP: When reflectance ← schlick(comps)')
+# @when(u'reflectance ← schlick(comps)')
+# def step_impl(context):
+#     raise NotImplementedError(u'STEP: When reflectance ← schlick(comps)')
 
 
-@then(u'reflectance = 1.0')
-def step_impl(context):
-    raise NotImplementedError(u'STEP: Then reflectance = 1.0')
+# @then(u'reflectance = 1.0')
+# def step_impl(context):
+#     raise NotImplementedError(u'STEP: Then reflectance = 1.0')
 
 
-@given(u'r ← ray(point(0, 0, 0), vector(0, 1, 0))')
-def step_impl(context):
-    raise NotImplementedError(u'STEP: Given r ← ray(point(0, 0, 0), vector(0, 1, 0))')
+# @given(u'r ← ray(point(0, 0, 0), vector(0, 1, 0))')
+# def step_impl(context):
+#     raise NotImplementedError(u'STEP: Given r ← ray(point(0, 0, 0), vector(0, 1, 0))')
 
 
-@given(u'xs ← intersections(-1:shape, 1:shape)')
-def step_impl(context):
-    raise NotImplementedError(u'STEP: Given xs ← intersections(-1:shape, 1:shape)')
+# @given(u'xs ← intersections(-1:shape, 1:shape)')
+# def step_impl(context):
+#     raise NotImplementedError(u'STEP: Given xs ← intersections(-1:shape, 1:shape)')
 
 
-@then(u'reflectance = 0.04')
-def step_impl(context):
-    raise NotImplementedError(u'STEP: Then reflectance = 0.04')
+# @then(u'reflectance = 0.04')
+# def step_impl(context):
+#     raise NotImplementedError(u'STEP: Then reflectance = 0.04')
 
 
-@given(u'r ← ray(point(0, 0.99, -2), vector(0, 0, 1))')
-def step_impl(context):
-    raise NotImplementedError(u'STEP: Given r ← ray(point(0, 0.99, -2), vector(0, 0, 1))')
+# @given(u'r ← ray(point(0, 0.99, -2), vector(0, 0, 1))')
+# def step_impl(context):
+#     raise NotImplementedError(u'STEP: Given r ← ray(point(0, 0.99, -2), vector(0, 0, 1))')
 
 
-@given(u'xs ← intersections(1.8589:shape)')
-def step_impl(context):
-    raise NotImplementedError(u'STEP: Given xs ← intersections(1.8589:shape)')
+# @given(u'xs ← intersections(1.8589:shape)')
+# def step_impl(context):
+#     raise NotImplementedError(u'STEP: Given xs ← intersections(1.8589:shape)')
 
 
-@then(u'reflectance = 0.48873')
-def step_impl(context):
-    raise NotImplementedError(u'STEP: Then reflectance = 0.48873')
+# @then(u'reflectance = 0.48873')
+# def step_impl(context):
+#     raise NotImplementedError(u'STEP: Then reflectance = 0.48873')
 
 
-@given(u's ← triangle(point(0, 1, 0), point(-1, 0, 0), point(1, 0, 0))')
-def step_impl(context):
-    raise NotImplementedError(u'STEP: Given s ← triangle(point(0, 1, 0), point(-1, 0, 0), point(1, 0, 0))')
+# @given(u's ← triangle(point(0, 1, 0), point(-1, 0, 0), point(1, 0, 0))')
+# def step_impl(context):
+#     raise NotImplementedError(u'STEP: Given s ← triangle(point(0, 1, 0), point(-1, 0, 0), point(1, 0, 0))')
 
 
-@when(u'i ← intersection_with_uv(3.5, s, 0.2, 0.4)')
-def step_impl(context):
-    raise NotImplementedError(u'STEP: When i ← intersection_with_uv(3.5, s, 0.2, 0.4)')
+# @when(u'i ← intersection_with_uv(3.5, s, 0.2, 0.4)')
+# def step_impl(context):
+#     raise NotImplementedError(u'STEP: When i ← intersection_with_uv(3.5, s, 0.2, 0.4)')
 
 
-@then(u'i.u = 0.2')
-def step_impl(context):
-    raise NotImplementedError(u'STEP: Then i.u = 0.2')
+# @then(u'i.u = 0.2')
+# def step_impl(context):
+#     raise NotImplementedError(u'STEP: Then i.u = 0.2')
 
 
-@then(u'i.v = 0.4')
-def step_impl(context):
-    raise NotImplementedError(u'STEP: Then i.v = 0.4')
+# @then(u'i.v = 0.4')
+# def step_impl(context):
+#     raise NotImplementedError(u'STEP: Then i.v = 0.4')
