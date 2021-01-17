@@ -24,9 +24,6 @@ def intersections(*argv):
     i = sorted(i, key=lambda x: x.t)
     return i
 
-def local_normal_at(shape, p):
-    return p - point(0, 0, 0)
-
 
 def prepare_computations(intersection, ray):
     c = comps()
@@ -73,6 +70,9 @@ class sphere(shape):
         assert t[0] <= t[1]
 
         return [intersection(t[0], s), intersection(t[1], s)]
+
+    def local_normal_at(self, s, p):
+        return p - point(0, 0, 0)
 
 
 class intersection:

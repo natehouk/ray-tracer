@@ -2,7 +2,7 @@ from behave import *
 from math import sqrt, pi
 from ray import ray
 from tuple import point, vector
-from sphere import sphere, local_normal_at, normalize
+from sphere import sphere, normalize
 from shape import set_transform
 from matrix import identity_matrix, translation, scaling, rotation_z
 from material import material

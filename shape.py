@@ -17,14 +17,11 @@ def intersect(shape, ray):
 
 def normal_at(shape, point):
     local_point = inverse(shape.transform) * point
-    local_normal = local_normal_at(shape, local_point)
+    local_normal = shape.local_normal_at(shape, local_point)
     world_normal = transpose(inverse(shape.transform)) * local_normal
     world_normal.w = 0
 
     return normalize(world_normal)
-
-def local_normal_at(shape, point):
-    return vector(point.x, point.y, point.z)
 
 def test_shape():
     return testShape()
@@ -43,6 +40,9 @@ class shape():
 
     def local_intersect(self, s, local_ray):
         s.saved_ray = local_ray
+
+    def local_normal_at(self, s, point):
+        return vector(point.x, point.y, point.z)
 
 
 class testShape(shape):
