@@ -1,8 +1,8 @@
 from behave import *
 from tuple import color, point
-from matrix import scaling, translation
+from matrix import scaling, translation, identity_matrix
 from shape import set_transform
-from pattern import stripe_pattern, stripe_at, stripe_at_object, set_pattern_transform
+from pattern import stripe_pattern, pattern_at_shape, set_pattern_transform, test_pattern, pattern_at_shape
 from sphere import sphere
 
 @given(u'black ← color(0, 0, 0)')
@@ -32,52 +32,52 @@ def step_impl(context):
 
 @then(u'stripe_at(pattern, point(0, 0, 0)) = white')
 def step_impl(context):
-    assert stripe_at(context.pattern, point(0, 0, 0)) == context.white
+    assert context.pattern.pattern_at(context.pattern, point(0, 0, 0)) == context.white
 
 
 @then(u'stripe_at(pattern, point(0, 1, 0)) = white')
 def step_impl(context):
-    assert stripe_at(context.pattern, point(0, 1, 0)) == context.white
+    assert context.pattern.pattern_at(context.pattern, point(0, 1, 0)) == context.white
 
 
 @then(u'stripe_at(pattern, point(0, 2, 0)) = white')
 def step_impl(context):
-    assert stripe_at(context.pattern, point(0, 2, 0)) == context.white
+    assert context.pattern.pattern_at(context.pattern, point(0, 2, 0)) == context.white
 
 
 @then(u'stripe_at(pattern, point(0, 0, 1)) = white')
 def step_impl(context):
-    assert stripe_at(context.pattern, point(0, 0, 1)) == context.white
+    assert context.pattern.pattern_at(context.pattern, point(0, 0, 1)) == context.white
 
 
 @then(u'stripe_at(pattern, point(0, 0, 2)) = white')
 def step_impl(context):
-    assert stripe_at(context.pattern, point(0, 0, 2)) == context.white
+    assert context.pattern.pattern_at(context.pattern, point(0, 0, 2)) == context.white
 
 
 @then(u'stripe_at(pattern, point(0.9, 0, 0)) = white')
 def step_impl(context):
-    assert stripe_at(context.pattern, point(0.9, 0, 0)) == context.white
+    assert context.pattern.pattern_at(context.pattern, point(0.9, 0, 0)) == context.white
 
 
 @then(u'stripe_at(pattern, point(1, 0, 0)) = black')
 def step_impl(context):
-    assert stripe_at(context.pattern, point(1, 0, 0)) == context.black
+    assert context.pattern.pattern_at(context.pattern, point(1, 0, 0)) == context.black
 
 
 @then(u'stripe_at(pattern, point(-0.1, 0, 0)) = black')
 def step_impl(context):
-    assert stripe_at(context.pattern, point(-0.1, 0, 0)) == context.black
+    assert context.pattern.pattern_at(context.pattern, point(-0.1, 0, 0)) == context.black
 
 
 @then(u'stripe_at(pattern, point(-1, 0, 0)) = black')
 def step_impl(context):
-    assert stripe_at(context.pattern, point(-1, 0, 0)) == context.black
+    assert context.pattern.pattern_at(context.pattern, point(-1, 0, 0)) == context.black
 
 
 @then(u'stripe_at(pattern, point(-1.1, 0, 0)) = white')
 def step_impl(context):
-    assert stripe_at(context.pattern, point(-1.1, 0, 0)) == context.white
+    assert context.pattern.pattern_at(context.pattern, point(-1.1, 0, 0)) == context.white
 
 
 @given(u'object ← sphere()')
@@ -92,7 +92,7 @@ def step_impl(context):
 
 @when(u'c ← stripe_at_object(pattern, object, point(1.5, 0, 0))')
 def step_impl(context):
-    context.c = stripe_at_object(context.pattern, context.object, point(1.5, 0, 0))
+    context.c = pattern_at_shape(context.pattern, context.object, point(1.5, 0, 0))
 
 
 @then(u'c = white')
@@ -112,4 +112,56 @@ def step_impl(context):
 
 @when(u'c ← stripe_at_object(pattern, object, point(2.5, 0, 0))')
 def step_impl(context):
-    context.c = stripe_at_object(context.pattern, context.object, point(2.5, 0, 0))
+    context.c = pattern_at_shape(context.pattern, context.object, point(2.5, 0, 0))
+
+
+@given(u'pattern ← test_pattern()')
+def step_impl(context):
+    context.pattern = test_pattern()
+
+
+@then(u'pattern.transform = identity_matrix')
+def step_impl(context):
+    assert context.pattern.transform == identity_matrix()
+
+
+@when(u'set_pattern_transform(pattern, translation(1, 2, 3))')
+def step_impl(context):
+    set_pattern_transform(context.pattern, translation(1, 2, 3))
+
+
+@then(u'pattern.transform = translation(1, 2, 3)')
+def step_impl(context):
+    assert context.pattern.transform == translation(1, 2, 3)
+
+
+@given(u'set_transform(shape, scaling(2, 2, 2))')
+def step_impl(context):
+    set_transform(context.shape, scaling(2, 2, 2))
+
+
+@when(u'c ← pattern_at_shape(pattern, shape, point(2, 3, 4))')
+def step_impl(context):
+    context.c = pattern_at_shape(context.pattern, context.shape, point(2, 3, 4))
+
+
+@then(u'c = color(1, 1.5, 2)')
+def step_impl(context):
+    print(context.c)
+    assert context.c == color(1, 1.5, 2)
+
+
+@given(u'set_pattern_transform(pattern, translation(0.5, 1, 1.5))')
+def step_impl(context):
+    set_pattern_transform(context.pattern, translation(0.5, 1, 1.5))
+
+
+@when(u'c ← pattern_at_shape(pattern, shape, point(2.5, 3, 3.5))')
+def step_impl(context):
+    context.c = pattern_at_shape(context.pattern, context.shape, point(2.5, 3, 3.5))
+
+
+@then(u'c = color(0.75, 0.5, 0.25)')
+def step_impl(context):
+    print(context.c)
+    assert context.c == color(0.75, 0.5, 0.25)

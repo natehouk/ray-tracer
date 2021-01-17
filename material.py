@@ -1,9 +1,9 @@
 from tuple import color, normalize, dot, reflect
-from pattern import stripe_at_object
+from pattern import pattern_at_shape
 
 def lighting(material, object, light, point, eyev, normalv, in_shawdow = False):
     if material.pattern is not None:
-        c = stripe_at_object(material.pattern, object, point)
+        c = pattern_at_shape(material.pattern, object, point)
     else:
         c = material.color
     effective_color = c * light.intensity
