@@ -1,6 +1,7 @@
 import random
 import time
 from math import sqrt, pi
+from shape import shape, intersect, normal_at
 from tuple import point, dot, normalize, color, EPSILON
 from matrix import identity_matrix, transpose, inverse, scaling, rotation_z, shearing
 from ray import ray, transform, position
@@ -23,39 +24,9 @@ def intersections(*argv):
     i = sorted(i, key=lambda x: x.t)
     return i
 
-def intersect(sphere, ray):
-    ray = transform(ray, inverse(sphere.transform))
+def local_normal_at(shape, p):
+    return p - point(0, 0, 0)
 
-    sphere_to_ray = ray.origin - point(0, 0, 0)
-    
-    a = dot(ray.direction, ray.direction)
-    b = 2 * dot(ray.direction, sphere_to_ray)
-    c = dot(sphere_to_ray, sphere_to_ray) - 1
-
-    descriminant = (b ** 2) - (4 * a * c)
-
-    if descriminant < 0:
-        t = []
-        return t
-    
-    t1 = (-b - sqrt(descriminant)) / (2 * a)
-    t2 = (-b + sqrt(descriminant)) / (2 * a)
-    t = [t1, t2]
-    t = sorted(t)
-    assert t[0] <= t[1]
-
-    return [intersection(t[0], sphere), intersection(t[1], sphere)]
-
-def set_transform(sphere, transform):
-    sphere.transform = transform
-    return
-
-def normal_at(sphere, world_point):
-    object_point = inverse(sphere.transform) * world_point
-    object_normal = object_point - point(0, 0, 0)
-    world_normal = transpose(inverse(sphere.transform)) * object_normal
-    world_normal.w = 0
-    return normalize(world_normal)
 
 def prepare_computations(intersection, ray):
     c = comps()
@@ -72,16 +43,36 @@ def prepare_computations(intersection, ray):
     c.over_point = c.point + c.normalv * EPSILON
     return c
 
-class sphere:
+class sphere(shape):
 
     def __init__(self):
-        self.id = str.format("%032x" % random.getrandbits(128))
-        self.transform = identity_matrix()
-        self.material = material()
+        super().__init__()
 
     def __eq__(self, other):
         return (self.transform == other.transform and
                 self.material == other.material)
+
+    def local_intersect(self, s, local_ray):
+
+        sphere_to_ray = local_ray.origin - point(0, 0, 0)
+        
+        a = dot(local_ray.direction, local_ray.direction)
+        b = 2 * dot(local_ray.direction, sphere_to_ray)
+        c = dot(sphere_to_ray, sphere_to_ray) - 1
+
+        descriminant = (b ** 2) - (4 * a * c)
+
+        if descriminant < 0:
+            t = []
+            return t
+        
+        t1 = (-b - sqrt(descriminant)) / (2 * a)
+        t2 = (-b + sqrt(descriminant)) / (2 * a)
+        t = [t1, t2]
+        t = sorted(t)
+        assert t[0] <= t[1]
+
+        return [intersection(t[0], s), intersection(t[1], s)]
 
 
 class intersection:

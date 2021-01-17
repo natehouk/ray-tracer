@@ -1,5 +1,6 @@
 from tuple import point, color, point_light, magnitude, normalize
-from sphere import sphere, intersect, intersections, prepare_computations, hit
+from sphere import sphere, intersections, prepare_computations, hit
+from shape import intersect
 from matrix import scaling
 from material import lighting
 from ray import ray
