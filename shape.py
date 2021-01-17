@@ -23,9 +23,6 @@ def normal_at(shape, point):
 
     return normalize(world_normal)
 
-def test_shape():
-    return testShape()
-
 
 class shape():
 
@@ -45,7 +42,7 @@ class shape():
         return vector(point.x, point.y, point.z)
 
 
-class testShape(shape):
+class test_shape(shape):
 
     def __init__(self):
         super().__init__()
