@@ -146,7 +146,7 @@ def step_impl(context):
 
 @when(u'n ← local_normal_at(s, point(1, 0, 0))')
 def step_impl(context):
-    context.n = local_normal_at(context.s, point(1, 0, 0))
+    context.n = context.s.local_normal_at(context.s, point(1, 0, 0))
 
 
 @then(u'n = vector(1, 0, 0)')
@@ -156,7 +156,7 @@ def step_impl(context):
 
 @when(u'n ← local_normal_at(s, point(0, 1, 0))')
 def step_impl(context):
-    context.n = local_normal_at(context.s, point(0, 1, 0))
+    context.n = context.s.local_normal_at(context.s, point(0, 1, 0))
 
 
 @then(u'n = vector(0, 1, 0)')
@@ -166,7 +166,7 @@ def step_impl(context):
 
 @when(u'n ← local_normal_at(s, point(0, 0, 1))')
 def step_impl(context):
-    context.n = local_normal_at(context.s, point(0, 0, 1))
+    context.n = context.s.local_normal_at(context.s, point(0, 0, 1))
 
 
 @then(u'n = vector(0, 0, 1)')
@@ -176,7 +176,7 @@ def step_impl(context):
 
 @when(u'n ← local_normal_at(s, point(√3/3, √3/3, √3/3))')
 def step_impl(context):
-    context.n = local_normal_at(context.s, point(sqrt(3)/3, sqrt(3)/3, sqrt(3)/3))
+    context.n = context.s.local_normal_at(context.s, point(sqrt(3)/3, sqrt(3)/3, sqrt(3)/3))
 
 
 @then(u'n = vector(√3/3, √3/3, √3/3)')
@@ -196,7 +196,7 @@ def step_impl(context):
 
 @when(u'n ← local_normal_at(s, point(0, 1.70711, -0.70711))')
 def step_impl(context):
-    context.n = local_normal_at(context.s, point(0, 1.70711, -0.70711))
+    context.n = context.s.local_normal_at(context.s, point(0, 1.70711, -0.70711))
 
 
 @then(u'n = vector(0, 0.70711, -0.70711)')
