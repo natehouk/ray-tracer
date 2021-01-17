@@ -36,6 +36,19 @@ class stripe_pattern(pattern):
         else:
             return pattern.b
 
+class gradient_pattern(pattern):
+    
+    def __init__(self, a, b):
+        self.a = a
+        self.b = b
+        super().__init__()
+
+    def pattern_at(self, pattern, point):
+        distance = pattern.b - pattern.a
+        fraction = point.x - floor(point.x)
+
+        return pattern.a + distance * fraction
+
 class test_pattern(pattern):
 
     def __init__(self):
