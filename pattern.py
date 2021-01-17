@@ -1,4 +1,4 @@
-from math import floor
+from math import floor, sqrt
 from tuple import color
 from matrix import inverse, identity_matrix
 
@@ -48,6 +48,19 @@ class gradient_pattern(pattern):
         fraction = point.x - floor(point.x)
 
         return pattern.a + distance * fraction
+
+class ring_pattern(pattern):
+    
+    def __init__(self, a, b):
+        self.a = a
+        self.b = b
+        super().__init__()
+
+    def pattern_at(self, pattern, point):
+        if floor(sqrt(point.x ** 2 + point.z ** 2)) % 2 == 0:
+            return self.a
+        else:
+            return self.b
 
 class test_pattern(pattern):
 
