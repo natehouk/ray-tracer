@@ -31,14 +31,14 @@ def intersect_world(world, ray):
     return s
 
 
-def shade_hit(world, comps):
+def shade_hit(world, comps, remaining):
     shadowed = is_shadowed(world, comps.over_point)
     surface = lighting(comps.object.material, comps.object, world.light, comps.over_point, comps.eyev, comps.normalv, shadowed)
-    reflected = reflected_color(world, comps)
+    reflected = reflected_color(world, comps, remaining)
     return surface + reflected
 
 
-def color_at(world, ray):
+def color_at(world, ray, remaining):
     xs = intersect_world(world, ray)
     if len(xs) == 0:
         return color(0, 0, 0)
@@ -46,7 +46,7 @@ def color_at(world, ray):
         for i in xs:
             if i.t > 0:
                 comps = prepare_computations(i, ray)
-                return shade_hit(world, comps)
+                return shade_hit(world, comps, remaining)
     return color(0, 0, 0)
 
 
@@ -64,14 +64,18 @@ def is_shadowed(world, point):
     else:
         return False
 
-def reflected_color(world, comps):
-    if comps.object.material.reflective == 0:
+def reflected_color(world, comps, remaining):
+    if remaining <= 0:
         return color(0, 0, 0)
     else:
-        reflect_ray = ray(comps.over_point, comps.reflectv)
-        c = color_at(world, reflect_ray)
+        if comps.object.material.reflective == 0:
+            return color(0, 0, 0)
+        else:
+            reflect_ray = ray(comps.over_point, comps.reflectv)
+            remaining -= 1
+            c = color_at(world, reflect_ray, remaining)
 
-        return c * comps.object.material.reflective
+            return c * comps.object.material.reflective
 
 class world:
 

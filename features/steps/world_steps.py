@@ -6,6 +6,7 @@ from sphere import sphere, intersection
 from matrix import scaling, translation
 from ray import ray
 from plane import plane
+from util import LIMIT
 
 @given(u'w ← world()')
 def step_impl(context):
@@ -103,7 +104,7 @@ def step_impl(context):
 
 @when(u'c ← shade_hit(w, comps)')
 def step_impl(context):
-    context.c = shade_hit(context.w, context.comps)
+    context.c = shade_hit(context.w, context.comps, LIMIT)
 
 
 @then(u'c = color(0.38066, 0.47583, 0.2855)')
@@ -139,7 +140,7 @@ def step_impl(context):
 
 @when(u'c ← color_at(w, r)')
 def step_impl(context):
-    context.c = color_at(context.w, context.r)
+    context.c = color_at(context.w, context.r, LIMIT)
 
 
 @then(u'c = color(0, 0, 0)')
@@ -246,7 +247,7 @@ def step_impl(context):
 
 @when(u'color ← reflected_color(w, comps)')
 def step_impl(context):
-    context.color = reflected_color(context.w, context.comps)
+    context.color = reflected_color(context.w, context.comps, LIMIT)
 
 
 @then(u'color = color(0, 0, 0)')
@@ -279,9 +280,53 @@ def step_impl(context):
 
 @when(u'color ← shade_hit(w, comps)')
 def step_impl(context):
-    context.color = shade_hit(context.w, context.comps)
+    context.color = shade_hit(context.w, context.comps, LIMIT)
 
 
 @then(u'color = color(0.87677, 0.92436, 0.82918)')
 def step_impl(context):
     assert context.color == color(0.87677, 0.92436, 0.82918)
+
+
+@given(u'w.light ← point_light(point(0, 0, 0), color(1, 1, 1))')
+def step_impl(context):
+    context.w.light = point_light(point(0, 0, 0), color(1, 1, 1))
+
+
+@given(u'lower ← plane() with')
+def step_impl(context):
+    context.lower = plane()
+    context.lower.material.reflective = 1
+    context.lower.material.transform = translation(0, -1, 0)
+
+
+@given(u'lower is added to w')
+def step_impl(context):
+    context.w.objects.append(context.lower)
+
+
+@given(u'upper ← plane() with')
+def step_impl(context):
+    context.upper = plane()
+    context.upper.material.reflective = 1
+    context.upper.material.transform = translation(0, 1, 0)
+
+
+@given(u'upper is added to w')
+def step_impl(context):
+    context.w.objects.append(context.upper)
+
+
+@given(u'r ← ray(point(0, 0, 0), vector(0, 1, 0))')
+def step_impl(context):
+    context.r = ray(point(0, 0, 0), vector(0, 1, 0))
+
+
+@then(u'color_at(w, r) should terminate successfully')
+def step_impl(context):
+    assert color_at(context.w, context.r, LIMIT)
+
+
+@when(u'color ← reflected_color(w, comps, 0)')
+def step_impl(context):
+    context.color = reflected_color(context.w, context.comps, 0)
