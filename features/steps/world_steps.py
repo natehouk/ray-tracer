@@ -1,9 +1,11 @@
 from behave import *
-from world import world, default_world, intersect_world, shade_hit, color_at, is_shadowed
+from math import sqrt
+from world import world, default_world, intersect_world, shade_hit, color_at, is_shadowed, reflected_color
 from tuple import point, vector, color, point_light
 from sphere import sphere, intersection
-from matrix import scaling
+from matrix import scaling, translation
 from ray import ray
+from plane import plane
 
 @given(u'w ← world()')
 def step_impl(context):
@@ -235,3 +237,51 @@ def step_impl(context):
 @then(u'c = color(0.1, 0.1, 0.1)')
 def step_impl(context):
     assert context.c == color(0.1, 0.1, 0.1)
+
+
+@given(u'shape.material.ambient ← 1')
+def step_impl(context):
+    context.shape.material.ambient = 1
+
+
+@when(u'color ← reflected_color(w, comps)')
+def step_impl(context):
+    context.color = reflected_color(context.w, context.comps)
+
+
+@then(u'color = color(0, 0, 0)')
+def step_impl(context):
+    assert context.color == color(0, 0, 0)
+
+
+@given(u'shape ← plane() with')
+def step_impl(context):
+    context.shape = plane()
+    context.shape.material.reflective = 0.5
+    context.shape.transform = translation(0, -1, 0)
+
+
+@given(u'shape is added to w')
+def step_impl(context):
+    context.w.objects.append(context.shape)
+
+
+@given(u'r ← ray(point(0, 0, -3), vector(0, -√2/2, √2/2))')
+def step_impl(context):
+    context.r = ray(point(0, 0, -3), vector(0, -sqrt(2)/2, sqrt(2)/2))
+
+
+@then(u'color = color(0.19032, 0.2379, 0.14274)')
+def step_impl(context):
+    print(context.color)
+    assert context.color == color(0.19032, 0.2379, 0.14274)
+
+
+@when(u'color ← shade_hit(w, comps)')
+def step_impl(context):
+    context.color = shade_hit(context.w, context.comps)
+
+
+@then(u'color = color(0.87677, 0.92436, 0.82918)')
+def step_impl(context):
+    assert context.color == color(0.87677, 0.92436, 0.82918)

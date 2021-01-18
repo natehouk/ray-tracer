@@ -1,7 +1,7 @@
 from math import sqrt, isnan
 
 # Equality precision
-EPSILON = 0.00001
+EPSILON = 0.0001
 
 def equals(a, b):
     return abs(a - b) < EPSILON or (isnan(a) and isnan(b))
@@ -25,12 +25,6 @@ def magnitude(v):
     return sqrt(v.x ** 2 + v.y ** 2 + v.z ** 2 + v.w ** 2)
 
 def normalize(v):
-    #if magnitude(v) == 0:
-    #    return tuple(float('inf'),
-    #                 float('inf'),
-    #                 float('inf'),
-    #                 float('inf'))
-    #else:
     return tuple(v.x / magnitude(v),
                  v.y / magnitude(v),
                  v.z / magnitude(v),
@@ -72,9 +66,9 @@ class tuple:
 
     def __eq__(self, other):
         if isnan(self.w) and isnan(other.w):
-            return bool(equals(self.x, other.x) and
-                        equals(self.y, other.y) and
-                        equals(self.z, other.z))
+            return bool(equals(self.red, other.red) and
+                        equals(self.green, other.green) and
+                        equals(self.blue, other.blue))
         else:
             return bool(equals(self.x, other.x) and
                         equals(self.y, other.y) and

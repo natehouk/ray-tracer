@@ -36,6 +36,11 @@ def step_impl(context):
     assert context.m.shininess == 200.0
 
 
+@then(u'm.reflective = 0.0')
+def step_impl(context):
+    assert context.m.reflective == 0.0
+
+
 @given(u'eyev ← vector(0, 0, -1)')
 def step_impl(context):
     context.eyev = vector(0, 0, -1)

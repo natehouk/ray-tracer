@@ -1,7 +1,10 @@
 from behave import *
+from math import sqrt
 from sphere import sphere, intersection, intersections, hit, prepare_computations
 from tuple import point, vector, EPSILON
 from matrix import translation
+from plane import plane
+from ray import ray
 
 @when(u'i ← intersection(3.5, s)')
 def step_impl(context):
@@ -58,24 +61,24 @@ def step_impl(context):
     assert context.comps.normalv == vector(0, 0, -1)
 
 
-# @given(u'shape ← plane()')
-# def step_impl(context):
-#     raise NotImplementedError(u'STEP: Given shape ← plane()')
+@given(u'shape ← plane()')
+def step_impl(context):
+    context.shape = plane()
 
 
-# @given(u'r ← ray(point(0, 1, -1), vector(0, -√2/2, √2/2))')
-# def step_impl(context):
-#     raise NotImplementedError(u'STEP: Given r ← ray(point(0, 1, -1), vector(0, -√2/2, √2/2))')
+@given(u'r ← ray(point(0, 1, -1), vector(0, -√2/2, √2/2))')
+def step_impl(context):
+    context.r = ray(point(0, 1, -1), vector(0, -sqrt(2)/2, sqrt(2)/2))
 
 
-# @given(u'i ← intersection(√2, shape)')
-# def step_impl(context):
-#     raise NotImplementedError(u'STEP: Given i ← intersection(√2, shape)')
+@given(u'i ← intersection(√2, shape)')
+def step_impl(context):
+    context.i = intersection(sqrt(2), context.shape)
 
 
-# @then(u'comps.reflectv = vector(0, √2/2, √2/2)')
-# def step_impl(context):
-#     raise NotImplementedError(u'STEP: Then comps.reflectv = vector(0, √2/2, √2/2)')
+@then(u'comps.reflectv = vector(0, √2/2, √2/2)')
+def step_impl(context):
+    assert context.comps.reflectv == vector(0, sqrt(2)/2, sqrt(2)/2)
 
 
 @then(u'comps.inside = false')

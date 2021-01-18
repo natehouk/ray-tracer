@@ -2,7 +2,7 @@ import random
 import time
 from math import sqrt, pi
 from shape import shape, intersect, normal_at
-from tuple import point, dot, normalize, color, EPSILON
+from tuple import point, dot, normalize, color, reflect, EPSILON
 from matrix import identity_matrix, transpose, inverse, scaling, rotation_z, shearing
 from ray import ray, transform, position
 from canvas import canvas, write_pixel, canvas_to_ppm
@@ -38,16 +38,13 @@ def prepare_computations(intersection, ray):
     else:
         c.inside = False
     c.over_point = c.point + c.normalv * EPSILON
+    c.reflectv = reflect(ray.direction, c.normalv)
     return c
 
 class sphere(shape):
 
     def __init__(self):
         super().__init__()
-
-    def __eq__(self, other):
-        return (self.transform == other.transform and
-                self.material == other.material)
 
     def local_intersect(self, s, local_ray):
 

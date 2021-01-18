@@ -33,7 +33,9 @@ def intersect_world(world, ray):
 
 def shade_hit(world, comps):
     shadowed = is_shadowed(world, comps.over_point)
-    return lighting(comps.object.material, comps.object, world.light, comps.over_point, comps.eyev, comps.normalv, shadowed)
+    surface = lighting(comps.object.material, comps.object, world.light, comps.over_point, comps.eyev, comps.normalv, shadowed)
+    reflected = reflected_color(world, comps)
+    return surface + reflected
 
 
 def color_at(world, ray):
@@ -61,6 +63,15 @@ def is_shadowed(world, point):
         return True
     else:
         return False
+
+def reflected_color(world, comps):
+    if comps.object.material.reflective == 0:
+        return color(0, 0, 0)
+    else:
+        reflect_ray = ray(comps.over_point, comps.reflectv)
+        c = color_at(world, reflect_ray)
+
+        return c * comps.object.material.reflective
 
 class world:
 
