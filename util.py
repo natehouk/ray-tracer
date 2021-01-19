@@ -3,6 +3,7 @@ from tuple import point, normalize
 from ray import ray
 from canvas import canvas, write_pixel
 from world import color_at
+import time
 
 def ray_for_pixel(camera, px, py):
     xoffset = (px + 0.5) * camera.pixel_size
@@ -20,11 +21,19 @@ def ray_for_pixel(camera, px, py):
 def render(camera, world):
     image = canvas(camera.hsize, camera.vsize)
 
+    start = time.time()
     for y in range(camera.vsize):
-        print(str(y))
+        current = time.time()
+        elapsed = current - start
+        percent = round(y / camera.vsize * 100, 2)
+        if y != 0:
+            t = round((1 / (y / camera.vsize)) * elapsed - elapsed, 2)
+            print("\r" + str(percent).rjust(4) + "% : " + str(t) + "s", end = " ", flush = True)
         for x in range(camera.hsize):
             ray = ray_for_pixel(camera, x, y)
             color = color_at(world, ray)
             write_pixel(image, x, y, color)
+            current = time.time()
+            elapsed = current - start
     
     return image

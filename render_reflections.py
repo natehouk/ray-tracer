@@ -33,13 +33,13 @@ def main():
     left_wall = plane()
     left_wall.transform = translation(0, 0, 5) * rotation_y(-pi/4) * rotation_x(pi/2) # * scaling(10, 0.01, 10)
     left_wall.material.specular = .7
-    left_wall.material.pattern = gradient_pattern(black, white)
+    left_wall.material.pattern = stripe_pattern(black, white)
     w.objects.append(left_wall)
 
     right_wall = plane()
     right_wall.transform = translation(0, 0, 5) * rotation_y(pi/4) * rotation_x(pi/2) # * scaling(10, 0.01, 10)
     right_wall.material.specular = .7
-    right_wall.material.pattern = gradient_pattern(black, white)
+    right_wall.material.pattern = stripe_pattern(black, white)
     w.objects.append(right_wall)
 
     middle = sphere()
@@ -48,17 +48,17 @@ def main():
     middle.material.color = color(0.1, 1, 0.5)
     middle.material.diffuse = 0.7
     middle.material.specular = 0.3
-    middle.material.reflective = 0
+    middle.material.reflective = .1
     middle.material.pattern = checkers_pattern(color(0.2, 0.5, 0.7), color(.8, .8, .2))
     w.objects.append(middle)
 
     right = sphere()
-    right.transform = translation(1.5, 0.5, -0.5) * scaling(0.5, 0.5, 0.5)
+    right.transform = translation(1.5, 0.5, -0.5) * scaling(1.5, 1.5, 1.5)
     right.material = material()
     right.material.color = color(0.5, 1, 0.1)
     right.material.diffuse = 0.7
     right.material.specular = 0.3
-    right.material.reflective = 0.5
+    right.material.reflective = 0.3
     right.material.pattern = ring_pattern(color(0.2, 0.5, 0.7), color(.8, .8, .2))
     w.objects.append(right)
 
@@ -68,11 +68,11 @@ def main():
     left.material.color = color(1, 0.8, 0.1)
     left.material.diffuse = 0.7
     left.material.specular = 0.3
-    left.material.reflective = 1
+    left.material.reflective = .2
     left.material.pattern = gradient_pattern(color(0.7, 0.5, 0.7), color(0, .8, .2))
     w.objects.append(left)
 
-    cam = camera(400, 200, pi/3)
+    cam = camera(800, 400, pi/3)
     cam.transform = view_transform(point(0, 1.5, -5), point(0, 1, 0), vector(0, 1, 0))
 
     canvas = render(cam, w)
