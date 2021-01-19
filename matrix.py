@@ -5,6 +5,8 @@ from canvas import canvas, write_pixel, canvas_to_ppm
 from ray import ray
 import time
 
+inverses = {}
+
 def transpose(m):
     t = matrix(0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0)
     for i in range(4):
@@ -61,15 +63,19 @@ def is_invertable(m):
     return True if determinant(m) != 0 else False
 
 def inverse(m):
-    if (is_invertable(m) is not True):
-        return Exception
-    else:
-        m2 = deepcopy(m)
-        for i in range(m.size):
-            for j in range(m.size):
-                c = cofactor(m, i, j)
-                m2.matrix[j][i] = c / determinant(m)
-        return m2
+    #if (is_invertable(m) is not True):
+    #    return Exception
+    #else:
+        #if m in inverses:
+        #    return inverses[m]
+    m2 = deepcopy(m)
+    for i in range(m.size):
+        for j in range(m.size):
+            c = cofactor(m, i, j)
+            m2.matrix[j][i] = c / determinant(m)
+    #if m2 not in inverses:
+    #    inverses[m] = m2
+    return m2
 
 def identity_matrix():
     return matrix(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1)

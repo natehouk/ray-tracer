@@ -23,6 +23,7 @@ def render(camera, world):
     image = canvas(camera.hsize, camera.vsize)
 
     for y in range(camera.vsize):
+        print(str(y))
         for x in range(camera.hsize):
             ray = ray_for_pixel(camera, x, y)
             color = color_at(world, ray, LIMIT)
