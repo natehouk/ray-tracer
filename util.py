@@ -4,8 +4,6 @@ from ray import ray
 from canvas import canvas, write_pixel
 from world import color_at
 
-LIMIT = 4
-
 def ray_for_pixel(camera, px, py):
     xoffset = (px + 0.5) * camera.pixel_size
     yoffset = (py + 0.5) * camera.pixel_size
@@ -26,7 +24,7 @@ def render(camera, world):
         print(str(y))
         for x in range(camera.hsize):
             ray = ray_for_pixel(camera, x, y)
-            color = color_at(world, ray, LIMIT)
+            color = color_at(world, ray)
             write_pixel(image, x, y, color)
     
     return image

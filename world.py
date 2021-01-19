@@ -5,6 +5,8 @@ from matrix import scaling
 from material import lighting
 from ray import ray
 
+LIMIT = 4
+
 def default_world():
     w = world()
     w.light = point_light(point(-10, 10, -10), color(1, 1, 1))
@@ -31,14 +33,14 @@ def intersect_world(world, ray):
     return s
 
 
-def shade_hit(world, comps, remaining):
+def shade_hit(world, comps, remaining = LIMIT):
     shadowed = is_shadowed(world, comps.over_point)
     surface = lighting(comps.object.material, comps.object, world.light, comps.over_point, comps.eyev, comps.normalv, shadowed)
     reflected = reflected_color(world, comps, remaining)
     return surface + reflected
 
 
-def color_at(world, ray, remaining):
+def color_at(world, ray, remaining = LIMIT):
     xs = intersect_world(world, ray)
     if len(xs) == 0:
         return color(0, 0, 0)
@@ -64,7 +66,7 @@ def is_shadowed(world, point):
     else:
         return False
 
-def reflected_color(world, comps, remaining):
+def reflected_color(world, comps, remaining = LIMIT):
     if remaining <= 0:
         return color(0, 0, 0)
     else:
