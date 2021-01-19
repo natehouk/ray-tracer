@@ -24,16 +24,14 @@ def render(camera, world):
     start = time.time()
     for y in range(camera.vsize):
         current = time.time()
-        elapsed = current - start
+        elapsed = round(current - start, 2)
         percent = round(y / camera.vsize * 100, 2)
         if y != 0:
             t = round((1 / (y / camera.vsize)) * elapsed - elapsed, 2)
-            print("\r" + str(percent).rjust(4) + "% : " + str(t) + "s", end = " ", flush = True)
+            print("\r" + str(percent).rjust(5) + "% : " + str(t) + "s left : " + str(elapsed) + "s elapsed", end = " ", flush = True)
         for x in range(camera.hsize):
             ray = ray_for_pixel(camera, x, y)
             color = color_at(world, ray)
             write_pixel(image, x, y, color)
-            current = time.time()
-            elapsed = current - start
     
     return image
