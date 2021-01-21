@@ -2,7 +2,7 @@ from behave import *
 from math import sqrt, pi
 from ray import ray
 from tuple import point, vector
-from sphere import sphere, normalize
+from sphere import sphere, normalize, glass_sphere
 from shape import set_transform
 from matrix import identity_matrix, translation, scaling, rotation_z
 from material import material
@@ -254,16 +254,16 @@ def step_impl(context):
     assert context.s.material == context.m
 
 
-# @given(u's ← glass_sphere()')
-# def step_impl(context):
-#     raise NotImplementedError(u'STEP: Given s ← glass_sphere()')
+@given(u's ← glass_sphere()')
+def step_impl(context):
+    context.s = glass_sphere()
 
 
-# @then(u's.material.transparency = 1.0')
-# def step_impl(context):
-#     raise NotImplementedError(u'STEP: Then s.material.transparency = 1.0')
+@then(u's.material.transparency = 1.0')
+def step_impl(context):
+    assert context.s.material.transparency == 1.0
 
 
-# @then(u's.material.refractive_index = 1.5')
-# def step_impl(context):
-#     raise NotImplementedError(u'STEP: Then s.material.refractive_index = 1.5')
+@then(u's.material.refractive_index = 1.5')
+def step_impl(context):
+    assert context.s.material.refractive_index == 1.5

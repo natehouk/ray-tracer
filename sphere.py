@@ -41,6 +41,12 @@ def prepare_computations(intersection, ray):
     c.reflectv = reflect(ray.direction, c.normalv)
     return c
 
+def glass_sphere():
+    s = sphere()
+    s.material.transparency = 1.0
+    s.material.refractive_index = 1.5
+    return s
+
 class sphere(shape):
 
     def __init__(self):
