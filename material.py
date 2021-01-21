@@ -37,6 +37,8 @@ class material:
         self.specular = 0.9
         self.shininess = 200.0
         self.reflective = 0
+        self.transparency = 0
+        self.refractive_index = 1
         self.pattern = None
 
     def __eq__(self, other):

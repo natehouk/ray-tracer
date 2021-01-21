@@ -66,7 +66,7 @@ def main():
     left.material.pattern = gradient_pattern(color(0.7, 0.5, 0.7), color(0, .8, .2))
     w.objects.append(left)
 
-    cam = camera(200, 100, pi/3)
+    cam = camera(1600, 800, pi/3)
     cam.transform = view_transform(point(0, 1.5, -5), point(0, 1, 0), vector(0, 1, 0))
 
     canvas = render(cam, w)

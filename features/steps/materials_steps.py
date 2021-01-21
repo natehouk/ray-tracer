@@ -41,6 +41,16 @@ def step_impl(context):
     assert context.m.reflective == 0.0
 
 
+@then(u'm.transparency = 0.0')
+def step_impl(context):
+    assert context.m.transparency == 0.0
+
+
+@then(u'm.refractive_index = 1.0')
+def step_impl(context):
+    assert context.m.refractive_index == 1.0
+
+
 @given(u'eyev ← vector(0, 0, -1)')
 def step_impl(context):
     context.eyev = vector(0, 0, -1)

@@ -33,5 +33,6 @@ def render(camera, world):
             ray = ray_for_pixel(camera, x, y)
             color = color_at(world, ray)
             write_pixel(image, x, y, color)
+    print()
     
     return image
