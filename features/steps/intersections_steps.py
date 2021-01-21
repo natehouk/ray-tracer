@@ -1,8 +1,8 @@
 from behave import *
 from math import sqrt
-from sphere import sphere, intersection, intersections, hit, prepare_computations
+from sphere import sphere, intersection, intersections, hit, prepare_computations, glass_sphere
 from tuple import point, vector, EPSILON
-from matrix import translation
+from matrix import translation, scaling
 from plane import plane
 from ray import ray
 
@@ -248,99 +248,110 @@ def step_impl(context):
     assert context.i == context.i4
 
 
-# @given(u'A ← glass_sphere() with')
-# def step_impl(context):
-#     raise NotImplementedError(u'STEP: Given A ← glass_sphere() with')
+@given(u'A ← glass_sphere() with')
+def step_impl(context):
+    context.A = glass_sphere()
+    context.A.transform = scaling(2, 2, 2)
+    context.A.material.refractive_index = 1.5
 
 
-# @given(u'B ← glass_sphere() with')
-# def step_impl(context):
-#     raise NotImplementedError(u'STEP: Given B ← glass_sphere() with')
+@given(u'B ← glass_sphere() with')
+def step_impl(context):
+    context.B = glass_sphere()
+    context.B.transform = translation(0, 0, -0.25)
+    context.B.material.refractive_index = 2.0
 
 
-# @given(u'C ← glass_sphere() with')
-# def step_impl(context):
-#     raise NotImplementedError(u'STEP: Given C ← glass_sphere() with')
+@given(u'C ← glass_sphere() with')
+def step_impl(context):
+    context.C = glass_sphere()
+    context.C.transform = translation(0, 0, 0.25)
+    context.C.material.refractive_index = 2.5
 
 
-# @given(u'r ← ray(point(0, 0, -4), vector(0, 0, 1))')
-# def step_impl(context):
-#     raise NotImplementedError(u'STEP: Given r ← ray(point(0, 0, -4), vector(0, 0, 1))')
+@given(u'r ← ray(point(0, 0, -4), vector(0, 0, 1))')
+def step_impl(context):
+    context.r = ray(point(0, 0, -4), vector(0, 0, 1))
 
 
-# @given(u'xs ← intersections(2:A, 2.75:B, 3.25:C, 4.75:B, 5.25:C, 6:A)')
-# def step_impl(context):
-#     raise NotImplementedError(u'STEP: Given xs ← intersections(2:A, 2.75:B, 3.25:C, 4.75:B, 5.25:C, 6:A)')
+@given(u'xs ← intersections(2:A, 2.75:B, 3.25:C, 4.75:B, 5.25:C, 6:A)')
+def step_impl(context):
+    context.xs = intersections(intersection(2, context.A),
+                               intersection(2.75, context.B), 
+                               intersection(3.25, context.C), 
+                               intersection(4.75, context.B),
+                               intersection(5.25, context.C), 
+                               intersection(6, context.A))
 
 
-# @when(u'comps ← prepare_computations(xs[0], r, xs)')
-# def step_impl(context):
-#     raise NotImplementedError(u'STEP: When comps ← prepare_computations(xs[0], r, xs)')
+@when(u'comps ← prepare_computations(xs[0], r, xs)')
+def step_impl(context):
+    context.comps = prepare_computations(context.xs[0], context.r, context.xs)
 
 
-# @then(u'comps.n1 = 1.0')
-# def step_impl(context):
-#     raise NotImplementedError(u'STEP: Then comps.n1 = 1.0')
+@then(u'comps.n1 = 1.0')
+def step_impl(context):
+    assert context.comps.n1 == 1.0
 
 
-# @then(u'comps.n2 = 1.5')
-# def step_impl(context):
-#     raise NotImplementedError(u'STEP: Then comps.n2 = 1.5')
+@then(u'comps.n2 = 1.5')
+def step_impl(context):
+    assert context.comps.n2 == 1.5
 
 
-# @when(u'comps ← prepare_computations(xs[1], r, xs)')
-# def step_impl(context):
-#     raise NotImplementedError(u'STEP: When comps ← prepare_computations(xs[1], r, xs)')
+@when(u'comps ← prepare_computations(xs[1], r, xs)')
+def step_impl(context):
+    context.comps = prepare_computations(context.xs[1], context.r, context.xs)
 
 
-# @then(u'comps.n1 = 1.5')
-# def step_impl(context):
-#     raise NotImplementedError(u'STEP: Then comps.n1 = 1.5')
+@then(u'comps.n1 = 1.5')
+def step_impl(context):
+    assert context.comps.n1 == 1.5
 
 
-# @then(u'comps.n2 = 2.0')
-# def step_impl(context):
-#     raise NotImplementedError(u'STEP: Then comps.n2 = 2.0')
+@then(u'comps.n2 = 2.0')
+def step_impl(context):
+    assert context.comps.n2 == 2.0
 
 
-# @when(u'comps ← prepare_computations(xs[2], r, xs)')
-# def step_impl(context):
-#     raise NotImplementedError(u'STEP: When comps ← prepare_computations(xs[2], r, xs)')
+@when(u'comps ← prepare_computations(xs[2], r, xs)')
+def step_impl(context):
+    context.comps = prepare_computations(context.xs[2], context.r, context.xs)
 
 
-# @then(u'comps.n1 = 2.0')
-# def step_impl(context):
-#     raise NotImplementedError(u'STEP: Then comps.n1 = 2.0')
+@then(u'comps.n1 = 2.0')
+def step_impl(context):
+    assert context.comps.n1 == 2.0
 
 
-# @then(u'comps.n2 = 2.5')
-# def step_impl(context):
-#     raise NotImplementedError(u'STEP: Then comps.n2 = 2.5')
+@then(u'comps.n2 = 2.5')
+def step_impl(context):
+    assert context.comps.n2 == 2.5
 
 
-# @when(u'comps ← prepare_computations(xs[3], r, xs)')
-# def step_impl(context):
-#     raise NotImplementedError(u'STEP: When comps ← prepare_computations(xs[3], r, xs)')
+@when(u'comps ← prepare_computations(xs[3], r, xs)')
+def step_impl(context):
+    context.comps = prepare_computations(context.xs[3], context.r, context.xs)
 
 
-# @then(u'comps.n1 = 2.5')
-# def step_impl(context):
-#     raise NotImplementedError(u'STEP: Then comps.n1 = 2.5')
+@then(u'comps.n1 = 2.5')
+def step_impl(context):
+    assert context.comps.n1 == 2.5
 
 
-# @when(u'comps ← prepare_computations(xs[4], r, xs)')
-# def step_impl(context):
-#     raise NotImplementedError(u'STEP: When comps ← prepare_computations(xs[4], r, xs)')
+@when(u'comps ← prepare_computations(xs[4], r, xs)')
+def step_impl(context):
+    context.comps = prepare_computations(context.xs[4], context.r, context.xs)
 
 
-# @when(u'comps ← prepare_computations(xs[5], r, xs)')
-# def step_impl(context):
-#     raise NotImplementedError(u'STEP: When comps ← prepare_computations(xs[5], r, xs)')
+@when(u'comps ← prepare_computations(xs[5], r, xs)')
+def step_impl(context):
+    context.comps = prepare_computations(context.xs[5], context.r, context.xs)
 
 
-# @then(u'comps.n2 = 1.0')
-# def step_impl(context):
-#     raise NotImplementedError(u'STEP: Then comps.n2 = 1.0')
+@then(u'comps.n2 = 1.0')
+def step_impl(context):
+    assert context.comps.n2 == 1.0
 
 
 # @given(u'shape ← glass_sphere()')

@@ -25,7 +25,7 @@ def intersections(*argv):
     return i
 
 
-def prepare_computations(intersection, ray):
+def prepare_computations(intersection, ray, xs = None):
     c = comps()
     c.t = intersection.t
     c.object = intersection.object
@@ -39,6 +39,24 @@ def prepare_computations(intersection, ray):
         c.inside = False
     c.over_point = c.point + c.normalv * EPSILON
     c.reflectv = reflect(ray.direction, c.normalv)
+    containers = []
+    if xs:
+        for i in xs:
+            if i == intersection:
+                if len(containers) == 0:
+                    c.n1 = 1.0
+                else:
+                    c.n1 = containers[-1].material.refractive_index
+            if i.object in containers:
+                containers.remove(i.object)
+            else:
+                containers.append(i.object)
+            if i == intersection:
+                if len(containers) == 0:
+                    c.n2 = 1.0
+                else:
+                    c.n2 = containers[-1].material.refractive_index
+                break
     return c
 
 def glass_sphere():
