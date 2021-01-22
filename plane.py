@@ -1,10 +1,10 @@
-from tuple import vector, EPSILON
-from sphere import intersection
-from shape import shape
 from matrix import identity_matrix
+from shape import shape
+from sphere import intersection
+from tuple import EPSILON, vector
+
 
 class plane(shape):
-
     def __init__(self):
         self.transform = identity_matrix()
         self.test = True

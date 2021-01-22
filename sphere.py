@@ -1,21 +1,24 @@
 import random
 import time
-from math import sqrt, pi
-from shape import shape, intersect, normal_at
-from tuple import point, dot, normalize, color, reflect, EPSILON
-from matrix import identity_matrix, transpose, inverse, scaling, rotation_z, shearing
-from ray import ray, transform, position
-from canvas import canvas, write_pixel, canvas_to_ppm
+from math import pi, sqrt
+
+from canvas import canvas, canvas_to_ppm, write_pixel
 from material import material
+from matrix import identity_matrix, inverse, rotation_z, scaling, shearing, transpose
+from ray import position, ray, transform
+from shape import intersect, normal_at, shape
+from tuple import EPSILON, color, dot, normalize, point, reflect
+
 
 def hit(intersections):
-    min = float('inf')
+    min = float("inf")
     h = None
     for i in intersections:
         if i.t >= 0 and i.t <= min:
             min = i.t
             h = i
     return h
+
 
 def intersections(*argv):
     i = []
@@ -25,7 +28,7 @@ def intersections(*argv):
     return i
 
 
-def prepare_computations(intersection, ray, xs = None):
+def prepare_computations(intersection, ray, xs=None):
     c = comps()
     c.t = intersection.t
     c.object = intersection.object
@@ -67,15 +70,15 @@ def glass_sphere():
     s.material.refractive_index = 1.5
     return s
 
-class sphere(shape):
 
+class sphere(shape):
     def __init__(self):
         super().__init__()
 
     def local_intersect(self, s, local_ray):
 
         sphere_to_ray = local_ray.origin - point(0, 0, 0)
-        
+
         a = dot(local_ray.direction, local_ray.direction)
         b = 2 * dot(local_ray.direction, sphere_to_ray)
         c = dot(sphere_to_ray, sphere_to_ray) - 1
@@ -85,7 +88,7 @@ class sphere(shape):
         if descriminant < 0:
             t = []
             return t
-        
+
         t1 = (-b - sqrt(descriminant)) / (2 * a)
         t2 = (-b + sqrt(descriminant)) / (2 * a)
         t = [t1, t2]
@@ -99,14 +102,12 @@ class sphere(shape):
 
 
 class intersection:
-
     def __init__(self, t, o):
         self.t = t
         self.object = o
 
 
 class comps:
-
     def __init__(self):
         self.t = None
         self.object = None
@@ -116,7 +117,21 @@ class comps:
         self.inside = None
 
     def __str__(self):
-        return "<" + str(self.t) + ", " + str(self.object) + ", " + str(self.point) + ", " + str(self.eyev) + ", " + str(self.normalv) + ", " + str(self.inside) + ">"
+        return (
+            "<"
+            + str(self.t)
+            + ", "
+            + str(self.object)
+            + ", "
+            + str(self.point)
+            + ", "
+            + str(self.eyev)
+            + ", "
+            + str(self.normalv)
+            + ", "
+            + str(self.inside)
+            + ">"
+        )
 
 
 if __name__ == "__main__":
@@ -128,7 +143,7 @@ if __name__ == "__main__":
     half = wall_size / 2
 
     canvas = canvas(canvas_pixels, canvas_pixels)
-    color = color(1, 0 , 0)
+    color = color(1, 0, 0)
     shape = sphere()
 
     # transformations
@@ -154,7 +169,7 @@ if __name__ == "__main__":
 
             if hit(xs) is not None:
                 write_pixel(canvas, x, y, color)
-            
+
     end = time.time()
     print("Finished render.")
     print(str(round(end - start, 2)) + "s")

@@ -1,13 +1,15 @@
 import time
 from math import pi
-from sphere import sphere
-from matrix import scaling, translation, rotation_x, rotation_y, view_transform
-from material import material
-from tuple import color, point, vector, point_light
-from world import world
-from util import render
-from canvas import canvas_to_ppm
+
 from camera import camera
+from canvas import canvas_to_ppm
+from material import material
+from matrix import rotation_x, rotation_y, scaling, translation, view_transform
+from sphere import sphere
+from tuple import color, point, point_light, vector
+from util import render
+from world import world
+
 
 def main():
 
@@ -24,12 +26,22 @@ def main():
     w.objects.append(floor)
 
     left_wall = sphere()
-    left_wall.transform = translation(0, 0, 5) * rotation_y(-pi/4) * rotation_x(pi/2) * scaling(10, 0.01, 10)
+    left_wall.transform = (
+        translation(0, 0, 5)
+        * rotation_y(-pi / 4)
+        * rotation_x(pi / 2)
+        * scaling(10, 0.01, 10)
+    )
     left_wall.material = floor.material
     w.objects.append(left_wall)
 
     right_wall = sphere()
-    right_wall.transform = translation(0, 0, 5) * rotation_y(pi/4) * rotation_x(pi/2) * scaling(10, 0.01, 10)
+    right_wall.transform = (
+        translation(0, 0, 5)
+        * rotation_y(pi / 4)
+        * rotation_x(pi / 2)
+        * scaling(10, 0.01, 10)
+    )
     right_wall.material = floor.material
     w.objects.append(right_wall)
 
@@ -57,7 +69,7 @@ def main():
     left.material.specular = 0.3
     w.objects.append(left)
 
-    cam = camera(200, 100, pi/3)
+    cam = camera(200, 100, pi / 3)
     cam.transform = view_transform(point(0, 1.5, -5), point(0, 1, 0), vector(0, 1, 0))
 
     canvas = render(cam, w)
@@ -72,6 +84,7 @@ def main():
     end = time.time()
     print("Finished writing file.")
     print(str(round(end - start, 2)) + "s")
+
 
 if __name__ == "__main__":
     main()

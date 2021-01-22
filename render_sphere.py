@@ -1,10 +1,11 @@
 import time
-from tuple import point, color, point_light, normalize
-from sphere import sphere, intersect, normal_at, hit
+
+from canvas import canvas, canvas_to_ppm, write_pixel
+from material import lighting, material
 from matrix import scaling, shearing
-from material import material, lighting
-from ray import ray, position
-from canvas import canvas, write_pixel, canvas_to_ppm
+from ray import position, ray
+from sphere import hit, intersect, normal_at, sphere
+from tuple import color, normalize, point, point_light
 
 if __name__ == "__main__":
     ray_origin = point(0, 0, -5)
@@ -47,10 +48,10 @@ if __name__ == "__main__":
             if hit(xs) is not None:
                 pnt = position(r, xs[0].t)
                 normal = normal_at(xs[0].object, pnt)
-                eye = - r.direction
+                eye = -r.direction
                 color = lighting(xs[0].object.material, light, pnt, eye, normal)
                 write_pixel(canvas, x, y, color)
-            
+
     end = time.time()
     print("Finished render.")
     print(str(round(end - start, 2)) + "s")

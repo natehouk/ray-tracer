@@ -1,12 +1,14 @@
 from math import sqrt
-from tuple import point, color, point_light, magnitude, normalize, dot
-from sphere import sphere, intersections, prepare_computations, hit
-from shape import intersect
-from matrix import scaling
+
 from material import lighting
+from matrix import scaling
 from ray import ray
+from shape import intersect
+from sphere import hit, intersections, prepare_computations, sphere
+from tuple import color, dot, magnitude, normalize, point, point_light
 
 LIMIT = 4
+
 
 def default_world():
     w = world()
@@ -34,14 +36,22 @@ def intersect_world(world, ray):
     return s
 
 
-def shade_hit(world, comps, remaining = LIMIT):
+def shade_hit(world, comps, remaining=LIMIT):
     shadowed = is_shadowed(world, comps.over_point)
-    surface = lighting(comps.object.material, comps.object, world.light, comps.over_point, comps.eyev, comps.normalv, shadowed)
+    surface = lighting(
+        comps.object.material,
+        comps.object,
+        world.light,
+        comps.over_point,
+        comps.eyev,
+        comps.normalv,
+        shadowed,
+    )
     reflected = reflected_color(world, comps, remaining)
     return surface + reflected
 
 
-def color_at(world, ray, remaining = LIMIT):
+def color_at(world, ray, remaining=LIMIT):
     xs = intersect_world(world, ray)
     if len(xs) == 0:
         return color(0, 0, 0)
@@ -67,7 +77,8 @@ def is_shadowed(world, point):
     else:
         return False
 
-def reflected_color(world, comps, remaining = LIMIT):
+
+def reflected_color(world, comps, remaining=LIMIT):
     if remaining <= 0:
         return color(0, 0, 0)
     else:
@@ -80,6 +91,7 @@ def reflected_color(world, comps, remaining = LIMIT):
 
             return c * comps.object.material.reflective
 
+
 def refracted_color(world, comps, remaining):
     n_ratio = comps.n1 / comps.n2
     cos_i = dot(comps.eyev, comps.normalv)
@@ -90,11 +102,14 @@ def refracted_color(world, comps, remaining):
         cos_t = sqrt(1.0 - sin2_t)
         direction = comps.normalv * (n_ratio * cos_i - cos_t) - comps.eyev * n_ratio
         refract_ray = ray(comps.under_point, direction)
-        c = color_at(world, refract_ray, remaining - 1) * comps.object.material.transparency
+        c = (
+            color_at(world, refract_ray, remaining - 1)
+            * comps.object.material.transparency
+        )
         return c
 
-class world:
 
+class world:
     def __init__(self):
         self.objects = []
         self.light = None

@@ -1,5 +1,7 @@
 import time
-from tuple import color, point, vector, normalize, projectile, environment, tick
+
+from tuple import color, environment, normalize, point, projectile, tick, vector
+
 
 def write_pixel(c, width, height, color):
     if width >= 0 and width < c.width and height >= 0 and height < c.height:
@@ -7,23 +9,28 @@ def write_pixel(c, width, height, color):
         return
     else:
         return Exception
-    
+
+
 def pixel_at(c, width, height):
     if width >= 0 and width < c.width and height >= 0 and height < c.height:
         return c.canvas[width][height]
     else:
         return Exception
 
+
 def canvas_to_ppm(c):
     return ppm(c)
 
+
 def clamp(c):
-    return color(int(max(min(c.red * 255, 255), 0) + .5),
-                 int(max(min(c.green * 255, 255), 0) + .5),
-                 int(max(min(c.blue * 255, 255), 0) + .5))
+    return color(
+        int(max(min(c.red * 255, 255), 0) + 0.5),
+        int(max(min(c.green * 255, 255), 0) + 0.5),
+        int(max(min(c.blue * 255, 255), 0) + 0.5),
+    )
+
 
 class canvas:
-
     def __init__(self, width, height):
         self.width = width
         self.height = height
@@ -33,7 +40,7 @@ class canvas:
         body = ""
         for i in range(0, self.height):
             cur = ""
-            for j in range (0, self.width):
+            for j in range(0, self.width):
                 clamped = clamp(self.canvas[j][i])
                 cur += str(clamped.red)
                 if len(cur) >= 67 and j != self.width - 1:
@@ -61,8 +68,8 @@ class canvas:
                 body += "\n"
         return body
 
-class ppm:
 
+class ppm:
     def __init__(self, c):
         self.header = "P3\n" + str(c.width) + " " + str(c.height) + "\n255"
         self.canvas = c
@@ -75,7 +82,7 @@ class ppm:
         f = open(filename, "w")
         f.write(str(self))
         f.close()
-    
+
 
 if __name__ == "__main__":
     start = point(0, 1, 0)
@@ -94,11 +101,11 @@ if __name__ == "__main__":
     print("Starting render...")
 
     x = 0
-    while(x < 300):
+    while x < 300:
         write_pixel(c, p.position.x, c.height - p.position.y, red)
         p = tick(e, p)
         x += 1
-    
+
     end = time.time()
     print("Finished render.")
     print(str(round(end - start, 2)) + "s")

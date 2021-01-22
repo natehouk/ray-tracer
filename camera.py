@@ -1,14 +1,15 @@
 from math import tan
+
 from matrix import identity_matrix
 
-class camera:
 
+class camera:
     def __init__(self, hsize, vsize, field_of_view):
         self.hsize = hsize
         self.vsize = vsize
         self.field_of_view = field_of_view
         self.transform = identity_matrix()
-        
+
         # calculate pixel size
         half_view = tan(field_of_view / 2)
         aspect = hsize / vsize
