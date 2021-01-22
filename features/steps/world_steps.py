@@ -3,6 +3,7 @@ from math import sqrt
 from behave import *
 
 from matrix import scaling, translation
+from pattern import test_pattern
 from plane import plane
 from ray import ray
 from sphere import intersection, intersections, sphere
@@ -18,7 +19,6 @@ from world import (
     shade_hit,
     world,
 )
-from pattern import test_pattern
 
 
 @given(u"w ← world()")
@@ -381,38 +381,84 @@ def step_impl(context):
     )
 
 
-@given(u'A ← the first object in w')
+@given(u"A ← the first object in w")
 def step_impl(context):
     context.A = context.w.objects[0]
 
 
-@given(u'A has')
+@given(u"A has")
 def step_impl(context):
     context.A.material.ambient = 1.0
     context.A.material.pattern = test_pattern()
 
 
-@given(u'B ← the second object in w')
+@given(u"B ← the second object in w")
 def step_impl(context):
     context.B = context.w.objects[1]
 
 
-@given(u'B has')
+@given(u"B has")
 def step_impl(context):
     context.B.material.transparency = 1.0
     context.B.material.refractive_index = 1.5
 
 
-@given(u'r ← ray(point(0, 0, 0.1), vector(0, 1, 0))')
+@given(u"r ← ray(point(0, 0, 0.1), vector(0, 1, 0))")
 def step_impl(context):
     context.r = ray(point(0, 0, 0.1), vector(0, 1, 0))
 
 
-@given(u'xs ← intersections(-0.9899:A, -0.4899:B, 0.4899:B, 0.9899:A)')
+@given(u"xs ← intersections(-0.9899:A, -0.4899:B, 0.4899:B, 0.9899:A)")
 def step_impl(context):
-    context.xs = intersections(intersection(-0.9899, context.A), intersection(-0.4899, context.B), intersection(0.4899, context.B), intersection(0.9899, context.A))
+    context.xs = intersections(
+        intersection(-0.9899, context.A),
+        intersection(-0.4899, context.B),
+        intersection(0.4899, context.B),
+        intersection(0.9899, context.A),
+    )
 
 
-@then(u'c = color(0, 0.99888, 0.04725)')
+@then(u"c = color(0, 0.99888, 0.04725)")
 def step_impl(context):
     assert context.c == color(0, 0.99888, 0.04725)
+
+
+@given(u"floor ← plane() with")
+def step_impl(context):
+    context.floor = plane()
+    context.floor.transform = translation(0, -1, 0)
+    context.floor.material.transparency = 0.5
+    context.floor.material.refractive_index = 1.5
+
+
+@given(u"floor is added to w")
+def step_impl(context):
+    context.w.objects.append(context.floor)
+
+
+@given(u"ball ← sphere() with")
+def step_impl(context):
+    context.ball = sphere()
+    context.ball.material.color = color(1, 0, 0)
+    context.ball.material.ambient = 0.5
+    context.ball.transform = translation(0, -3.5, -0.5)
+
+
+@given(u"ball is added to w")
+def step_impl(context):
+    context.w.objects.append(context.ball)
+
+
+@given(u"xs ← intersections(√2:floor)")
+def step_impl(context):
+    context.xs = intersections(intersection(sqrt(2), context.floor))
+
+
+@when(u"color ← shade_hit(w, comps, 5)")
+def step_impl(context):
+    context.color = shade_hit(context.w, context.comps, 5)
+
+
+@then(u"color = color(0.93642, 0.68642, 0.68642)")
+def step_impl(context):
+    assert context.color == color(0.93642, 0.68642, 0.68642)

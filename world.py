@@ -48,7 +48,8 @@ def shade_hit(world, comps, remaining=LIMIT):
         shadowed,
     )
     reflected = reflected_color(world, comps, remaining)
-    return surface + reflected
+    refracted = refracted_color(world, comps, remaining)
+    return surface + reflected + refracted
 
 
 def color_at(world, ray, remaining=LIMIT):
@@ -93,20 +94,20 @@ def reflected_color(world, comps, remaining=LIMIT):
 
 
 def refracted_color(world, comps, remaining):
-    n_ratio = comps.n1 / comps.n2
-    cos_i = dot(comps.eyev, comps.normalv)
-    sin2_t = n_ratio ** 2 * (1 - cos_i ** 2)
-    if comps.object.material.transparency == 0 or remaining <= 0 or sin2_t > 1:
+    if comps.object.material.transparency == 0 or remaining <= 0:
         return color(0, 0, 0)
     else:
-        cos_t = sqrt(1.0 - sin2_t)
-        direction = comps.normalv * (n_ratio * cos_i - cos_t) - comps.eyev * n_ratio
-        refract_ray = ray(comps.under_point, direction)
-        c = (
-            color_at(world, refract_ray, remaining - 1)
-            * comps.object.material.transparency
-        )
-        return c
+        n_ratio = comps.n1 / comps.n2
+        cos_i = dot(comps.eyev, comps.normalv)
+        sin2_t = n_ratio ** 2 * (1 - cos_i ** 2)
+        if sin2_t > 1:
+            return color(0, 0, 0)
+        else:
+            cos_t = sqrt(1.0 - sin2_t)
+            direction = comps.normalv * (n_ratio * cos_i - cos_t) - comps.eyev * n_ratio
+            refract_ray = ray(comps.under_point, direction)
+            c = color_at(world, refract_ray, remaining - 1) * comps.object.material.transparency
+            return c
 
 
 class world:

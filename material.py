@@ -2,9 +2,9 @@ from pattern import pattern_at_shape
 from tuple import color, dot, normalize, reflect
 
 
-def lighting(material, object, light, point, eyev, normalv, in_shawdow=False):
+def lighting(material, obj, light, point, eyev, normalv, in_shawdow=False):
     if material.pattern is not None:
-        c = pattern_at_shape(material.pattern, object, point)
+        c = pattern_at_shape(material.pattern, obj, point)
     else:
         c = material.color
     effective_color = c * light.intensity
