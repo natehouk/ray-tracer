@@ -2,7 +2,7 @@ from behave import *
 from math import sqrt
 from world import world, default_world, intersect_world, shade_hit, color_at, is_shadowed, reflected_color, LIMIT
 from tuple import point, vector, color, point_light
-from sphere import sphere, intersection
+from sphere import sphere, intersection, intersections, refracted_color
 from matrix import scaling, translation
 from ray import ray
 from plane import plane
@@ -329,3 +329,24 @@ def step_impl(context):
 @when(u'color ← reflected_color(w, comps, 0)')
 def step_impl(context):
     context.color = reflected_color(context.w, context.comps, 0)
+
+
+@given(u'xs ← intersections(4:shape, 6:shape)')
+def step_impl(context):
+    context.xs = intersections(intersection(4, context.shape), intersection(6, context.shape))
+
+
+@when(u'c ← refracted_color(w, comps, 5)')
+def step_impl(context):
+    context.c = refracted_color(context.w, context.comps, 5)
+
+
+@given(u'shape has')
+def step_impl(context):
+    context.shape.material.transparency = 1.0
+    context.shape.material.refractive_index = 1.5
+
+
+@when(u'c ← refracted_color(w, comps, 0)')
+def step_impl(context):
+    context.c = refracted_color(context.w, context.comps, 0)
