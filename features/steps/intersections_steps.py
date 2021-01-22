@@ -123,29 +123,30 @@ def step_impl(context):
     assert context.comps.point.z > context.comps.over_point.z
 
 
-# @given(u'shape ← glass_sphere() with')
-# def step_impl(context):
-#     raise NotImplementedError(u'STEP: Given shape ← glass_sphere() with')
+@given(u'shape ← glass_sphere() with')
+def step_impl(context):
+    context.shape = glass_sphere()
+    context.shape.transform = translation(0, 0, 1)
 
 
-# @given(u'xs ← intersections(i)')
-# def step_impl(context):
-#     raise NotImplementedError(u'STEP: Given xs ← intersections(i)')
+@given(u'xs ← intersections(i)')
+def step_impl(context):
+    context.xs = intersections(context.i)
 
 
-# @when(u'comps ← prepare_computations(i, r, xs)')
-# def step_impl(context):
-#     raise NotImplementedError(u'STEP: When comps ← prepare_computations(i, r, xs)')
+@when(u'comps ← prepare_computations(i, r, xs)')
+def step_impl(context):
+    context.comps = prepare_computations(context.i, context.r, context.xs)
 
 
-# @then(u'comps.under_point.z > EPSILON/2')
-# def step_impl(context):
-#     raise NotImplementedError(u'STEP: Then comps.under_point.z > EPSILON/2')
+@then(u'comps.under_point.z > EPSILON/2')
+def step_impl(context):
+    assert context.comps.under_point.z > EPSILON/2
 
 
-# @then(u'comps.point.z < comps.under_point.z')
-# def step_impl(context):
-#     raise NotImplementedError(u'STEP: Then comps.point.z < comps.under_point.z')
+@then(u'comps.point.z < comps.under_point.z')
+def step_impl(context):
+    assert context.comps.point.z < context.comps.under_point.z
 
 
 @given(u'i1 ← intersection(1, s)')

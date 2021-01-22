@@ -38,6 +38,7 @@ def prepare_computations(intersection, ray, xs = None):
     else:
         c.inside = False
     c.over_point = c.point + c.normalv * EPSILON
+    c.under_point = c.point - c.normalv * EPSILON
     c.reflectv = reflect(ray.direction, c.normalv)
     containers = []
     if xs:
