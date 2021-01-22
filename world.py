@@ -106,7 +106,10 @@ def refracted_color(world, comps, remaining):
             cos_t = sqrt(1.0 - sin2_t)
             direction = comps.normalv * (n_ratio * cos_i - cos_t) - comps.eyev * n_ratio
             refract_ray = ray(comps.under_point, direction)
-            c = color_at(world, refract_ray, remaining - 1) * comps.object.material.transparency
+            c = (
+                color_at(world, refract_ray, remaining - 1)
+                * comps.object.material.transparency
+            )
             return c
 
 
