@@ -65,7 +65,7 @@ def color_at(world, ray, remaining=LIMIT):
     else:
         for i in xs:
             if i.t > 0:
-                comps = prepare_computations(i, ray)
+                comps = prepare_computations(i, ray, xs)
                 return shade_hit(world, comps, remaining)
     return color(0, 0, 0)
 
