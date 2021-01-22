@@ -18,6 +18,7 @@ from world import (
     shade_hit,
     world,
 )
+from pattern import test_pattern
 
 
 @given(u"w ← world()")
@@ -378,3 +379,40 @@ def step_impl(context):
         intersection(-sqrt(2) / 2, context.shape),
         intersection(sqrt(2) / 2, context.shape),
     )
+
+
+@given(u'A ← the first object in w')
+def step_impl(context):
+    context.A = context.w.objects[0]
+
+
+@given(u'A has')
+def step_impl(context):
+    context.A.material.ambient = 1.0
+    context.A.material.pattern = test_pattern()
+
+
+@given(u'B ← the second object in w')
+def step_impl(context):
+    context.B = context.w.objects[1]
+
+
+@given(u'B has')
+def step_impl(context):
+    context.B.material.transparency = 1.0
+    context.B.material.refractive_index = 1.5
+
+
+@given(u'r ← ray(point(0, 0, 0.1), vector(0, 1, 0))')
+def step_impl(context):
+    context.r = ray(point(0, 0, 0.1), vector(0, 1, 0))
+
+
+@given(u'xs ← intersections(-0.9899:A, -0.4899:B, 0.4899:B, 0.9899:A)')
+def step_impl(context):
+    context.xs = intersections(intersection(-0.9899, context.A), intersection(-0.4899, context.B), intersection(0.4899, context.B), intersection(0.9899, context.A))
+
+
+@then(u'c = color(0, 0.99888, 0.04725)')
+def step_impl(context):
+    assert context.c == color(0, 0.99888, 0.04725)
