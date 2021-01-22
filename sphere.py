@@ -61,13 +61,6 @@ def prepare_computations(intersection, ray, xs = None):
     return c
 
 
-def refracted_color(world, comps, remaining):
-    if comps.object.material.transparency == 0 or remaining <= 0:
-        return color(0, 0, 0)
-    else:
-        return color(1, 1, 1)
-
-
 def glass_sphere():
     s = sphere()
     s.material.transparency = 1.0

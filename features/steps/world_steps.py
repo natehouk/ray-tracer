@@ -1,8 +1,8 @@
 from behave import *
 from math import sqrt
-from world import world, default_world, intersect_world, shade_hit, color_at, is_shadowed, reflected_color, LIMIT
+from world import world, default_world, intersect_world, shade_hit, color_at, is_shadowed, reflected_color, refracted_color, LIMIT
 from tuple import point, vector, color, point_light
-from sphere import sphere, intersection, intersections, refracted_color
+from sphere import sphere, intersection, intersections
 from matrix import scaling, translation
 from ray import ray
 from plane import plane
@@ -350,3 +350,13 @@ def step_impl(context):
 @when(u'c ← refracted_color(w, comps, 0)')
 def step_impl(context):
     context.c = refracted_color(context.w, context.comps, 0)
+
+
+@given(u'r ← ray(point(0, 0, √2/2), vector(0, 1, 0))')
+def step_impl(context):
+    context.r = ray(point(0, 0, sqrt(2)/2), vector(0, 1, 0))
+
+
+@given(u'xs ← intersections(-√2/2:shape, √2/2:shape)')
+def step_impl(context):
+    context.xs = intersections(intersection(-sqrt(2)/2, context.shape), intersection(sqrt(2)/2, context.shape))
