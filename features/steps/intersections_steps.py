@@ -13,7 +13,8 @@ from sphere import (
     prepare_computations,
     sphere,
 )
-from tuple import EPSILON, point, vector
+from world import schlick
+from tuple import EPSILON, point, vector, equals
 
 
 @when(u"i ← intersection(3.5, s)")
@@ -367,76 +368,61 @@ def step_impl(context):
     assert context.comps.n2 == 1.0
 
 
-# @given(u'shape ← glass_sphere()')
-# def step_impl(context):
-#     raise NotImplementedError(u'STEP: Given shape ← glass_sphere()')
+@given(u'shape ← glass_sphere()')
+def step_impl(context):
+    context.shape = glass_sphere()
 
 
-# @given(u'r ← ray(point(0, 0, √2/2), vector(0, 1, 0))')
-# def step_impl(context):
-#     raise NotImplementedError(u'STEP: Given r ← ray(point(0, 0, √2/2), vector(0, 1, 0))')
+@when(u'reflectance ← schlick(comps)')
+def step_impl(context):
+    context.reflectance = schlick(context.comps)
 
 
-# @given(u'xs ← intersections(-√2/2:shape, √2/2:shape)')
-# def step_impl(context):
-#     raise NotImplementedError(u'STEP: Given xs ← intersections(-√2/2:shape, √2/2:shape)')
+@then(u'reflectance = 1.0')
+def step_impl(context):
+    assert context.reflectance == 1.0
 
 
-# @when(u'reflectance ← schlick(comps)')
-# def step_impl(context):
-#     raise NotImplementedError(u'STEP: When reflectance ← schlick(comps)')
+@given(u'xs ← intersections(-1:shape, 1:shape)')
+def step_impl(context):
+    context.xs = intersections(intersection(-1, context.shape), intersection(1, context.shape))
 
 
-# @then(u'reflectance = 1.0')
-# def step_impl(context):
-#     raise NotImplementedError(u'STEP: Then reflectance = 1.0')
+@then(u'reflectance = 0.04')
+def step_impl(context):
+    assert equals(context.reflectance, 0.04)
 
 
-# @given(u'r ← ray(point(0, 0, 0), vector(0, 1, 0))')
-# def step_impl(context):
-#     raise NotImplementedError(u'STEP: Given r ← ray(point(0, 0, 0), vector(0, 1, 0))')
+@given(u'r ← ray(point(0, 0.99, -2), vector(0, 0, 1))')
+def step_impl(context):
+    context.r = ray(point(0, 0.99, -2), vector(0, 0, 1))
 
 
-# @given(u'xs ← intersections(-1:shape, 1:shape)')
-# def step_impl(context):
-#     raise NotImplementedError(u'STEP: Given xs ← intersections(-1:shape, 1:shape)')
+@given(u'xs ← intersections(1.8589:shape)')
+def step_impl(context):
+    context.xs = intersections(intersection(1.8589, context.shape))
 
 
-# @then(u'reflectance = 0.04')
-# def step_impl(context):
-#     raise NotImplementedError(u'STEP: Then reflectance = 0.04')
-
-
-# @given(u'r ← ray(point(0, 0.99, -2), vector(0, 0, 1))')
-# def step_impl(context):
-#     raise NotImplementedError(u'STEP: Given r ← ray(point(0, 0.99, -2), vector(0, 0, 1))')
-
-
-# @given(u'xs ← intersections(1.8589:shape)')
-# def step_impl(context):
-#     raise NotImplementedError(u'STEP: Given xs ← intersections(1.8589:shape)')
-
-
-# @then(u'reflectance = 0.48873')
-# def step_impl(context):
-#     raise NotImplementedError(u'STEP: Then reflectance = 0.48873')
+@then(u'reflectance = 0.48873')
+def step_impl(context):
+    assert equals(context.reflectance, 0.48873)
 
 
 # @given(u's ← triangle(point(0, 1, 0), point(-1, 0, 0), point(1, 0, 0))')
 # def step_impl(context):
-#     raise NotImplementedError(u'STEP: Given s ← triangle(point(0, 1, 0), point(-1, 0, 0), point(1, 0, 0))')
+#     context.s = triangle(point(0, 1, 0), point(-1, 0, 0), point(1, 0, 0))
 
 
 # @when(u'i ← intersection_with_uv(3.5, s, 0.2, 0.4)')
 # def step_impl(context):
-#     raise NotImplementedError(u'STEP: When i ← intersection_with_uv(3.5, s, 0.2, 0.4)')
+#     context.i = intersection_with_uv(3.5, context.s, 0.2, 0.4)
 
 
 # @then(u'i.u = 0.2')
 # def step_impl(context):
-#     raise NotImplementedError(u'STEP: Then i.u = 0.2')
+#     assert context.i.u == 0.2
 
 
 # @then(u'i.v = 0.4')
 # def step_impl(context):
-#     raise NotImplementedError(u'STEP: Then i.v = 0.4')
+#     assert context.i.v == 0.4

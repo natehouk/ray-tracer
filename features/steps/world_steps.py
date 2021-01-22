@@ -462,3 +462,27 @@ def step_impl(context):
 @then(u"color = color(0.93642, 0.68642, 0.68642)")
 def step_impl(context):
     assert context.color == color(0.93642, 0.68642, 0.68642)
+
+
+@given(u"floor2 ← plane() with")
+def step_impl(context):
+    context.floor2 = plane()
+    context.floor2.transform = translation(0, -1, 0)
+    context.floor2.material.reflective = 0.5
+    context.floor2.material.transparency = 0.5
+    context.floor2.material.refractive_index = 1.5
+
+
+@given(u"floor2 is added to w")
+def step_impl(context):
+    context.w.objects.append(context.floor2)
+
+
+@given(u"xs ← intersections(√2:floor2)")
+def step_impl(context):
+    context.xs = intersections(intersection(sqrt(2), context.floor2))
+
+
+@then(u'color = color(0.93391, 0.69643, 0.69243)')
+def step_impl(context):
+    assert context.color == color(0.93391, 0.69643, 0.69243)

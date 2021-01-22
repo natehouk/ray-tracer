@@ -28,7 +28,7 @@ def intersections(*argv):
     return i
 
 
-def prepare_computations(intersection, ray, xs=None):
+def prepare_computations(intersection, ray, xs = None):
     c = comps()
     c.t = intersection.t
     c.object = intersection.object
