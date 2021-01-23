@@ -98,7 +98,7 @@ def main():
 
     start = time.time()
     print("Start writing file...")
-    canvas_to_ppm(canvas).write_file("images/reflections.ppm")
+    canvas_to_ppm(canvas).write_file("images/cubes.ppm")
     end = time.time()
     print("Finished writing file.")
     print(str(round(end - start, 2)) + "s")

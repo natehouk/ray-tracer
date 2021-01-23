@@ -94,8 +94,6 @@ class sphere(shape):
         t2 = (-b + sqrt(descriminant)) / (2 * a)
         t = [t1, t2]
         t = sorted(t)
-
-        print(str(t[0]) + " " + str(t[1]))
         assert t[0] <= t[1]
 
         return [intersection(t[0], s), intersection(t[1], s)]
