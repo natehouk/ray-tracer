@@ -4,45 +4,9 @@ from math import sqrt
 from canvas import canvas, canvas_to_ppm, write_pixel
 from matrix import inverse, transpose
 from ray import position, ray
-from shape import intersect, normal_at, shape, intersection, hit
+from shape import hit, intersect, intersection, normal_at, shape
 from tuple import color, dot, normalize, point, reflect
 from util import EPSILON
-
-
-def prepare_computations(intersection, ray, xs=None):
-    c = comps()
-    c.t = intersection.t
-    c.object = intersection.object
-    c.point = position(ray, c.t)
-    c.eyev = -ray.direction
-    c.normalv = normal_at(c.object, c.point)
-    if dot(c.normalv, c.eyev) < 0:
-        c.inside = True
-        c.normalv = -c.normalv
-    else:
-        c.inside = False
-    c.over_point = c.point + c.normalv * EPSILON
-    c.under_point = c.point - c.normalv * EPSILON
-    c.reflectv = reflect(ray.direction, c.normalv)
-    containers = []
-    if xs:
-        for i in xs:
-            if i == intersection:
-                if len(containers) == 0:
-                    c.n1 = 1.0
-                else:
-                    c.n1 = containers[-1].material.refractive_index
-            if i.object in containers:
-                containers.remove(i.object)
-            else:
-                containers.append(i.object)
-            if i == intersection:
-                if len(containers) == 0:
-                    c.n2 = 1.0
-                else:
-                    c.n2 = containers[-1].material.refractive_index
-                break
-    return c
 
 
 def glass_sphere():
@@ -84,33 +48,6 @@ class sphere(shape):
         world_normal = transpose(inverse(sphere.transform)) * object_normal
         world_normal.w = 0
         return normalize(world_normal)
-
-
-class comps:
-    def __init__(self):
-        self.t = None
-        self.object = None
-        self.point = None
-        self.eyev = None
-        self.normalv = None
-        self.inside = None
-
-    def __str__(self):
-        return (
-            "<"
-            + str(self.t)
-            + ", "
-            + str(self.object)
-            + ", "
-            + str(self.point)
-            + ", "
-            + str(self.eyev)
-            + ", "
-            + str(self.normalv)
-            + ", "
-            + str(self.inside)
-            + ">"
-        )
 
 
 if __name__ == "__main__":

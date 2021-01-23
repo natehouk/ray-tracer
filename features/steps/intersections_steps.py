@@ -5,12 +5,8 @@ from behave import *
 from matrix import scaling, translation
 from plane import plane
 from ray import ray
-from sphere import (
-    glass_sphere,
-    prepare_computations,
-    sphere,
-)
-from shape import intersection, intersections, hit
+from shape import hit, intersection, intersections, prepare_computations
+from sphere import glass_sphere, sphere
 from tuple import point, vector
 from util import EPSILON, equals
 from world import schlick

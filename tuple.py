@@ -1,6 +1,5 @@
 from math import isnan, sqrt
 
-
 from util import equals
 
 

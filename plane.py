@@ -1,5 +1,5 @@
 from matrix import identity_matrix
-from shape import shape, intersection
+from shape import intersection, shape
 from tuple import vector
 from util import EPSILON
 

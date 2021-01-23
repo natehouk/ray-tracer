@@ -4,7 +4,7 @@ from math import tan
 from canvas import canvas, write_pixel
 from matrix import identity_matrix, inverse
 from ray import ray
-from tuple import point, normalize
+from tuple import normalize, point
 from world import color_at
 
 
