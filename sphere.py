@@ -4,19 +4,9 @@ from math import sqrt
 from canvas import canvas, canvas_to_ppm, write_pixel
 from matrix import inverse, transpose
 from ray import position, ray
-from shape import intersect, normal_at, shape, intersection
+from shape import intersect, normal_at, shape, intersection, hit
 from tuple import color, dot, normalize, point, reflect
 from util import EPSILON
-
-
-def hit(intersections):
-    min = float("inf")
-    h = None
-    for i in intersections:
-        if i.t >= 0 and i.t <= min:
-            min = i.t
-            h = i
-    return h
 
 
 def prepare_computations(intersection, ray, xs=None):

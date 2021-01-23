@@ -4,7 +4,8 @@ from canvas import canvas, canvas_to_ppm, write_pixel
 from material import lighting, material
 from matrix import scaling, shearing
 from ray import position, ray
-from sphere import hit, intersect, normal_at, sphere
+from sphere import intersect, normal_at, sphere
+from shape import hit
 from tuple import color, normalize, point, point_light
 
 if __name__ == "__main__":

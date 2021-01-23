@@ -7,11 +7,10 @@ from plane import plane
 from ray import ray
 from sphere import (
     glass_sphere,
-    hit,
     prepare_computations,
     sphere,
 )
-from shape import intersection, intersections
+from shape import intersection, intersections, hit
 from tuple import point, vector
 from util import EPSILON, equals
 from world import schlick

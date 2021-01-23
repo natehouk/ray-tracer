@@ -62,3 +62,13 @@ def intersections(*argv):
         i.append(arg)
     i = sorted(i, key=lambda x: x.t)
     return i
+
+
+def hit(intersections):
+    min = float("inf")
+    h = None
+    for i in intersections:
+        if i.t >= 0 and i.t <= min:
+            min = i.t
+            h = i
+    return h

@@ -3,8 +3,8 @@ from math import sqrt
 from material import lighting
 from matrix import scaling
 from ray import ray
-from shape import intersect
-from sphere import hit, prepare_computations, sphere
+from shape import intersect, hit
+from sphere import prepare_computations, sphere
 from tuple import color, dot, magnitude, normalize, point, point_light
 from util import LIMIT
 
