@@ -8,8 +8,8 @@ from util import EPSILON
 class cylinder(shape):
     def __init__(self):
         super().__init__()
-        self.minimum = -float('inf')
-        self.maximum = float('inf')
+        self.minimum = -float("inf")
+        self.maximum = float("inf")
         self.closed = False
 
     def local_intersect(self, cylinder, ray):
@@ -57,7 +57,7 @@ class cylinder(shape):
         x = ray.origin.x + t * ray.direction.x
         z = ray.origin.z + t * ray.direction.z
 
-        return x ** 2 + z **2 <= 1
+        return x ** 2 + z ** 2 <= 1
 
     def intersect_caps(self, cyl, ray, xs):
         if cyl.closed is not True or abs(ray.direction.y) < EPSILON:
