@@ -1,11 +1,7 @@
 from math import isnan, sqrt
 
 
-from util import EPSILON
-
-
-def equals(a, b):
-    return abs(a - b) < EPSILON or (isnan(a) and isnan(b))
+from util import equals
 
 
 def is_point(p):

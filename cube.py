@@ -1,5 +1,4 @@
-from shape import shape
-from sphere import intersection
+from shape import shape, intersection
 from tuple import vector
 from util import EPSILON
 

@@ -2,7 +2,8 @@ from behave import *
 
 from cylinder import cylinder
 from ray import ray
-from tuple import equals, normalize, point, vector
+from tuple import normalize, point, vector
+from util import equals
 
 
 @given(u"cyl ← cylinder()")

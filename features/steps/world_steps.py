@@ -6,10 +6,10 @@ from matrix import scaling, translation
 from pattern import test_pattern
 from plane import plane
 from ray import ray
-from sphere import intersection, intersections, sphere
+from sphere import sphere
+from shape import intersection, intersections
 from tuple import color, point, point_light, vector
 from world import (
-    LIMIT,
     color_at,
     default_world,
     intersect_world,
@@ -19,6 +19,7 @@ from world import (
     shade_hit,
     world,
 )
+from util import LIMIT
 
 
 @given(u"w ← world()")

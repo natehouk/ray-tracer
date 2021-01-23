@@ -4,7 +4,8 @@ from math import cos, isnan, pi, sin
 
 from canvas import canvas, canvas_to_ppm, write_pixel
 from ray import ray
-from tuple import color, cross, equals, normalize, point, tuple
+from tuple import color, cross, normalize, point, tuple
+from util import equals
 
 
 def transpose(m):

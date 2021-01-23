@@ -48,3 +48,17 @@ class shape:
 class test_shape(shape):
     def __init__(self):
         super().__init__()
+
+
+class intersection:
+    def __init__(self, t, o):
+        self.t = t
+        self.object = o
+
+
+def intersections(*argv):
+    i = []
+    for arg in argv:
+        i.append(arg)
+    i = sorted(i, key=lambda x: x.t)
+    return i

@@ -8,13 +8,12 @@ from ray import ray
 from sphere import (
     glass_sphere,
     hit,
-    intersection,
-    intersections,
     prepare_computations,
     sphere,
 )
-from tuple import equals, point, vector
-from util import EPSILON
+from shape import intersection, intersections
+from tuple import point, vector
+from util import EPSILON, equals
 from world import schlick
 
 

@@ -5,7 +5,8 @@ from behave import *
 from camera import camera, ray_for_pixel, render
 from canvas import pixel_at
 from matrix import identity_matrix, rotation_y, translation, view_transform
-from tuple import color, equals, point, vector
+from tuple import color, point, vector
+from util import equals
 
 
 @given(u"hsize ← 160")

@@ -1,13 +1,10 @@
-import random
 import time
-from copy import deepcopy
-from math import pi, sqrt
+from math import sqrt
 
 from canvas import canvas, canvas_to_ppm, write_pixel
-from material import material
-from matrix import identity_matrix, inverse, rotation_z, scaling, shearing, transpose
-from ray import position, ray, transform
-from shape import intersect, normal_at, shape
+from matrix import inverse, transpose
+from ray import position, ray
+from shape import intersect, normal_at, shape, intersection
 from tuple import color, dot, normalize, point, reflect
 from util import EPSILON
 
@@ -20,14 +17,6 @@ def hit(intersections):
             min = i.t
             h = i
     return h
-
-
-def intersections(*argv):
-    i = []
-    for arg in argv:
-        i.append(arg)
-    i = sorted(i, key=lambda x: x.t)
-    return i
 
 
 def prepare_computations(intersection, ray, xs=None):
@@ -105,12 +94,6 @@ class sphere(shape):
         world_normal = transpose(inverse(sphere.transform)) * object_normal
         world_normal.w = 0
         return normalize(world_normal)
-
-
-class intersection:
-    def __init__(self, t, o):
-        self.t = t
-        self.object = o
 
 
 class comps:

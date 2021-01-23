@@ -4,10 +4,9 @@ from material import lighting
 from matrix import scaling
 from ray import ray
 from shape import intersect
-from sphere import hit, intersections, prepare_computations, sphere
+from sphere import hit, prepare_computations, sphere
 from tuple import color, dot, magnitude, normalize, point, point_light
-
-LIMIT = 4
+from util import LIMIT
 
 
 def default_world():
