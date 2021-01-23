@@ -28,8 +28,8 @@ def main():
     floor.transform = scaling(0.75, 0.75, 0.75)
     floor.material.color = color(0.9, 0.9, 0.9)
     floor.material.specular = 0.1
-    floor.material.pattern = checkers_pattern(black, white)
-    floor.material.reflective = 0.6
+    floor.material.pattern = checkers_pattern(color(1, 0.8, 0.1), color(0.1, .1, 0.85))
+    floor.material.reflective = 0.1
     w.objects.append(floor)
 
     left_wall = plane()
@@ -37,10 +37,10 @@ def main():
         translation(0, 0, 5)
         * rotation_y(-pi / 4)
         * rotation_x(pi / 2)
-        * scaling(0.1, 0.1, 0.1)
+        * scaling(0.25, 0.25, 0.25)
     )
     left_wall.material.specular = 0.1
-    left_wall.material.pattern = checkers_pattern(black, white)
+    left_wall.material.pattern = stripe_pattern(black, white)
     w.objects.append(left_wall)
 
     right_wall = plane()
@@ -48,20 +48,20 @@ def main():
         translation(0, 0, 5)
         * rotation_y(pi / 4)
         * rotation_x(pi / 2)
-        * scaling(0.1, 0.1, 0.1)
+        * scaling(0.25, 0.25, 0.25)
     )
     right_wall.material.specular = 0.1
-    right_wall.material.pattern = checkers_pattern(black, white)
+    right_wall.material.pattern = stripe_pattern(black, white)
     w.objects.append(right_wall)
 
     middle = sphere()
     middle.transform = translation(-0.5, 1, 0.5)
     middle.material = material()
-    middle.material.color = color(0.1, .8, 0.05)
-    middle.material.diffuse = 0.1
-    middle.material.specular = 0.1
+    middle.material.color = color(0.1, .1, 0.85)
+    middle.material.diffuse = 0.7
+    middle.material.specular = 0.3
     middle.material.reflective = 0.9
-    middle.material.transparency = 0.1
+    middle.material.transparency = 0.15
     # middle.material.pattern = checkers_pattern(
     #     color(0.2, 0.5, 0.7), color(0.8, 0.8, 0.2)
     # )
@@ -71,10 +71,10 @@ def main():
     right.transform = translation(1.5, 0.5, -0.5) * scaling(0.5, 0.5, 0.5)
     right.material = material()
     right.material.color = color(0.1, 0.1, 0.1)
-    right.material.diffuse = 0.9
-    right.material.specular = 0.1
-    right.material.reflective = 0.5
-    middle.material.transparency = .95
+    right.material.diffuse = 0.7
+    right.material.specular = 0.3
+    right.material.reflective = .4
+    middle.material.transparency = 0
     right.material.pattern = ring_pattern(color(0.2, 0.5, 0.7), color(0.8, 0.8, 0.2))
     w.objects.append(right)
 
@@ -82,14 +82,14 @@ def main():
     left.transform = translation(-1.5, 0.33, -0.75) * scaling(0.33, 0.33, 0.33)
     left.material = material()
     left.material.color = color(1, 0.8, 0.1)
-    left.material.diffuse = 0.1
-    left.material.specular = 0.1
-    left.material.reflective = 0.9
-    left.material.transparency = 0.5
+    left.material.diffuse = 0.7
+    left.material.specular = 0.3
+    left.material.reflective = .4
+    left.material.transparency = 0.1
     left.material.pattern = gradient_pattern(color(0.7, 0.5, 0.7), color(0, 0.8, 0.2))
     w.objects.append(left)
 
-    cam = camera(800, 400, pi / 2)
+    cam = camera(1600, 800, pi / 2)
     cam.transform = view_transform(point(0, 1.5, -5), point(0, 1, 0), vector(0, 1, 0))
 
     canvas = render(cam, w)
