@@ -1,6 +1,6 @@
-from sphere import intersection
-from tuple import vector, EPSILON
 from shape import shape
+from sphere import intersection
+from tuple import EPSILON, vector
 
 
 class cube(shape):
@@ -22,16 +22,16 @@ class cube(shape):
         return [intersection(tmin, cube), intersection(tmax, cube)]
 
     def check_axis(self, origin, direction):
-        tmin_numerator = (-1 - origin)
-        tmax_numerator = (1 - origin)
+        tmin_numerator = -1 - origin
+        tmax_numerator = 1 - origin
 
         if abs(direction) >= EPSILON:
             tmin = tmin_numerator / direction
             tmax = tmax_numerator / direction
         else:
-            tmin = tmin_numerator * float('inf')
-            tmax = tmax_numerator * float('inf')
-        
+            tmin = tmin_numerator * float("inf")
+            tmax = tmax_numerator * float("inf")
+
         if tmin > tmax:
             tmin, tmax = tmax, tmin
 

@@ -36,7 +36,7 @@ def intersect_world(world, ray):
     return s
 
 
-def shade_hit(world, comps, remaining = LIMIT):
+def shade_hit(world, comps, remaining=LIMIT):
     shadowed = is_shadowed(world, comps.over_point)
     surface = lighting(
         comps.object.material,
@@ -118,6 +118,7 @@ def refracted_color(world, comps, remaining):
             )
             return c
 
+
 def schlick(comps):
     cos = dot(comps.eyev, comps.normalv)
     if comps.n1 > comps.n2:
@@ -127,7 +128,7 @@ def schlick(comps):
             return 1.0
         cos_t = sqrt(1.0 - sin2_t)
         cos = cos_t
-    
+
     r0 = ((comps.n1 - comps.n2) / (comps.n1 + comps.n2)) ** 2
     return r0 + (1 - r0) * (1 - cos) ** 5
 

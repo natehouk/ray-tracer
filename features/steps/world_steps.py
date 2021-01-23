@@ -489,6 +489,6 @@ def step_impl(context):
     context.xs = intersections(intersection(sqrt(2), context.floor2))
 
 
-@then(u'color = color(0.93391, 0.69643, 0.69243)')
+@then(u"color = color(0.93391, 0.69643, 0.69243)")
 def step_impl(context):
     assert context.color == color(0.93391, 0.69643, 0.69243)

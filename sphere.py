@@ -1,12 +1,12 @@
 import random
 import time
+from copy import deepcopy
 from math import pi, sqrt
 
 from canvas import canvas, canvas_to_ppm, write_pixel
 from material import material
 from matrix import identity_matrix, inverse, rotation_z, scaling, shearing, transpose
 from ray import position, ray, transform
-from copy import deepcopy
 from shape import intersect, normal_at, shape
 from tuple import EPSILON, color, dot, normalize, point, reflect
 
@@ -29,7 +29,7 @@ def intersections(*argv):
     return i
 
 
-def prepare_computations(intersection, ray, xs = None):
+def prepare_computations(intersection, ray, xs=None):
     c = comps()
     c.t = intersection.t
     c.object = intersection.object
@@ -77,7 +77,7 @@ class sphere(shape):
         super().__init__()
 
     def local_intersect(self, s, local_ray):
-        
+
         sphere_to_ray = local_ray.origin - point(0, 0, 0)
 
         a = dot(local_ray.direction, local_ray.direction)
@@ -95,7 +95,7 @@ class sphere(shape):
         t = [t1, t2]
         t = sorted(t)
 
-        print (str(t[0]) + " " + str(t[1]))
+        print(str(t[0]) + " " + str(t[1]))
         assert t[0] <= t[1]
 
         return [intersection(t[0], s), intersection(t[1], s)]
