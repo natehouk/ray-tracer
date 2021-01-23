@@ -132,12 +132,6 @@ def schlick(comps):
     return r0 + (1 - r0) * (1 - cos) ** 5
 
 
-class world:
-    def __init__(self):
-        self.objects = []
-        self.light = None
-
-
 def lighting(material, obj, light, point, eyev, normalv, in_shawdow=False):
     if material.pattern is not None:
         c = pattern_at_shape(material.pattern, obj, point)
@@ -164,3 +158,9 @@ def lighting(material, obj, light, point, eyev, normalv, in_shawdow=False):
         return ambient
     else:
         return ambient + diffuse + specular
+
+
+class world:
+    def __init__(self):
+        self.objects = []
+        self.light = None
