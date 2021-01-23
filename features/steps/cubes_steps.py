@@ -91,3 +91,78 @@ def step_impl(context):
 @given(u'r ← ray(point(2, 2, 0), vector(-1, 0, 0))')
 def step_impl(context):
     context.r = ray(point(2, 2, 0), vector(-1, 0, 0))
+
+
+@given(u'p ← point(1, 0.5, -0.8)')
+def step_impl(context):
+    context.p = point(1, 0.5, -0.8)
+
+
+@when(u'normal ← local_normal_at(c, p)')
+def step_impl(context):
+    context.normal = context.c.local_normal_at(context.c, context.p)
+
+
+@then(u'normal = vector(1, 0, 0)')
+def step_impl(context):
+    assert context.normal == vector(1, 0, 0)
+
+
+@given(u'p ← point(-1, -0.2, 0.9)')
+def step_impl(context):
+    context.p = point(-1, -0.2, 0.9)
+
+
+@then(u'normal = vector(-1, 0, 0)')
+def step_impl(context):
+    assert context.normal == vector(-1, 0, 0)
+
+
+@given(u'p ← point(-0.4, 1, -0.1)')
+def step_impl(context):
+    context.p = point(-0.4, 1, -0.1)
+
+
+@then(u'normal = vector(0, 1, 0)')
+def step_impl(context):
+    assert context.normal == vector(0, 1, 0)
+
+
+@given(u'p ← point(0.3, -1, -0.7)')
+def step_impl(context):
+    context.p = point(0.3, -1, -0.7)
+
+
+@then(u'normal = vector(0, -1, 0)')
+def step_impl(context):
+    assert context.normal == vector(0, -1, 0)
+
+
+@given(u'p ← point(-0.6, 0.3, 1)')
+def step_impl(context):
+    context.p = point(-0.6, 0.3, 1)
+
+
+@then(u'normal = vector(0, 0, 1)')
+def step_impl(context):
+    assert context.normal == vector(0, 0, 1)
+
+
+@given(u'p ← point(0.4, 0.4, -1)')
+def step_impl(context):
+    context.p = point(0.4, 0.4, -1)
+
+
+@then(u'normal = vector(0, 0, -1)')
+def step_impl(context):
+    assert context.normal == vector(0, 0, -1)
+
+
+@given(u'p ← point(1, 1, 1)')
+def step_impl(context):
+    context.p = point(1, 1, 1)
+
+
+@given(u'p ← point(-1, -1, -1)')
+def step_impl(context):
+    context.p = point(-1, -1, -1)

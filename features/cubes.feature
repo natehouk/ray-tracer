@@ -34,19 +34,19 @@ Scenario Outline: A ray misses a cube
     | point(2, 2, 0)   | vector(-1, 0, 0)               |
 
 
-# Scenario Outline: The normal on the surface of a cube
-#   Given c ← cube()
-#     And p ← <point>
-#   When normal ← local_normal_at(c, p)
-#   Then normal = <normal>
+Scenario Outline: The normal on the surface of a cube
+  Given c ← cube()
+    And p ← <point>
+  When normal ← local_normal_at(c, p)
+  Then normal = <normal>
 
-#   Examples:
-#     | point                | normal           |
-#     | point(1, 0.5, -0.8)  | vector(1, 0, 0)  |
-#     | point(-1, -0.2, 0.9) | vector(-1, 0, 0) |
-#     | point(-0.4, 1, -0.1) | vector(0, 1, 0)  |
-#     | point(0.3, -1, -0.7) | vector(0, -1, 0) |
-#     | point(-0.6, 0.3, 1)  | vector(0, 0, 1)  |
-#     | point(0.4, 0.4, -1)  | vector(0, 0, -1) |
-#     | point(1, 1, 1)       | vector(1, 0, 0)  |
-#     | point(-1, -1, -1)    | vector(-1, 0, 0) |
+  Examples:
+    | point                | normal           |
+    | point(1, 0.5, -0.8)  | vector(1, 0, 0)  |
+    | point(-1, -0.2, 0.9) | vector(-1, 0, 0) |
+    | point(-0.4, 1, -0.1) | vector(0, 1, 0)  |
+    | point(0.3, -1, -0.7) | vector(0, -1, 0) |
+    | point(-0.6, 0.3, 1)  | vector(0, 0, 1)  |
+    | point(0.4, 0.4, -1)  | vector(0, 0, -1) |
+    | point(1, 1, 1)       | vector(1, 0, 0)  |
+    | point(-1, -1, -1)    | vector(-1, 0, 0) |

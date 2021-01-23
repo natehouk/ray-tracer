@@ -1,5 +1,5 @@
 from sphere import intersection
-from tuple import EPSILON
+from tuple import vector, EPSILON
 from shape import shape
 
 
@@ -36,3 +36,13 @@ class cube(shape):
             tmin, tmax = tmax, tmin
 
         return tmin, tmax
+
+    def local_normal_at(self, cube, point):
+        maxc = max(abs(point.x), abs(point.y), abs(point.z))
+
+        if maxc == abs(point.x):
+            return vector(point.x, 0, 0)
+        elif maxc == abs(point.y):
+            return vector(0, point.y, 0)
+        else:
+            return vector(0, 0, point.z)
