@@ -2,10 +2,11 @@ from math import sqrt
 
 from behave import *
 
-from material import lighting, material
+from material import material
 from pattern import stripe_pattern
 from sphere import sphere
 from tuple import color, point, point_light, vector
+from world import lighting
 
 
 @given(u"m ← material()")

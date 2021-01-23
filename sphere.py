@@ -3,10 +3,9 @@ from math import sqrt
 
 from canvas import canvas, canvas_to_ppm, write_pixel
 from matrix import inverse, transpose
-from ray import position, ray
-from shape import hit, intersect, intersection, normal_at, shape
-from tuple import color, dot, normalize, point, reflect
-from util import EPSILON
+from ray import ray
+from shape import hit, intersect, intersection, shape
+from tuple import color, dot, normalize, point
 
 
 def glass_sphere():

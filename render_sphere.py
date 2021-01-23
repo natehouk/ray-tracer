@@ -1,12 +1,13 @@
 import time
 
 from canvas import canvas, canvas_to_ppm, write_pixel
-from material import lighting, material
+from material import material
 from matrix import scaling, shearing
 from ray import position, ray
 from shape import hit
 from sphere import intersect, normal_at, sphere
 from tuple import color, normalize, point, point_light
+from world import lighting
 
 if __name__ == "__main__":
     ray_origin = point(0, 0, -5)

@@ -1,11 +1,11 @@
 from math import sqrt
 
-from material import lighting
 from matrix import scaling
+from pattern import pattern_at_shape
 from ray import ray
 from shape import hit, intersect, prepare_computations
 from sphere import sphere
-from tuple import color, dot, magnitude, normalize, point, point_light
+from tuple import color, dot, magnitude, normalize, point, point_light, reflect
 from util import LIMIT
 
 
@@ -136,3 +136,31 @@ class world:
     def __init__(self):
         self.objects = []
         self.light = None
+
+
+def lighting(material, obj, light, point, eyev, normalv, in_shawdow=False):
+    if material.pattern is not None:
+        c = pattern_at_shape(material.pattern, obj, point)
+    else:
+        c = material.color
+    effective_color = c * light.intensity
+    lightv = normalize(light.position - point)
+    ambient = effective_color * material.ambient
+    light_dot_normal = dot(lightv, normalv)
+    black = color(0, 0, 0)
+    if light_dot_normal < 0:
+        diffuse = black
+        specular = black
+    else:
+        diffuse = effective_color * material.diffuse * light_dot_normal
+        reflectv = reflect(-lightv, normalv)
+        reflect_dot_eye = dot(reflectv, eyev)
+        if reflect_dot_eye <= 0:
+            specular = black
+        else:
+            factor = reflect_dot_eye ** material.shininess
+            specular = light.intensity * material.specular * factor
+    if in_shawdow:
+        return ambient
+    else:
+        return ambient + diffuse + specular

@@ -1,12 +1,9 @@
 import random
-import time
-from math import pi, sqrt
 
-from canvas import canvas, canvas_to_ppm, write_pixel
 from material import material
-from matrix import identity_matrix, inverse, rotation_z, scaling, shearing, transpose
-from ray import position, ray, transform
-from tuple import color, dot, normalize, point, reflect, vector
+from matrix import identity_matrix, inverse, transpose
+from ray import position, transform
+from tuple import dot, normalize, reflect, vector
 from util import EPSILON
 
 
