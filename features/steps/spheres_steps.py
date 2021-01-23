@@ -62,6 +62,7 @@ def step_impl(context):
 
 @then(u"xs.count = 0")
 def step_impl(context):
+    print (len(context.xs))
     assert len(context.xs) == 0
 
 

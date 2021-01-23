@@ -84,14 +84,14 @@ class sphere(shape):
         b = 2 * dot(local_ray.direction, sphere_to_ray)
         c = dot(sphere_to_ray, sphere_to_ray) - 1
 
-        descriminant = (b ** 2) - (4 * a * c)
+        discriminant = (b ** 2) - (4 * a * c)
 
-        if descriminant < 0:
+        if discriminant < 0:
             t = []
             return t
 
-        t1 = (-b - sqrt(descriminant)) / (2 * a)
-        t2 = (-b + sqrt(descriminant)) / (2 * a)
+        t1 = (-b - sqrt(discriminant)) / (2 * a)
+        t2 = (-b + sqrt(discriminant)) / (2 * a)
         t = [t1, t2]
         t = sorted(t)
         assert t[0] <= t[1]
