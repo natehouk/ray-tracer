@@ -1,6 +1,7 @@
 from shape import shape
 from sphere import intersection
-from tuple import EPSILON, vector
+from tuple import vector
+from util import EPSILON
 
 
 class cube(shape):

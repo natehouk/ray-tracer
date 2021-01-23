@@ -1,14 +1,13 @@
 import time
 from math import pi
 
-from camera import camera
+from camera import camera, render
 from canvas import canvas_to_ppm
 from material import material
 from matrix import rotation_x, rotation_y, scaling, translation, view_transform
 from plane import plane
 from sphere import sphere
 from tuple import color, point, point_light, vector
-from util import render
 from world import world
 
 

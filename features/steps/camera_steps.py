@@ -2,11 +2,10 @@ from math import pi, sqrt
 
 from behave import *
 
-from camera import camera
+from camera import camera, ray_for_pixel, render
 from canvas import pixel_at
 from matrix import identity_matrix, rotation_y, translation, view_transform
 from tuple import color, equals, point, vector
-from util import ray_for_pixel, render
 
 
 @given(u"hsize ← 160")

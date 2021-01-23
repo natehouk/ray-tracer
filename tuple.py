@@ -1,7 +1,7 @@
 from math import isnan, sqrt
 
-# Equality precision
-EPSILON = 0.0001
+
+from util import EPSILON
 
 
 def equals(a, b):

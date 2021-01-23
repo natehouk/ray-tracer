@@ -6,7 +6,8 @@ from canvas import canvas, canvas_to_ppm, write_pixel
 from material import material
 from matrix import identity_matrix, inverse, rotation_z, scaling, shearing, transpose
 from ray import position, ray, transform
-from tuple import EPSILON, color, dot, normalize, point, vector
+from tuple import color, dot, normalize, point, vector
+from util import EPSILON
 
 
 def set_transform(shape, transform):

@@ -13,7 +13,8 @@ from sphere import (
     prepare_computations,
     sphere,
 )
-from tuple import EPSILON, equals, point, vector
+from tuple import equals, point, vector
+from util import EPSILON
 from world import schlick
 
 

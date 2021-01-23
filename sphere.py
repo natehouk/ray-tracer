@@ -8,7 +8,8 @@ from material import material
 from matrix import identity_matrix, inverse, rotation_z, scaling, shearing, transpose
 from ray import position, ray, transform
 from shape import intersect, normal_at, shape
-from tuple import EPSILON, color, dot, normalize, point, reflect
+from tuple import color, dot, normalize, point, reflect
+from util import EPSILON
 
 
 def hit(intersections):
