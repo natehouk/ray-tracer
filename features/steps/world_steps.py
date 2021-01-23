@@ -97,11 +97,17 @@ def step_impl(context):
 
 @then(u"xs[1].t = 4.5")
 def step_impl(context):
+    print(context.xs[0].t)
+    print(context.xs[1].t)
+    print(context.xs[2].t)
+    print(context.xs[3].t)
+    print("FDSFS")
     assert context.xs[1].t == 4.5
 
 
 @then(u"xs[2].t = 5.5")
 def step_impl(context):
+    print(context.xs[2].t)
     assert context.xs[2].t == 5.5
 
 

@@ -132,8 +132,6 @@ def step_impl(context):
 
 # @then(u'xs[0].t = 3')
 # def step_impl(context):
-#     print(context.xs[0].t)
-#     print(context.xs[1].t)
 #     assert context.xs[0].t == 3
 
 
@@ -194,14 +192,14 @@ def step_impl(context):
     assert context.n == normalize(context.n)
 
 
-# @given(u'set_transform(s, translation(0, 1, 0))')
-# def step_impl(context):
-#     set_transform(context.s, translation(0, 1, 0))
+@given(u'set_transform(s, translation(0, 1, 0))')
+def step_impl(context):
+    set_transform(context.s, translation(0, 1, 0))
 
 
-# @when(u'n ← local_normal_at(s, point(0, 1.70711, -0.70711))')
-# def step_impl(context):
-#     context.n = context.s.local_normal_at(context.s, point(0, 1.70711, -0.70711))
+@when(u'n ← local_normal_at(s, point(0, 1.70711, -0.70711))')
+def step_impl(context):
+    context.n = context.s.local_normal_at(context.s, point(0, 1.70711, -0.70711))
 
 
 @then(u"n = vector(0, 0.70711, -0.70711)")
@@ -214,14 +212,14 @@ def step_impl(context):
     context.m = scaling(1, 0.5, 1) * rotation_z(pi / 5)
 
 
-# @given(u'set_transform(s, m)')
-# def step_impl(context):
-#     set_transform(context.s, context.m)
+@given(u'set_transform(s, m)')
+def step_impl(context):
+    set_transform(context.s, context.m)
 
 
-# @when(u'n ← local_normal_at(s, point(0, √2/2, -√2/2))')
-# def step_impl(context):
-#     context.n = local_normal_at(context.s, point(0, sqrt(2)/2, -sqrt(2)/2))
+@when(u'n ← local_normal_at(s, point(0, √2/2, -√2/2))')
+def step_impl(context):
+    context.n = context.s.local_normal_at(context.s, point(0, sqrt(2)/2, -sqrt(2)/2))
 
 
 @then(u"n = vector(0, 0.97014, -0.24254)")

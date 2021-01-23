@@ -131,5 +131,4 @@ def step_impl(context):
 
 @then(u"pixel_at(image, 5, 5) = color(0.38066, 0.47583, 0.2855)")
 def step_impl(context):
-    print(pixel_at(context.image, 5, 5))
     assert pixel_at(context.image, 5, 5) == color(0.38066, 0.47583, 0.2855)

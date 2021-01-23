@@ -6,6 +6,7 @@ from canvas import canvas, canvas_to_ppm, write_pixel
 from material import material
 from matrix import identity_matrix, inverse, rotation_z, scaling, shearing, transpose
 from ray import position, ray, transform
+from copy import deepcopy
 from shape import intersect, normal_at, shape
 from tuple import EPSILON, color, dot, normalize, point, reflect
 
@@ -76,7 +77,7 @@ class sphere(shape):
         super().__init__()
 
     def local_intersect(self, s, local_ray):
-
+        
         sphere_to_ray = local_ray.origin - point(0, 0, 0)
 
         a = dot(local_ray.direction, local_ray.direction)
@@ -93,12 +94,18 @@ class sphere(shape):
         t2 = (-b + sqrt(descriminant)) / (2 * a)
         t = [t1, t2]
         t = sorted(t)
+
+        print (str(t[0]) + " " + str(t[1]))
         assert t[0] <= t[1]
 
         return [intersection(t[0], s), intersection(t[1], s)]
 
-    def local_normal_at(self, s, p):
-        return p - point(0, 0, 0)
+    def local_normal_at(self, sphere, world_point):
+        object_point = inverse(sphere.transform) * world_point
+        object_normal = object_point - point(0, 0, 0)
+        world_normal = transpose(inverse(sphere.transform)) * object_normal
+        world_normal.w = 0
+        return normalize(world_normal)
 
 
 class intersection:
