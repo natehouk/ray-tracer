@@ -1,6 +1,7 @@
 from shape import shape
 from sphere import intersection
-from tuple import EPSILON
+from tuple import EPSILON, vector
+from math import sqrt
 
 class cylinder(shape):
     def __init__(self):
@@ -8,8 +9,7 @@ class cylinder(shape):
 
     def local_intersect(self, cylinder, ray):
         a = ray.direction.x ** 2 + ray.direction.z ** 2
-        print('ray')
-        print(ray.direction.z ** 2)
+
         if abs(a) < EPSILON:
             return []
         
@@ -21,8 +21,14 @@ class cylinder(shape):
         if discriminant < 0:
             return []
 
-        print(abs(a))
-        print (discriminant)
-        input()
+        t0 = (-b - sqrt(discriminant)) / (2 * a)
+        t1 = (-b + sqrt(discriminant)) / (2 * a)
+        t = [t0, t1]
+        t = sorted(t)
+        assert t[0] <= t[1]
 
-        return [intersection(1, cylinder)]
+        return [intersection(t[0], cylinder), intersection(t[1], cylinder)]
+
+
+    def local_normal_at(self, cylinder, point):
+        return vector(point.x, 0, point.z)

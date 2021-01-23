@@ -90,9 +90,9 @@ class sphere(shape):
             t = []
             return t
 
-        t1 = (-b - sqrt(discriminant)) / (2 * a)
-        t2 = (-b + sqrt(discriminant)) / (2 * a)
-        t = [t1, t2]
+        t0 = (-b - sqrt(discriminant)) / (2 * a)
+        t1 = (-b + sqrt(discriminant)) / (2 * a)
+        t = [t0, t1]
         t = sorted(t)
         assert t[0] <= t[1]
 
