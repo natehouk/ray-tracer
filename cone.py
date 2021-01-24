@@ -17,13 +17,13 @@ class cone(shape):
         b = 2 * ray.origin.x * ray.direction.x - 2 * ray.origin.y * ray.direction.y + 2 * ray.origin.z * ray.direction.z
         c = ray.origin.x ** 2 - ray.origin.y ** 2 + ray.origin.z ** 2
 
+        xs = []
         if abs(a) < EPSILON and abs(b) < EPSILON:
             return []
         elif abs(a) < EPSILON:
             t = -c / (2 * b)
-            return [intersection(t, cone)]
+            xs.append(intersection(t, cone))
         else:
-            xs = []
             discriminant = b ** 2 - 4 * a * c
 
             if discriminant < 0:
@@ -43,7 +43,7 @@ class cone(shape):
             if cone.minimum < y1 and y1 < cone.maximum:
                 xs.append(intersection(t1, cone))
 
-        #self.intersect_caps(cone, ray, xs)
+        self.intersect_caps(cone, ray, xs)
 
         return xs
 
@@ -55,22 +55,25 @@ class cone(shape):
         elif dist < 1 and point.y <= cone.minimum + EPSILON:
             return vector(0, -1, 0)
         else:
-            return vector(point.x, 0, point.z)
+            y = sqrt(dist)
+            if point.y > 0:
+                y = -y
+            return vector(point.x, y, point.z)
 
-    def check_cap(self, ray, t):
+    def check_cap(self, ray, t, y):
         x = ray.origin.x + t * ray.direction.x
         z = ray.origin.z + t * ray.direction.z
 
-        return x ** 2 + z ** 2 <= 1
+        return x ** 2 + z ** 2 <= y ** 2
 
     def intersect_caps(self, cone, ray, xs):
-        if cone.closed is not True or abs(ray.direction.y) < EPSILON:
+        if cone.closed is not True or abs(ray.direction.y) <= EPSILON:
             return
 
         t = (cone.minimum - ray.origin.y) / ray.direction.y
-        if self.check_cap(ray, t):
+        if self.check_cap(ray, t, cone.minimum):
             xs.append(intersection(t, cone))
 
         t = (cone.maximum - ray.origin.y) / ray.direction.y
-        if self.check_cap(ray, t):
+        if self.check_cap(ray, t, cone.maximum):
             xs.append(intersection(t, cone))

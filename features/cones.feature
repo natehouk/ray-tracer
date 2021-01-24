@@ -23,21 +23,21 @@ Scenario: Intersecting a cone with a ray parallel to one of its halves
   Then xs.count = 1
     And xs[0].t = 0.35355
 
-#Scenario Outline: Intersecting a cone's end caps
-#  Given shape ← cone()
-#    And shape.minimum ← -0.5
-#    And shape.maximum ← 0.5
-#    And shape.closed ← true
-#    And direction ← normalize(<direction>)
-#    And r ← ray(<origin>, direction)
-#  When xs ← local_intersect(shape, r)
-#  Then xs.count = <count>
-#
-#  Examples:
-#    | origin             | direction       | count |
-#    | point(0, 0, -5)    | vector(0, 1, 0) | 0     |
-#    | point(0, 0, -0.25) | vector(0, 1, 1) | 2     |
-#    | point(0, 0, -0.25) | vector(0, 1, 0) | 4     |
+Scenario Outline: Intersecting a cone's end caps
+  Given shape ← cone()
+    And shape.minimum ← -0.5
+    And shape.maximum ← 0.5
+    And shape.closed ← true
+    And direction ← normalize(<direction>)
+    And r ← ray(<origin>, direction)
+  When xs ← local_intersect(shape, r)
+  Then xs.count = <count>
+
+  Examples:
+    | origin             | direction       | count |
+    | point(0, 0, -5)    | vector(0, 1, 0) | 0     |
+    | point(0, 0, -0.25) | vector(0, 1, 1) | 2     |
+    | point(0, 0, -0.25) | vector(0, 1, 0) | 4     |
 #
 #Scenario Outline: Computing the normal vector on a cone
 #  Given shape ← cone()

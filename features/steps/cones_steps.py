@@ -52,3 +52,23 @@ def step_impl(context):
 @then(u'xs[0].t = 0.35355')
 def step_impl(context):
     assert equals(context.xs[0].t, 0.35355)
+
+
+@given(u'shape.minimum ← -0.5')
+def step_impl(context):
+    context.shape.minimum = -0.5
+
+
+@given(u'shape.maximum ← 0.5')
+def step_impl(context):
+    context.shape.maximum = 0.5
+
+
+@given(u'shape.closed ← true')
+def step_impl(context):
+    context.shape.closed = True
+
+
+@given(u'r ← ray(point(0, 0, -0.25), direction)')
+def step_impl(context):
+    context.r = ray(point(0, 0, -0.25), context.direction)

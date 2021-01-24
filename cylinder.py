@@ -39,7 +39,7 @@ class cylinder(shape):
             if cylinder.minimum < y1 and y1 < cylinder.maximum:
                 xs.append(intersection(t1, cylinder))
 
-        self.intersect_caps(cylinder, ray, xs)
+        xs = self.intersect_caps(cylinder, ray, xs)
 
         return xs
 
@@ -61,7 +61,7 @@ class cylinder(shape):
 
     def intersect_caps(self, cylinder, ray, xs):
         if cylinder.closed is not True or abs(ray.direction.y) < EPSILON:
-            return
+            return xs
 
         t = (cylinder.minimum - ray.origin.y) / ray.direction.y
         if self.check_cap(ray, t):
@@ -70,3 +70,5 @@ class cylinder(shape):
         t = (cylinder.maximum - ray.origin.y) / ray.direction.y
         if self.check_cap(ray, t):
             xs.append(intersection(t, cylinder))
+
+        return xs
