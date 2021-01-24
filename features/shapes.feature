@@ -54,17 +54,17 @@ Scenario: Computing the normal on a transformed shape
    Given s ← test_shape()
    Then s.parent is nothing
 
-# Scenario: Converting a point from world to object space
-#   Given g1 ← group()
-#     And set_transform(g1, rotation_y(π/2))
-#     And g2 ← group()
-#     And set_transform(g2, scaling(2, 2, 2))
-#     And add_child(g1, g2)
-#     And s ← sphere()
-#     And set_transform(s, translation(5, 0, 0))
-#     And add_child(g2, s)
-#   When p ← world_to_object(s, point(-2, 0, -10))
-#   Then p = point(0, 0, -1)
+ Scenario: Converting a point from world to object space
+   Given g1 ← group()
+     And set_transform(g1, rotation_y(π/2))
+     And g2 ← group()
+     And set_transform(g2, scaling(2, 2, 2))
+     And add_child(g1, g2)
+     And s ← sphere()
+     And set_transform(s, translation(5, 0, 0))
+     And add_child(g2, s)
+   When p ← world_to_object(s, point(-2, 0, -10))
+   Then p = point(0, 0, -1)
 
 # Scenario: Converting a normal from object to world space
 #   Given g1 ← group()

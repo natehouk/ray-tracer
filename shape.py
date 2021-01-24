@@ -79,6 +79,11 @@ def prepare_computations(intersection, ray, xs=None):
                 break
     return c
 
+def world_to_object(shape, point):
+    if shape.parent is not None:
+        point = world_to_object(shape.parent, point)
+    return inverse(shape.transform) * point
+
 
 class shape:
     def __init__(self):
