@@ -86,6 +86,17 @@ def world_to_object(shape, point):
     return inverse(shape.transform) * point
 
 
+def normal_to_world(shape, normal):
+    normal = transpose(inverse(shape.transform)) * normal
+    normal.w = 0
+    normal = normalize(normal)
+
+    if shape.parent is not None:
+        normal = normal_to_world(shape.parent, normal)
+
+    return normal
+
+
 class shape:
     def __init__(self):
         self.id = str.format("%032x" % random.getrandbits(128))

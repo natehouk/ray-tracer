@@ -4,7 +4,7 @@ from behave import *
 
 from group import add_child, group
 from matrix import rotation_y, scaling, translation
-from shape import intersect, normal_at, set_transform, test_shape, world_to_object
+from shape import intersect, normal_at, set_transform, test_shape, world_to_object, normal_to_world
 from tuple import point, vector
 
 
@@ -111,3 +111,18 @@ def step_impl(context):
 @then(u"p = point(0, 0, -1)")
 def step_impl(context):
     assert context.p == point(0, 0, -1)
+
+
+@given(u'set_transform(g2, scaling(1, 2, 3))')
+def step_impl(context):
+    set_transform(context.g2, scaling(1, 2, 3))
+
+
+@when(u'n ← normal_to_world(s, vector(√3/3, √3/3, √3/3))')
+def step_impl(context):
+    context.n = normal_to_world(context.s, vector(sqrt(3)/3, sqrt(3)/3, sqrt(3)/3))
+
+
+@then(u'n = vector(0.2857, 0.4286, -0.8571)')
+def step_impl(context):
+    assert context.n == vector(0.2857, 0.4286, -0.8571)
