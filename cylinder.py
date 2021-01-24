@@ -59,14 +59,14 @@ class cylinder(shape):
 
         return x ** 2 + z ** 2 <= 1
 
-    def intersect_caps(self, cyl, ray, xs):
-        if cyl.closed is not True or abs(ray.direction.y) < EPSILON:
+    def intersect_caps(self, cylinder, ray, xs):
+        if cylinder.closed is not True or abs(ray.direction.y) < EPSILON:
             return
 
-        t = (cyl.minimum - ray.origin.y) / ray.direction.y
+        t = (cylinder.minimum - ray.origin.y) / ray.direction.y
         if self.check_cap(ray, t):
-            xs.append(intersection(t, cyl))
+            xs.append(intersection(t, cylinder))
 
-        t = (cyl.maximum - ray.origin.y) / ray.direction.y
+        t = (cylinder.maximum - ray.origin.y) / ray.direction.y
         if self.check_cap(ray, t):
-            xs.append(intersection(t, cyl))
+            xs.append(intersection(t, cylinder))
