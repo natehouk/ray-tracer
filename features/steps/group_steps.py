@@ -1,10 +1,10 @@
 from behave import *
 from group import group, add_child
-from matrix import identity_matrix, translation
+from matrix import identity_matrix, translation, scaling
 from sphere import sphere
 from tuple import point, vector
 from ray import ray
-from shape import set_transform
+from shape import set_transform, intersect
 
 @given(u'g ← group()')
 def step_impl(context):
@@ -104,3 +104,28 @@ def step_impl(context):
 @then(u'xs[3].object = s1')
 def step_impl(context):
     assert context.xs[3].object == context.s1
+
+
+@given(u'set_transform(g, scaling(2, 2, 2))')
+def step_impl(context):
+    set_transform(context.g, scaling(2, 2, 2))
+
+
+@given(u'set_transform(s, translation(5, 0, 0))')
+def step_impl(context):
+    set_transform(context.s, translation(5, 0, 0))
+
+
+@given(u'add_child(g, s)')
+def step_impl(context):
+    add_child(context.g, context.s)
+
+
+@when(u'r ← ray(point(10, 0, -10), vector(0, 0, 1))')
+def step_impl(context):
+    context.r = ray(point(10, 0, -10), vector(0, 0, 1))
+
+
+@when(u'xs ← intersect(g, r)')
+def step_impl(context):
+    context.xs = intersect(context.g, context.r)
