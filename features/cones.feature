@@ -38,14 +38,14 @@ Scenario Outline: Intersecting a cone's end caps
     | point(0, 0, -5)    | vector(0, 1, 0) | 0     |
     | point(0, 0, -0.25) | vector(0, 1, 1) | 2     |
     | point(0, 0, -0.25) | vector(0, 1, 0) | 4     |
-#
-#Scenario Outline: Computing the normal vector on a cone
-#  Given shape ← cone()
-#  When n ← local_normal_at(shape, <point>)
-#  Then n = <normal>
-#
-#  Examples:
-#    | point             | normal                 |
-#    | point(0, 0, 0)    | vector(0, 0, 0)        |
-#    | point(1, 1, 1)    | vector(1, -√2, 1)      |
-#    | point(-1, -1, 0)  | vector(-1, 1, 0)       |
+
+Scenario Outline: Computing the normal vector on a cone
+  Given shape ← cone()
+  When n ← local_normal_at(shape, <point>)
+  Then n = <normal>
+
+  Examples:
+    | point             | normal                 |
+    | point(0, 0, 0)    | vector(0, 0, 0)        |
+    | point(1, 1, 1)    | vector(1, -√2, 1)      |
+    | point(-1, -1, 0)  | vector(-1, 1, 0)       |

@@ -14,7 +14,11 @@ class cone(shape):
 
     def local_intersect(self, cone, ray):
         a = ray.direction.x ** 2 - ray.direction.y ** 2 + ray.direction.z ** 2
-        b = 2 * ray.origin.x * ray.direction.x - 2 * ray.origin.y * ray.direction.y + 2 * ray.origin.z * ray.direction.z
+        b = (
+            2 * ray.origin.x * ray.direction.x
+            - 2 * ray.origin.y * ray.direction.y
+            + 2 * ray.origin.z * ray.direction.z
+        )
         c = ray.origin.x ** 2 - ray.origin.y ** 2 + ray.origin.z ** 2
 
         xs = []
