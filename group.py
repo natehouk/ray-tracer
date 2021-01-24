@@ -1,4 +1,5 @@
-from shape import shape, intersect
+from shape import intersect, shape
+
 
 def add_child(group, shape):
     shape.parent = group

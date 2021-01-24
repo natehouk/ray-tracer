@@ -2,10 +2,10 @@ from math import pi, sqrt
 
 from behave import *
 
-from matrix import translation, rotation_y, scaling
+from group import add_child, group
+from matrix import rotation_y, scaling, translation
 from shape import intersect, normal_at, set_transform, test_shape, world_to_object
 from tuple import point, vector
-from group import group, add_child
 
 
 @given(u"s ← test_shape()")
@@ -68,46 +68,46 @@ def step_impl(context):
     context.n = normal_at(context.s, point(0, sqrt(2) / 2, -sqrt(2) / 2))
 
 
-@then(u's.parent is nothing')
+@then(u"s.parent is nothing")
 def step_impl(context):
     assert context.s.parent is None
 
 
-@given(u'g1 ← group()')
+@given(u"g1 ← group()")
 def step_impl(context):
     context.g1 = group()
 
 
-@given(u'set_transform(g1, rotation_y(π/2))')
+@given(u"set_transform(g1, rotation_y(π/2))")
 def step_impl(context):
-    set_transform(context.g1, rotation_y(pi/2))
+    set_transform(context.g1, rotation_y(pi / 2))
 
 
-@given(u'g2 ← group()')
+@given(u"g2 ← group()")
 def step_impl(context):
     context.g2 = group()
 
 
-@given(u'set_transform(g2, scaling(2, 2, 2))')
+@given(u"set_transform(g2, scaling(2, 2, 2))")
 def step_impl(context):
     set_transform(context.g2, scaling(2, 2, 2))
 
 
-@given(u'add_child(g1, g2)')
+@given(u"add_child(g1, g2)")
 def step_impl(context):
     add_child(context.g1, context.g2)
 
 
-@given(u'add_child(g2, s)')
+@given(u"add_child(g2, s)")
 def step_impl(context):
     add_child(context.g2, context.s)
 
 
-@when(u'p ← world_to_object(s, point(-2, 0, -10))')
+@when(u"p ← world_to_object(s, point(-2, 0, -10))")
 def step_impl(context):
     context.p = world_to_object(context.s, point(-2, 0, -10))
 
 
-@then(u'p = point(0, 0, -1)')
+@then(u"p = point(0, 0, -1)")
 def step_impl(context):
     assert context.p == point(0, 0, -1)

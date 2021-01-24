@@ -1,131 +1,133 @@
 from behave import *
-from group import group, add_child
-from matrix import identity_matrix, translation, scaling
+
+from group import add_child, group
+from matrix import identity_matrix, scaling, translation
+from ray import ray
+from shape import intersect, set_transform
 from sphere import sphere
 from tuple import point, vector
-from ray import ray
-from shape import set_transform, intersect
 
-@given(u'g ← group()')
+
+@given(u"g ← group()")
 def step_impl(context):
     context.g = group()
 
 
-@then(u'g.transform = identity_matrix')
+@then(u"g.transform = identity_matrix")
 def step_impl(context):
     assert context.g.transform == identity_matrix()
 
 
-@then(u'g is empty')
+@then(u"g is empty")
 def step_impl(context):
     assert len(context.g.children) == 0
 
 
-@when(u'add_child(g, s)')
+@when(u"add_child(g, s)")
 def step_impl(context):
     add_child(context.g, context.s)
 
 
-@then(u'g is not empty')
+@then(u"g is not empty")
 def step_impl(context):
     assert len(context.g.children) != 0
 
 
-@then(u'g includes s')
+@then(u"g includes s")
 def step_impl(context):
     assert context.s in context.g.children
 
 
-@then(u's.parent = g')
+@then(u"s.parent = g")
 def step_impl(context):
     assert context.s.parent == context.g
 
 
-@when(u'xs ← local_intersect(g, r)')
+@when(u"xs ← local_intersect(g, r)")
 def step_impl(context):
     context.xs = context.g.local_intersect(context.g, context.r)
 
 
-@given(u's2 ← sphere()')
+@given(u"s2 ← sphere()")
 def step_impl(context):
     context.s2 = sphere()
 
 
-@given(u'set_transform(s2, translation(0, 0, -3))')
+@given(u"set_transform(s2, translation(0, 0, -3))")
 def step_impl(context):
     set_transform(context.s2, translation(0, 0, -3))
 
 
-@given(u's3 ← sphere()')
+@given(u"s3 ← sphere()")
 def step_impl(context):
     context.s3 = sphere()
 
 
-@given(u'set_transform(s3, translation(5, 0, 0))')
+@given(u"set_transform(s3, translation(5, 0, 0))")
 def step_impl(context):
     set_transform(context.s3, translation(5, 0, 0))
 
 
-@given(u'add_child(g, s1)')
+@given(u"add_child(g, s1)")
 def step_impl(context):
     add_child(context.g, context.s1)
 
 
-@given(u'add_child(g, s2)')
+@given(u"add_child(g, s2)")
 def step_impl(context):
     add_child(context.g, context.s2)
 
 
-@given(u'add_child(g, s3)')
+@given(u"add_child(g, s3)")
 def step_impl(context):
     add_child(context.g, context.s3)
 
 
-@when(u'r ← ray(point(0, 0, -5), vector(0, 0, 1))')
+@when(u"r ← ray(point(0, 0, -5), vector(0, 0, 1))")
 def step_impl(context):
     context.r = ray(point(0, 0, -5), vector(0, 0, 1))
 
 
-@then(u'xs[0].object = s2')
+@then(u"xs[0].object = s2")
 def step_impl(context):
     assert context.xs[0].object == context.s2
 
 
-@then(u'xs[1].object = s2')
+@then(u"xs[1].object = s2")
 def step_impl(context):
     assert context.xs[1].object == context.s2
 
 
-@then(u'xs[2].object = s1')
+@then(u"xs[2].object = s1")
 def step_impl(context):
     assert context.xs[2].object == context.s1
 
 
-@then(u'xs[3].object = s1')
+@then(u"xs[3].object = s1")
 def step_impl(context):
     assert context.xs[3].object == context.s1
 
 
-@given(u'set_transform(g, scaling(2, 2, 2))')
+@given(u"set_transform(g, scaling(2, 2, 2))")
 def step_impl(context):
     set_transform(context.g, scaling(2, 2, 2))
 
 
-@given(u'set_transform(s, translation(5, 0, 0))')
+@given(u"set_transform(s, translation(5, 0, 0))")
 def step_impl(context):
     set_transform(context.s, translation(5, 0, 0))
 
 
-@given(u'add_child(g, s)')
+@given(u"add_child(g, s)")
 def step_impl(context):
     add_child(context.g, context.s)
 
 
-@when(u'r ← ray(point(10, 0, -10), vector(0, 0, 1))')
+@when(u"r ← ray(point(10, 0, -10), vector(0, 0, 1))")
 def step_impl(context):
     context.r = ray(point(10, 0, -10), vector(0, 0, 1))
 
 
-@when(u'xs ← intersect(g, r)')
+@when(u"xs ← intersect(g, r)")
 def step_impl(context):
     context.xs = intersect(context.g, context.r)
