@@ -1,4 +1,8 @@
-from shape import shape
+from shape import shape, intersect
+
+def add_child(group, shape):
+    shape.parent = group
+    group.children.append(shape)
 
 
 class group(shape):
@@ -7,7 +11,12 @@ class group(shape):
         self.children = []
 
     def local_intersect(self, cube, ray):
-        pass
+        xs = []
+        for child in self.children:
+            for intersection in intersect(child, ray):
+                xs.append(intersection)
+        xs = sorted(xs, key=lambda x: x.t)
+        return xs
 
     def check_axis(self, origin, direction):
         pass

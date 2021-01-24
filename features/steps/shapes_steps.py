@@ -65,3 +65,8 @@ def step_impl(context):
 @when(u"n ← normal_at(s, point(0, √2/2, -√2/2))")
 def step_impl(context):
     context.n = normal_at(context.s, point(0, sqrt(2) / 2, -sqrt(2) / 2))
+
+
+@then(u's.parent is nothing')
+def step_impl(context):
+    assert context.s.parent is None

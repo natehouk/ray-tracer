@@ -83,6 +83,7 @@ def prepare_computations(intersection, ray, xs=None):
 class shape:
     def __init__(self):
         self.id = str.format("%032x" % random.getrandbits(128))
+        self.parent = None
         self.transform = identity_matrix()
         self.material = material()
 
