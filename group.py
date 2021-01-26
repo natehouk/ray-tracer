@@ -5,7 +5,6 @@ def add_child(group, shape):
     shape.parent = group
     group.children.append(shape)
 
-
 class group(shape):
     def __init__(self):
         super().__init__()
@@ -19,8 +18,5 @@ class group(shape):
         xs = sorted(xs, key=lambda x: x.t)
         return xs
 
-    def check_axis(self, origin, direction):
-        pass
-
     def local_normal_at(self, cube, point):
-        pass
+        raise Exception

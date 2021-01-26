@@ -42,11 +42,7 @@ class sphere(shape):
         return [intersection(t[0], s), intersection(t[1], s)]
 
     def local_normal_at(self, sphere, world_point):
-        object_point = inverse(sphere.transform) * world_point
-        object_normal = object_point - point(0, 0, 0)
-        world_normal = transpose(inverse(sphere.transform)) * object_normal
-        world_normal.w = 0
-        return normalize(world_normal)
+        return normalize(world_point - point(0, 0, 0))
 
 
 if __name__ == "__main__":

@@ -5,7 +5,8 @@ from matrix import identity_matrix, inverse, transpose
 from ray import position, transform
 from tuple import dot, normalize, reflect, vector
 from util import EPSILON
-
+from math import pi
+from matrix import rotation_y
 
 def set_transform(shape, transform):
     shape.transform = transform
@@ -17,14 +18,14 @@ def intersect(shape, ray):
     return shape.local_intersect(shape, local_ray)
 
 
-def normal_at(shape, point):
-    local_point = inverse(shape.transform) * point
+def normal_at(shape, world_point):
+    local_point = world_to_object(shape, world_point)
+    print("local_point\n", local_point)
     local_normal = shape.local_normal_at(shape, local_point)
-    world_normal = transpose(inverse(shape.transform)) * local_normal
-    world_normal.w = 0
-
-    return normalize(world_normal)
-
+    print("local_normal\n", local_normal)
+    ntw = normal_to_world(shape, local_normal)
+    print("normal_to_world\n", ntw)
+    return ntw
 
 def intersections(*argv):
     i = []
