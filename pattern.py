@@ -9,10 +9,14 @@ def set_pattern_transform(pattern, transform):
     return
 
 
-def pattern_at_shape(p, obj, world_point):
-    object_point = inverse(obj.transform) * world_point
-    pattern_point = inverse(p.transform) * object_point
+def world_to_object(shape, point):
+    if shape.parent is not None:
+        point = world_to_object(shape.parent, point)
+    return inverse(shape.transform) * point
 
+def pattern_at_shape(p, obj, world_point):
+    object_point = world_to_object(obj, world_point)
+    pattern_point = inverse(p.transform) * object_point
     return p.pattern_at(p, pattern_point)
 
 
