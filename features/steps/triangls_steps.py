@@ -1,6 +1,7 @@
 from behave import *
 from tuple import point, vector
 from triangle import triangle
+from ray import ray
 
 @given(u'p1 ← point(0, 1, 0)')
 def step_impl(context):
@@ -85,3 +86,38 @@ def step_impl(context):
 @then(u'n3 = t.normal')
 def step_impl(context):
     assert context.n3 == context.t.normal
+
+
+@given(u'r ← ray(point(0, -1, -2), vector(0, 1, 0))')
+def step_impl(context):
+    context.r = ray(point(0, -1, -2), vector(0, 1, 0))
+
+
+@when(u'xs ← local_intersect(t, r)')
+def step_impl(context):
+    context.xs = context.t.local_intersect(context.t, context.r)
+
+
+@given(u'r ← ray(point(1, 1, -2), vector(0, 0, 1))')
+def step_impl(context):
+    context.r = ray(point(1, 1, -2), vector(0, 0, 1))
+
+
+@given(u'r ← ray(point(-1, 1, -2), vector(0, 0, 1))')
+def step_impl(context):
+    context.r = ray(point(-1, 1, -2), vector(0, 0, 1))
+
+
+@given(u'r ← ray(point(0, -1, -2), vector(0, 0, 1))')
+def step_impl(context):
+    context.r = ray(point(0, -1, -2), vector(0, 0, 1))
+
+
+@given(u'r ← ray(point(0, 0.5, -2), vector(0, 0, 1))')
+def step_impl(context):
+    context.r = ray(point(0, 0.5, -2), vector(0, 0, 1))
+
+
+@then(u'xs[0].t = 2')
+def step_impl(context):
+    assert context.xs[0].t == 2

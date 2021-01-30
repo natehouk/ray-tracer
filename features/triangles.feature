@@ -12,36 +12,36 @@ Scenario: Constructing a triangle
     And t.e2 = vector(1, -1, 0)
     And t.normal = vector(0, 0, -1)
 
-#Scenario: Intersecting a ray parallel to the triangle
-#  Given t ← triangle(point(0, 1, 0), point(-1, 0, 0), point(1, 0, 0))
-#    And r ← ray(point(0, -1, -2), vector(0, 1, 0))
-#  When xs ← local_intersect(t, r)
-#  Then xs is empty
-#
-#Scenario: A ray misses the p1-p3 edge
-#  Given t ← triangle(point(0, 1, 0), point(-1, 0, 0), point(1, 0, 0))
-#    And r ← ray(point(1, 1, -2), vector(0, 0, 1))
-#  When xs ← local_intersect(t, r)
-#  Then xs is empty
-#
-#Scenario: A ray misses the p1-p2 edge
-#  Given t ← triangle(point(0, 1, 0), point(-1, 0, 0), point(1, 0, 0))
-#    And r ← ray(point(-1, 1, -2), vector(0, 0, 1))
-#  When xs ← local_intersect(t, r)
-#  Then xs is empty
-#
-#Scenario: A ray misses the p2-p3 edge
-#  Given t ← triangle(point(0, 1, 0), point(-1, 0, 0), point(1, 0, 0))
-#    And r ← ray(point(0, -1, -2), vector(0, 0, 1))
-#  When xs ← local_intersect(t, r)
-#  Then xs is empty
-#
-#Scenario: A ray strikes a triangle
-#  Given t ← triangle(point(0, 1, 0), point(-1, 0, 0), point(1, 0, 0))
-#    And r ← ray(point(0, 0.5, -2), vector(0, 0, 1))
-#  When xs ← local_intersect(t, r)
-#  Then xs.count = 1
-#    And xs[0].t = 2
+Scenario: Intersecting a ray parallel to the triangle
+  Given t ← triangle(point(0, 1, 0), point(-1, 0, 0), point(1, 0, 0))
+    And r ← ray(point(0, -1, -2), vector(0, 1, 0))
+  When xs ← local_intersect(t, r)
+  Then xs is empty
+
+Scenario: A ray misses the p1-p3 edge
+  Given t ← triangle(point(0, 1, 0), point(-1, 0, 0), point(1, 0, 0))
+    And r ← ray(point(1, 1, -2), vector(0, 0, 1))
+  When xs ← local_intersect(t, r)
+  Then xs is empty
+
+Scenario: A ray misses the p1-p2 edge
+  Given t ← triangle(point(0, 1, 0), point(-1, 0, 0), point(1, 0, 0))
+    And r ← ray(point(-1, 1, -2), vector(0, 0, 1))
+  When xs ← local_intersect(t, r)
+  Then xs is empty
+
+Scenario: A ray misses the p2-p3 edge
+  Given t ← triangle(point(0, 1, 0), point(-1, 0, 0), point(1, 0, 0))
+    And r ← ray(point(0, -1, -2), vector(0, 0, 1))
+  When xs ← local_intersect(t, r)
+  Then xs is empty
+
+Scenario: A ray strikes a triangle
+  Given t ← triangle(point(0, 1, 0), point(-1, 0, 0), point(1, 0, 0))
+    And r ← ray(point(0, 0.5, -2), vector(0, 0, 1))
+  When xs ← local_intersect(t, r)
+  Then xs.count = 1
+    And xs[0].t = 2
 #
 Scenario: Finding the normal on a triangle
   Given t ← triangle(point(0, 1, 0), point(-1, 0, 0), point(1, 0, 0))
