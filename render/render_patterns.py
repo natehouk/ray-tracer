@@ -18,9 +18,7 @@ from sphere import sphere
 from tuple import color, point, point_light, vector
 from world import world
 
-
-def main():
-
+if __name__ == "__main__":
     start = time.time()
     print("Starting render...")
 
@@ -31,7 +29,7 @@ def main():
     white = color(1, 1, 1)
 
     floor = plane()
-    # floor.transform = scaling(10, 0.01, 10)
+    floor.transform = scaling(10, 0.01, 10)
     floor.material.color = color(1, 0.9, 0.9)
     floor.material.specular = 0.1
     floor.material.pattern = checkers_pattern(black, white)
@@ -95,7 +93,3 @@ def main():
     end = time.time()
     print("Finished writing file.")
     print(str(round(end - start, 2)) + "s")
-
-
-if __name__ == "__main__":
-    main()

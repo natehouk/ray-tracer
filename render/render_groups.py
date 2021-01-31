@@ -14,9 +14,7 @@ from matrix import view_transform
 from tuple import color, point, point_light, vector
 from world import world
 
-
-def main():
-
+if __name__ == "__main__":
     start = time.time()
     print("Starting render...")
 
@@ -41,7 +39,3 @@ def main():
     end = time.time()
     print("Finished writing file.")
     print(str(round(end - start, 2)) + "s")
-
-
-if __name__ == "__main__":
-    main()
