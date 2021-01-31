@@ -162,12 +162,13 @@ class point_light:
 
 if __name__ == "__main__":
     # projectile starts one unit above the origin
-    # velocity is normalzied to 1 unit/tick
+    # velocity is normalized to 1 unit/tick
     p = projectile(point(0, 1, 0), normalize(vector(1, 1, 0)))
 
     # gravity -0.1 unit/tick, and wind is -0.01 unit/tick
     e = environment(vector(0, -0.1, 0), vector(-0.01, 0, 0))
 
+    # print current projectile and environment and wait for user input
     while True:
         print(p)
         print(e)

@@ -69,10 +69,10 @@ def is_invertable(m):
 
 
 def inverse(m):
-    #if m.inverse is not None:
-    #    return m.inverse
-    #elif is_invertable(m) is not True:
-    #    return Exception
+    if m.inverse is not None:
+       return m.inverse
+    elif is_invertable(m) is not True:
+       return Exception
     inverse = deepcopy(m)
     for i in range(m.size):
         for j in range(m.size):
@@ -268,29 +268,3 @@ class matrix:
                     string += " | "
             string += "\n"
         return string
-
-
-if __name__ == "__main__":
-    origin = point(0, 0, 0)
-    twelve = point(0, 0, 1)
-    c = canvas(600, 600)
-    red = color(1, 0, 0)
-
-    start = time.time()
-    print("Starting render...")
-
-    for i in range(12):
-        r = rotation_y(i * pi / 6)
-        pixel = r * twelve
-        write_pixel(c, 225 * pixel.x + 300, c.height - 225 * pixel.z - 300, red)
-
-    end = time.time()
-    print("Finished render.")
-    print(str(round(end - start, 2)) + "s")
-
-    start = time.time()
-    print("Start writing file...")
-    canvas_to_ppm(c).write_file("images/clock.ppm")
-    end = time.time()
-    print("Finished writing file.")
-    print(str(round(end - start, 2)) + "s")
