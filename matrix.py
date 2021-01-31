@@ -70,9 +70,9 @@ def is_invertable(m):
 
 def inverse(m):
     if m.inverse is not None:
-       return m.inverse
+        return m.inverse
     elif is_invertable(m) is not True:
-       return Exception
+        return Exception
     inverse = deepcopy(m)
     for i in range(m.size):
         for j in range(m.size):

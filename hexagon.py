@@ -1,9 +1,11 @@
 from math import pi
-from shape import set_transform
-from group import group, add_child
-from matrix import scaling, translation, rotation_y, rotation_z
-from sphere import sphere
+
 from cylinder import cylinder
+from group import add_child, group
+from matrix import rotation_y, rotation_z, scaling, translation
+from shape import set_transform
+from sphere import sphere
+
 
 def hexagon_corner():
     corner = sphere()
@@ -15,7 +17,13 @@ def hexagon_edge():
     edge = cylinder()
     edge.minimum = 0
     edge.maximum = 1
-    set_transform(edge, translation(0, 0, -1) * rotation_y(-pi / 6) * rotation_z(-pi / 2) * scaling(0.25, 1, 0.25))
+    set_transform(
+        edge,
+        translation(0, 0, -1)
+        * rotation_y(-pi / 6)
+        * rotation_z(-pi / 2)
+        * scaling(0.25, 1, 0.25),
+    )
     return edge
 
 

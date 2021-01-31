@@ -1,12 +1,12 @@
 import random
+from math import pi
 
 from material import material
-from matrix import identity_matrix, inverse, transpose
+from matrix import identity_matrix, inverse, rotation_y, transpose
 from ray import position, transform
 from tuple import dot, normalize, reflect, vector
 from util import EPSILON
-from math import pi
-from matrix import rotation_y
+
 
 def set_transform(shape, transform):
     shape.transform = transform
@@ -22,6 +22,7 @@ def normal_at(shape, world_point):
     local_point = world_to_object(shape, world_point)
     local_normal = shape.local_normal_at(shape, local_point)
     return normal_to_world(shape, local_normal)
+
 
 def intersections(*argv):
     i = []

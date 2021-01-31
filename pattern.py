@@ -14,6 +14,7 @@ def world_to_object(shape, point):
         point = world_to_object(shape.parent, point)
     return inverse(shape.transform) * point
 
+
 def pattern_at_shape(p, obj, world_point):
     object_point = world_to_object(obj, world_point)
     pattern_point = inverse(p.transform) * object_point

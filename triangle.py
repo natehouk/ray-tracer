@@ -1,7 +1,6 @@
-from shape import shape
 from ray import ray
-from tuple import dot, normalize, cross
-from shape import intersection
+from shape import intersection, shape
+from tuple import cross, dot, normalize
 from util import EPSILON
 
 

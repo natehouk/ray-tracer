@@ -1,9 +1,9 @@
 import time
 from math import pi
-from tuple import point, color
-from canvas import canvas, write_pixel, canvas_to_ppm
-from matrix import rotation_y
 
+from canvas import canvas, canvas_to_ppm, write_pixel
+from matrix import rotation_y
+from tuple import color, point
 
 
 def main():
@@ -30,6 +30,7 @@ def main():
     end = time.time()
     print("Finished writing file.")
     print(str(round(end - start, 2)) + "s")
+
 
 if __name__ == "__main__":
     main()

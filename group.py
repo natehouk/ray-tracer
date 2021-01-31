@@ -5,6 +5,7 @@ def add_child(group, shape):
     shape.parent = group
     group.children.append(shape)
 
+
 class group(shape):
     def __init__(self):
         super().__init__()

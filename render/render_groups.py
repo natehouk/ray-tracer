@@ -1,8 +1,12 @@
-import sys
 import os.path
-sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), os.path.pardir)))
+import sys
+
+sys.path.append(
+    os.path.abspath(os.path.join(os.path.dirname(__file__), os.path.pardir))
+)
 import time
 from math import pi
+
 from camera import camera, render
 from canvas import canvas_to_ppm
 from hexagon import hexagon
