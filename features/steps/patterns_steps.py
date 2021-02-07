@@ -163,7 +163,6 @@ def step_impl(context):
 
 @then(u"c = color(1, 1.5, 2)")
 def step_impl(context):
-    print(context.c)
     assert context.c == color(1, 1.5, 2)
 
 
@@ -179,7 +178,6 @@ def step_impl(context):
 
 @then(u"c = color(0.75, 0.5, 0.25)")
 def step_impl(context):
-    print(context.c)
     assert context.c == color(0.75, 0.5, 0.25)
 
 
