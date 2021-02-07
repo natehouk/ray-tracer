@@ -1,7 +1,18 @@
+from tuple import point
+
 def parse_obj_file(file):
-    ignored = 0
+    p = parser()
     for line in file.split("\n"):
         if line[0] != "v" and line[0] != "f":
-            ignored += 1
+            p.ignored += 1
+        elif line[0] == "v":
+            v = line.split(" ")
+            p.vertices.append(point(v[1], v[2], v[3]))
+    return p
 
-    return ignored
+class parser:
+
+    def __init__(self):
+        self.ignored = 0
+        self.vertices = []
+        self.vertices.append(point(0, 0, 0))
