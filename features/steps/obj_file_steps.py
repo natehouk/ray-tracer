@@ -49,7 +49,7 @@ def step_impl(context):
 
 @when(u'g ← parser.default_group')
 def step_impl(context):
-    context.g = context.parser.default_group
+    context.g = context.parser.groups["default_group"]
 
 
 @when(u't1 ← first child of g')
@@ -110,3 +110,29 @@ def step_impl(context):
 @then(u't3.p3 = parser.vertices[5]')
 def step_impl(context):
     assert context.t3.p3 == context.parser.vertices[5]
+
+
+@given(u'file ← the file "triangles.obj"')
+def step_impl(context):
+    f = open("files/triangles.obj", "r")
+    context.file = f.read()
+
+
+@when(u'g1 ← "FirstGroup" from parser')
+def step_impl(context):
+    context.g1 = context.parser.groups["FirstGroup"]
+
+
+@when(u'g2 ← "SecondGroup" from parser')
+def step_impl(context):
+    context.g2 = context.parser.groups["SecondGroup"]
+
+
+@when(u't1 ← first child of g1')
+def step_impl(context):
+    context.t1 = context.g1[0]
+
+
+@when(u't2 ← first child of g2')
+def step_impl(context):
+    context.t2 = context.g2[0]

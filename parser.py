@@ -9,22 +9,30 @@ def fan_triangulation(vertices):
 
 def parse_obj_file(file):
     p = parser()
+    group = "default_group"
     for line in file.split("\n"):
         if line == "":
             p.ignored += 1
+        elif line[0] == "g" and len(line.split(" ")) == 2:
+            g = line.split(" ")
+            group = g[1]
         elif line[0] == "v" and len(line.split(" ")) == 4:
             v = line.split(" ")
             p.vertices.append(point(float(v[1]), float(v[2]), float(v[3])))
         elif line[0] == "f" and len(line.split(" ")) >= 4:
             f = line.split(" ")
             if len(f) == 4:
-                p.default_group.append(face(p.vertices[int(f[1])],
+                if group not in p.groups:
+                    p.groups[group] = []
+                p.groups[group].append(face(p.vertices[int(f[1])],
                                             p.vertices[int(f[2])],
                                             p.vertices[int(f[3])]))
             else:
                 triangles = fan_triangulation(p.vertices)
                 for triangle in triangles:
-                    p.default_group.append(triangle)
+                    if group not in p.groups:
+                        p.groups[group] = []
+                    p.groups[group].append(triangle)
         else:
             p.ignored += 1
     return p
@@ -35,7 +43,7 @@ class parser:
         self.ignored = 0
         self.vertices = []
         self.vertices.append(point(0, 0, 0))
-        self.default_group = []
+        self.groups = {"default_group": []}
 
 class face:
 
