@@ -90,3 +90,23 @@ def step_impl(context):
 @then(u't2.p3 = parser.vertices[4]')
 def step_impl(context):
     assert context.t2.p3 == context.parser.vertices[4]
+
+
+@when(u't3 ← third child of g')
+def step_impl(context):
+    context.t3 = context.g[2]
+
+
+@then(u't3.p1 = parser.vertices[1]')
+def step_impl(context):
+    assert context.t3.p1 == context.parser.vertices[1]
+
+
+@then(u't3.p2 = parser.vertices[4]')
+def step_impl(context):
+    assert context.t3.p2 == context.parser.vertices[4]
+
+
+@then(u't3.p3 = parser.vertices[5]')
+def step_impl(context):
+    assert context.t3.p3 == context.parser.vertices[5]
