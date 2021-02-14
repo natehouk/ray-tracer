@@ -1,5 +1,5 @@
 from behave import *
-from parser import parse_obj_file
+from parser import parse_obj_file, obj_to_group
 from tuple import point
 
 @given(u'gibberish ← a file containing')
@@ -136,3 +136,25 @@ def step_impl(context):
 @when(u't2 ← first child of g2')
 def step_impl(context):
     context.t2 = context.g2[0]
+
+
+@given(u'parser ← parse_obj_file(file)')
+def step_impl(context):
+    context.parser = parse_obj_file(context.file)
+
+
+@when(u'g ← obj_to_group(parser)')
+def step_impl(context):
+    context.g = obj_to_group(context.parser)
+
+
+@then(u'g includes "FirstGroup" from parser')
+def step_impl(context):
+    for tri in context.parser.groups["FirstGroup"]:
+        assert tri in context.g.children
+
+
+@then(u'g includes "SecondGroup" from parser')
+def step_impl(context):
+    for tri in context.parser.groups["SecondGroup"]:
+        assert tri in context.g.children

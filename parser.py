@@ -1,9 +1,18 @@
 from tuple import point
+from group import group
+from triangle import triangle
+
+def obj_to_group(parser):
+    g = group()
+    for grp in parser.groups.values():
+        for tri in grp:
+            g.children.append(tri)
+    return g
 
 def fan_triangulation(vertices):
     triangles = []
     for i in range (2, len(vertices) - 1):
-        tri = face(vertices[1], vertices[i], vertices[i+1])
+        tri = triangle(vertices[1], vertices[i], vertices[i+1])
         triangles.append(tri)
     return triangles
 
@@ -24,15 +33,15 @@ def parse_obj_file(file):
             if len(f) == 4:
                 if group not in p.groups:
                     p.groups[group] = []
-                p.groups[group].append(face(p.vertices[int(f[1])],
+                p.groups[group].append(triangle(p.vertices[int(f[1])],
                                             p.vertices[int(f[2])],
                                             p.vertices[int(f[3])]))
             else:
                 triangles = fan_triangulation(p.vertices)
-                for triangle in triangles:
+                for tri in triangles:
                     if group not in p.groups:
                         p.groups[group] = []
-                    p.groups[group].append(triangle)
+                    p.groups[group].append(tri)
         else:
             p.ignored += 1
     return p
@@ -44,10 +53,3 @@ class parser:
         self.vertices = []
         self.vertices.append(point(0, 0, 0))
         self.groups = {"default_group": []}
-
-class face:
-
-    def __init__(self, p1, p2, p3):
-        self.p1 = p1
-        self.p2 = p2
-        self.p3 = p3
